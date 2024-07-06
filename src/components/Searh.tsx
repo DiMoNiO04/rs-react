@@ -8,7 +8,7 @@ class Search extends Component {
           <h1>Star Wars people search</h1>
           <div className="search">
             <div className="search__block">
-              <input type="text" placeholder="Search by people in star wars" />
+              <input type="text" placeholder="Search by people" />
               <button type="button">Search</button>
             </div>
           </div>

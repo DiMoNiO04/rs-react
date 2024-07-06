@@ -4,7 +4,6 @@
   &__block {
     @include flexCenterBetween;
     column-gap: 48px;
-    height: 60px;
   }
 
   input {
@@ -17,11 +16,16 @@
     font-weight: 700;
     font-size: 18px;
     height: 60px;
+    transition: background-color 0.2s ease;
+
+    &:focus {
+      background-color: $white;
+    }
   }
 
   button  {
     border-radius: 12px;
-    padding: 20px 48px;
+    padding: 0 48px;
     border: 3px solid transparent;
     background-color: $blue;
     font-weight: 700;
@@ -35,6 +39,39 @@
       color: $black;
       border-color: $black;
       background-color: $white;
+    }
+  }
+}
+
+@media (max-width: $laptop) {
+  .search {
+    margin: 20px 0 40px;
+
+    &__block {
+        column-gap: 40px;
+      }
+    
+      input {
+        height: 50px;
+      }
+    
+      button {
+        height: 50px;
+        padding: 0 40px;
+      }
+  }
+}
+
+@media (max-width: $mob) {
+  .search {
+    &__block {
+      @include flexColumn;
+      row-gap: 12px;
+    }
+
+    button {
+      width: 100%;
+      font-size: 20px;
     }
   }
 }

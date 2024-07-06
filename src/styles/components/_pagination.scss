@@ -1,5 +1,5 @@
 .pagination {
-  margin: auto 0 0 0;
+  margin: auto 0 32px 0;
   display: flex;
   column-gap: 24px;
   justify-content: flex-end;
@@ -52,6 +52,30 @@
 
       &:first-child {
         color: $red;
+      }
+    }
+  }
+}
+
+@media (max-width: $mob) {
+  .pagination {
+    column-gap: 20px;
+
+    &__btn {
+      padding: 6px;
+
+      svg {
+        @include sizes(20px, 20px);
+      }
+    }
+
+    &__title-page {
+      font-size: 20px;
+    }
+
+    &__title-numbers {
+      span {
+        font-size: 20px;
       }
     }
   }

@@ -16,3 +16,35 @@
     }
   }
 }
+
+@media (max-width: $laptop) {
+  .results {
+    &__list {
+      @include grid(4);
+      margin-bottom: 20px;
+    }
+
+    &__title {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: $mob) {
+  .results {
+   &__list {
+    @include grid(2);
+      margin-bottom: 16px;
+      grid-gap: 12px;
+   }
+
+   &__title {
+    font-size: 20px;
+    margin-bottom: 16px;
+
+    span {
+      font-size: 22px;
+    }
+   }
+  }
+}
