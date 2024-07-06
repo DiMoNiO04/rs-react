@@ -23,6 +23,12 @@ class ResultsBlock extends Component {
               <Card />
               <Card />
             </ul>
+            <div className="results__none" style={{ display: 'none' }}>
+              No results were found for your request <span>Dima</span>. Try again!
+            </div>
+            <div className="results__loader" style={{ display: 'none' }}>
+              <img src="./loading.gif" alt="Loading..." />
+            </div>
           </div>
         </div>
       </section>

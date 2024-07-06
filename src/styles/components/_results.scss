@@ -15,6 +15,19 @@
       font-size: 28px;
     }
   }
+
+  &__none {
+    font-size: 32px;
+    
+    span {
+      color: $red;
+    }
+  }
+
+  &__loader {
+    @include sizes(120px, 120px);
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: $laptop) {
