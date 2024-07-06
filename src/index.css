@@ -1,11 +1,3 @@
 @import './styles/normalize.css';
 @import './styles/fonts.css';
-
-@font-face {
-  font-family: 'Star Jedi';
-  src: url('/fonts/Starjedi.ttf') format('truetype');
-}
-
-body {
-  font-family: 'Star Jedi', sans-serif;
-}
+@import './styles/settings/index.scss';
