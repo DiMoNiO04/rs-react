@@ -5,10 +5,11 @@ class Search extends Component {
     return (
       <section className="section">
         <div className="container">
+          <h1>Star Wars people search</h1>
           <div className="search">
             <div className="search__block">
-              <input type="text" placeholder="Введите поисковой запрос" />
-              <button type="button">Поиск</button>
+              <input type="text" placeholder="Search by people in star wars" />
+              <button type="button">Search</button>
             </div>
           </div>
         </div>

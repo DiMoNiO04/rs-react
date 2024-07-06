@@ -1,0 +1,23 @@
+.card {
+  background-color: $grey;
+  border: 3px solid $black;
+  padding: 20px;
+  border-radius: 12px;
+  @include flexColumn;
+  row-gap: 12px;
+
+  &__block {
+    @include flexColumn;
+    row-gap: 4px;
+
+    b {
+      color: $red;
+      font-size: 18px;
+    }
+
+    p {
+      color: $blue;
+      font-size: 16px;
+    }
+  }
+}
