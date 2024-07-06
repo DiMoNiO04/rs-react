@@ -1,7 +1,6 @@
 import { Component } from 'react';
 
-import './resultsBlock.scss';
-import Card from '../card/Card';
+import Card from './Card';
 
 class ResultsBlock extends Component {
   render() {

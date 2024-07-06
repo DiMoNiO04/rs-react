@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import Search from './components/search/Searh';
-import ResultsBlock from './components/resultsBlock/ResultsBlock';
+import Search from './components/Searh';
+import ResultsBlock from './components/ResultsBlock';
 
 class App extends Component {
   render() {

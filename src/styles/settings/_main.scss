@@ -15,7 +15,6 @@ a,
 textarea {
   outline: none;
   cursor: pointer;
-  font: inherit;
 
   &:focus {
     outline: none;
@@ -32,7 +31,6 @@ h3,
 h4,
 h5,
 h6 {
-  font: inherit;
   margin: 0;
   padding: 0;
 }
@@ -45,7 +43,6 @@ p {
 button {
   border: none;
   color: inherit;
-  font: inherit;
   text-align: inherit;
   padding: 0;
   background-color: inherit;
@@ -92,11 +89,11 @@ html {
 }
 
 body {
-  font-family: 'Star Jedi', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: $yellow;
   color: $black;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 130%;
   min-height: 100vh;
   position: relative;
