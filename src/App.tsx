@@ -1,7 +1,10 @@
-import './App.css';
+import { Component } from 'react';
+import Search from './components/search/Searh';
 
-function App() {
-  return <div>Class Components</div>;
+class App extends Component {
+  render() {
+    return <Search />;
+  }
 }
 
 export default App;
