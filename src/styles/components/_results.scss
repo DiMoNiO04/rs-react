@@ -2,6 +2,7 @@
   &__list {
     @include grid(5);
     grid-gap: 16px;
+    margin-bottom: 24px;
   }
 
   &__title {

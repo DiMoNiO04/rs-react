@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import Card from './Card';
+import Pagination from './Pagination';
 
 class ResultsBlock extends Component {
   render() {
@@ -23,6 +24,7 @@ class ResultsBlock extends Component {
               <Card />
               <Card />
             </ul>
+            <Pagination />
           </div>
         </div>
       </section>

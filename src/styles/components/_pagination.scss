@@ -1,0 +1,58 @@
+.pagination {
+  margin: auto 0 0 0;
+  display: flex;
+  column-gap: 24px;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  &__btns {
+    display: flex;
+    column-gap: 8px;
+  }
+
+  &__btn {
+    border-radius: 8px;
+    padding: 12px;
+    background-color: $blue;
+    border: 2px solid transparent;
+    @include flexCenter;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+
+    svg {
+      path {
+        stroke: $white;
+        transition: stroke 0.2s ease;
+      }
+    }
+
+    @include hover {
+      border-color: $black;
+      background-color: $white;
+      svg path {
+        stroke: $black;
+      }
+    }
+  }
+
+  &__title {
+    display: flex;
+    column-gap: 10px;
+  }
+
+  &__title-page {
+    font-size: 24px;
+  }
+
+  &__title-numbers {
+    display: flex;
+    column-gap: 4px;
+
+    span {
+      font-size: 24px;
+
+      &:first-child {
+        color: $red;
+      }
+    }
+  }
+}
