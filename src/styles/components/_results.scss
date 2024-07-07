@@ -18,7 +18,9 @@
 
   &__none {
     font-size: 32px;
-    
+    line-height: 48px;
+    margin-top: 48px;
+
     span {
       color: $red;
     }
@@ -45,19 +47,19 @@
 
 @media (max-width: $mob) {
   .results {
-   &__list {
-    @include grid(2);
+    &__list {
+      @include grid(2);
       margin-bottom: 16px;
       grid-gap: 12px;
-   }
-
-   &__title {
-    font-size: 20px;
-    margin-bottom: 16px;
-
-    span {
-      font-size: 22px;
     }
-   }
+
+    &__title {
+      font-size: 20px;
+      margin-bottom: 16px;
+
+      span {
+        font-size: 22px;
+      }
+    }
   }
 }

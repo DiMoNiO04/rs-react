@@ -4,6 +4,7 @@ import { getStorageValue } from '../utils/localeStorage';
 
 interface IResultBlockProps {
   cards: ICardProps[];
+  isLoading: boolean;
 }
 
 class ResultsBlock extends Component<IResultBlockProps> {
@@ -13,11 +14,11 @@ class ResultsBlock extends Component<IResultBlockProps> {
 
   getRequestData(): string {
     const storageValue: string | null = getStorageValue();
-    return storageValue !== null && storageValue !== '' ? storageValue : 'ALL';
+    return storageValue || 'ALL';
   }
 
   render() {
-    const { cards } = this.props;
+    const { cards, isLoading } = this.props;
 
     return (
       <section className="section">
@@ -26,20 +27,21 @@ class ResultsBlock extends Component<IResultBlockProps> {
             <div className="results__title">
               Found peoples matching your request: <span>{this.getRequestData()}</span>
             </div>
-            {cards.length !== 0 && (
+
+            {isLoading ? (
+              <div className="results__loader">
+                <img src="./loading.gif" alt="Loading..." />
+              </div>
+            ) : cards.length === 0 ? (
+              <div className="results__none">
+                No results were found for your request <span>{this.getRequestData()}</span>. Try again!
+              </div>
+            ) : (
               <ul className="results__list">
                 {cards.map((card) => (
                   <Card key={card.name} {...card} />
                 ))}
               </ul>
-            )}
-            <div className="results__none" style={{ display: 'none' }}>
-              No results were found for your request <span>Dima</span>. Try again!
-            </div>
-            {cards.length === 0 && (
-              <div className="results__loader">
-                <img src="./loading.gif" alt="Loading..." />
-              </div>
             )}
           </div>
         </div>

@@ -5,6 +5,7 @@ import { getStorageValue } from '../utils/localeStorage';
 interface ISearchProps {
   searchParams: string;
   handleSearch: (searchQuery: string) => void;
+  isLoading: boolean;
 }
 
 interface ISearchState {
@@ -36,11 +37,15 @@ class Search extends Component<ISearchProps, ISearchState> {
   }
 
   handleSearch(): void {
-    this.props.handleSearch(this.state.inputValue.trim());
-    localStorage.setItem(STORAGE_KEY, this.state.inputValue.trim());
+    this.setState({ inputValue: this.state.inputValue.trim() }, () => {
+      this.props.handleSearch(this.state.inputValue);
+      localStorage.setItem(STORAGE_KEY, this.state.inputValue);
+    });
   }
 
   render() {
+    const { isLoading } = this.props;
+
     return (
       <section className="section">
         <div className="container">
@@ -53,7 +58,7 @@ class Search extends Component<ISearchProps, ISearchState> {
                 value={this.state.inputValue}
                 onChange={(event) => this.changeInputValue(event)}
               />
-              <button type="button" onClick={this.handleSearch}>
+              <button disabled={isLoading} type="button" onClick={this.handleSearch}>
                 Поиск
               </button>
             </div>
