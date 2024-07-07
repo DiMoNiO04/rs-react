@@ -38,8 +38,8 @@ class Search extends Component<ISearchProps, ISearchState> {
 
   handleSearch(): void {
     this.setState({ inputValue: this.state.inputValue.trim() }, () => {
-      this.props.handleSearch(this.state.inputValue);
       localStorage.setItem(STORAGE_KEY, this.state.inputValue);
+      this.props.handleSearch(this.state.inputValue);
     });
   }
 

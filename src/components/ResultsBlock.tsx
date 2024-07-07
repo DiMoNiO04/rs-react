@@ -13,8 +13,7 @@ class ResultsBlock extends Component<IResultBlockProps> {
   }
 
   getRequestData(): string {
-    const storageValue: string | null = getStorageValue();
-    return storageValue || 'ALL';
+    return getStorageValue() || 'ALL';
   }
 
   render() {

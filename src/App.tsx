@@ -2,7 +2,7 @@ import { Component } from 'react';
 import ResultsBlock from './components/ResultsBlock';
 import { ICardProps } from './components/Card';
 import Search from './components/Searh';
-import { API_URL, STORAGE_KEY } from './utils/consts';
+import { API_URL } from './utils/consts';
 import { getStorageValue } from './utils/localeStorage';
 
 interface IAppState {
@@ -44,8 +44,6 @@ class App extends Component<object, IAppState> {
 
     const url: string = this.getFetchUrl(searchParams);
 
-    console.log(url);
-
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -62,7 +60,6 @@ class App extends Component<object, IAppState> {
   handleSearch(searchParams: string): void {
     this.setState({ searchParams });
     this.fetchData(searchParams);
-    localStorage.setItem(STORAGE_KEY, searchParams);
   }
 
   render() {
