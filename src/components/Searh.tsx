@@ -1,5 +1,6 @@
 import { ChangeEvent, Component } from 'react';
-import { STORAGE_KEY } from '../urils/consts';
+import { STORAGE_KEY } from '../utils/consts';
+import { getStorageValue } from '../utils/localeStorage';
 
 interface ISearchProps {
   searchParams: string;
@@ -21,6 +22,15 @@ class Search extends Component<ISearchProps, ISearchState> {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
+  componentDidMount(): void {
+    const storageValue: string | null = getStorageValue();
+    if (storageValue !== null) {
+      this.setState({
+        inputValue: storageValue,
+      });
+    }
+  }
+
   changeInputValue(event: ChangeEvent<HTMLInputElement>): void {
     this.setState({ inputValue: event.target.value });
   }
@@ -34,12 +44,12 @@ class Search extends Component<ISearchProps, ISearchState> {
     return (
       <section className="section">
         <div className="container">
-          <h1>Поиск персонажей Star Wars</h1>
+          <h1>Search peoples for Star Wars</h1>
           <div className="search">
             <div className="search__block">
               <input
                 type="text"
-                placeholder="Поиск персонажей"
+                placeholder="Search peoples"
                 value={this.state.inputValue}
                 onChange={(event) => this.changeInputValue(event)}
               />

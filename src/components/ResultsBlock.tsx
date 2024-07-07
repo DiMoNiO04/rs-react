@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Card, { ICardProps } from './Card';
+import { getStorageValue } from '../utils/localeStorage';
 
 interface IResultBlockProps {
   cards: ICardProps[];
@@ -10,6 +11,11 @@ class ResultsBlock extends Component<IResultBlockProps> {
     super(props);
   }
 
+  getRequestData(): string {
+    const storageValue: string | null = getStorageValue();
+    return storageValue !== null && storageValue !== '' ? storageValue : 'ALL';
+  }
+
   render() {
     const { cards } = this.props;
 
@@ -18,7 +24,7 @@ class ResultsBlock extends Component<IResultBlockProps> {
         <div className="container">
           <div className="results">
             <div className="results__title">
-              Found peoples matching your request: <span>All</span>
+              Found peoples matching your request: <span>{this.getRequestData()}</span>
             </div>
             {cards.length !== 0 && (
               <ul className="results__list">
