@@ -1,4 +1,5 @@
 import { ChangeEvent, Component } from 'react';
+import { STORAGE_KEY } from '../urils/consts';
 
 interface ISearchProps {
   searchParams: string;
@@ -20,16 +21,13 @@ class Search extends Component<ISearchProps, ISearchState> {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  state: ISearchState = {
-    inputValue: this.props.searchParams || '',
-  };
-
   changeInputValue(event: ChangeEvent<HTMLInputElement>): void {
     this.setState({ inputValue: event.target.value });
   }
 
   handleSearch(): void {
     this.props.handleSearch(this.state.inputValue.trim());
+    localStorage.setItem(STORAGE_KEY, this.state.inputValue.trim());
   }
 
   render() {

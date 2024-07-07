@@ -2,6 +2,7 @@ import { Component } from 'react';
 import ResultsBlock from './components/ResultsBlock';
 import { ICardProps } from './components/Card';
 import Search from './components/Searh';
+import { API_URL, STORAGE_KEY } from './urils/consts';
 
 interface IAppState {
   cards: ICardProps[];
@@ -23,12 +24,24 @@ class App extends Component<object, IAppState> {
     this.fetchData();
   }
 
-  fetchData(searchParams?: string): void {
-    const url: string = searchParams
-      ? `https://swapi.dev/api/people/?search=${searchParams}`
-      : 'https://swapi.dev/api/people/';
+  getSrorageValue(): string | null {
+    return localStorage.getItem(STORAGE_KEY);
+  }
 
-    fetch(url)
+  getFetchUrl(searchParams: string | undefined): string {
+    let url: string = API_URL;
+
+    if (this.getSrorageValue()) {
+      url += `?search=${this.getSrorageValue()}`;
+    } else if (searchParams) {
+      url += `?search=${searchParams.trim()}`;
+    }
+
+    return url;
+  }
+
+  fetchData(searchParams?: string): void {
+    fetch(this.getFetchUrl(searchParams))
       .then((res) => res.json())
       .then((data) => {
         this.setState({
