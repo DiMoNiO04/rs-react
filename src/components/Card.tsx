@@ -9,6 +9,10 @@ export interface ICardProps {
 }
 
 class Card extends Component<ICardProps> {
+  constructor(props: ICardProps) {
+    super(props);
+  }
+
   render() {
     const { name, height, mass, birth_year, gender } = this.props;
 

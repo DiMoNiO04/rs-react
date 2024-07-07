@@ -6,6 +6,10 @@ interface IResultBlockProps {
 }
 
 class ResultsBlock extends Component<IResultBlockProps> {
+  constructor(props: IResultBlockProps) {
+    super(props);
+  }
+
   render() {
     const { cards } = this.props;
 

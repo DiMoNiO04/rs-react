@@ -5,19 +5,28 @@ import Search from './components/Searh';
 
 interface IAppState {
   cards: ICardProps[];
+  searchParams: string;
 }
 
-class App extends Component<IAppState> {
-  state: IAppState = {
-    cards: [],
-  };
+class App extends Component<object, IAppState> {
+  constructor(props: IAppState) {
+    super(props);
+    this.state = {
+      cards: [],
+      searchParams: '',
+    };
+
+    this.handleSearch = this.handleSearch.bind(this);
+  }
 
   componentDidMount(): void {
     this.fetchData();
   }
 
-  fetchData(): void {
-    const url: string = 'https://swapi.dev/api/people/';
+  fetchData(searchParams?: string): void {
+    const url: string = searchParams
+      ? `https://swapi.dev/api/people/?search=${searchParams}`
+      : 'https://swapi.dev/api/people/';
 
     fetch(url)
       .then((res) => res.json())
@@ -31,10 +40,15 @@ class App extends Component<IAppState> {
       });
   }
 
+  handleSearch(searchParams: string): void {
+    this.setState({ searchParams });
+    this.fetchData(searchParams);
+  }
+
   render() {
     return (
       <>
-        <Search />
+        <Search searchParams={this.state.searchParams} handleSearch={this.handleSearch} />
         <ResultsBlock cards={this.state.cards} />
       </>
     );
