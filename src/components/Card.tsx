@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 
 export interface ICardProps {
   name: string;
@@ -13,7 +13,7 @@ class Card extends Component<ICardProps> {
     super(props);
   }
 
-  render() {
+  render(): ReactNode {
     const { name, height, mass, birth_year, gender } = this.props;
 
     return (

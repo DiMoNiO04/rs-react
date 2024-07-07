@@ -1,4 +1,4 @@
-import { ChangeEvent, Component } from 'react';
+import { ChangeEvent, Component, ReactNode } from 'react';
 import { STORAGE_KEY } from '../utils/consts';
 import { getStorageValue } from '../utils/localeStorage';
 
@@ -43,7 +43,7 @@ class Search extends Component<ISearchProps, ISearchState> {
     });
   }
 
-  render() {
+  render(): ReactNode {
     const { isLoading } = this.props;
 
     return (

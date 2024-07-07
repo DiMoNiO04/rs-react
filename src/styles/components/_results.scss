@@ -30,6 +30,26 @@
     @include sizes(120px, 120px);
     margin: 0 auto;
   }
+
+  &__error-btn {
+    background-color: $red;
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: $white;
+    font-size: 16px;
+    transition: opacity 0.2s ease;
+    border: 2px solid $black;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__error-msg {
+    width: 100vh;
+    height: 100vh;
+    @include flexCenter;
+  }
 }
 
 @media (max-width: $laptop) {

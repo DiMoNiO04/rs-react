@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import Card, { ICardProps } from './Card';
 import { getStorageValue } from '../utils/localeStorage';
 
@@ -16,7 +16,7 @@ class ResultsBlock extends Component<IResultBlockProps> {
     return getStorageValue() || 'ALL';
   }
 
-  render() {
+  render(): ReactNode {
     const { cards, isLoading } = this.props;
 
     return (

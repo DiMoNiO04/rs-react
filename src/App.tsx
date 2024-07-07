@@ -1,9 +1,9 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import ResultsBlock from './components/ResultsBlock';
 import { ICardProps } from './components/Card';
-import Search from './components/Searh';
 import { API_URL } from './utils/consts';
 import { getStorageValue } from './utils/localeStorage';
+import Search from './components/Searh';
 
 interface IAppState {
   cards: ICardProps[];
@@ -12,7 +12,7 @@ interface IAppState {
 }
 
 class App extends Component<object, IAppState> {
-  constructor(props: IAppState) {
+  constructor(props: object) {
     super(props);
     this.state = {
       cards: [],
@@ -21,6 +21,7 @@ class App extends Component<object, IAppState> {
     };
 
     this.handleSearch = this.handleSearch.bind(this);
+    this.throwError = this.throwError.bind(this);
   }
 
   componentDidMount(): void {
@@ -54,6 +55,8 @@ class App extends Component<object, IAppState> {
       })
       .catch((error) => {
         console.error('Error fetching data', error);
+        this.setState({ isLoading: false });
+        throw error;
       });
   }
 
@@ -62,13 +65,26 @@ class App extends Component<object, IAppState> {
     this.fetchData(searchParams);
   }
 
-  render() {
+  throwError(): void {
+    this.setState(() => {
+      throw new Error('Triggered Error');
+    });
+  }
+
+  render(): ReactNode {
     const { cards, isLoading, searchParams } = this.state;
 
     return (
       <>
         <Search searchParams={searchParams} handleSearch={this.handleSearch} isLoading={isLoading} />
         <ResultsBlock cards={cards} isLoading={isLoading} />
+        <section className="section">
+          <div className="container">
+            <button className="results__error-btn" onClick={this.throwError}>
+              Trigger Error
+            </button>
+          </div>
+        </section>
       </>
     );
   }
