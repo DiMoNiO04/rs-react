@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
+import ErrorContent from './ErrorContent';
 
 interface IErrorBoundaryProps {
   children: ReactNode;
@@ -26,13 +27,7 @@ class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> 
 
   render(): ReactNode {
     if (this.state.hasError) {
-      return (
-        <div className="container">
-          <div className="results__error-msg">
-            <h2>Oooops. An unexpected error occurred. Restart the application!</h2>
-          </div>
-        </div>
-      );
+      return <ErrorContent />;
     }
 
     return <>{this.props.children}</>;

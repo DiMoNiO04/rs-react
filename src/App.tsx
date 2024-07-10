@@ -4,11 +4,13 @@ import { ICardProps } from './components/Card';
 import { API_URL } from './utils/consts';
 import { getStorageValue } from './utils/localeStorage';
 import Search from './components/Searh';
+import ErrorContent from './components/ErrorContent';
 
 interface IAppState {
   cards: ICardProps[];
   searchParams: string;
   isLoading: boolean;
+  isError: boolean;
 }
 
 class App extends Component<object, IAppState> {
@@ -18,6 +20,7 @@ class App extends Component<object, IAppState> {
       cards: [],
       searchParams: '',
       isLoading: false,
+      isError: false,
     };
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -50,13 +53,19 @@ class App extends Component<object, IAppState> {
       .then((data) => {
         this.setState({
           cards: data.results,
-          isLoading: false,
         });
       })
       .catch((error) => {
+        this.setState({
+          isError: true,
+        });
         console.error('Error fetching data', error);
-        this.setState({ isLoading: false });
         throw error;
+      })
+      .finally(() => {
+        this.setState({
+          isLoading: false,
+        });
       });
   }
 
@@ -66,25 +75,34 @@ class App extends Component<object, IAppState> {
   }
 
   throwError(): void {
+    let counter = 1;
     this.setState(() => {
+      console.log('this is count of error', counter);
+      counter += 1;
       throw new Error('Triggered Error');
     });
   }
 
   render(): ReactNode {
-    const { cards, isLoading, searchParams } = this.state;
+    const { cards, isLoading, searchParams, isError } = this.state;
 
     return (
       <>
-        <Search searchParams={searchParams} handleSearch={this.handleSearch} isLoading={isLoading} />
-        <ResultsBlock cards={cards} isLoading={isLoading} />
-        <section className="section">
-          <div className="container">
-            <button className="results__error-btn" onClick={this.throwError}>
-              Trigger Error
-            </button>
-          </div>
-        </section>
+        {isError ? (
+          <ErrorContent />
+        ) : (
+          <>
+            <Search searchParams={searchParams} handleSearch={this.handleSearch} isLoading={isLoading} />
+            <ResultsBlock cards={cards} isLoading={isLoading} />
+            <section className="section">
+              <div className="container">
+                <button className="results__error-btn" onClick={this.throwError}>
+                  Trigger Error
+                </button>
+              </div>
+            </section>
+          </>
+        )}
       </>
     );
   }
