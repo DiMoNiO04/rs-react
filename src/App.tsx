@@ -1,10 +1,9 @@
 import { Component, ReactNode } from 'react';
 import ResultsBlock from './components/ResultsBlock';
 import { ICardProps } from './components/Card';
-import { API_URL } from './utils/consts';
-import { getStorageValue } from './utils/localeStorage';
 import Search from './components/Searh';
 import ErrorContent from './components/ErrorContent';
+import Api from './components/Api';
 
 interface IAppState {
   cards: ICardProps[];
@@ -31,42 +30,20 @@ class App extends Component<object, IAppState> {
     this.fetchData();
   }
 
-  getFetchUrl(searchParams: string | undefined): string {
-    let url: string = API_URL;
-
-    if (getStorageValue()) {
-      url += `?search=${getStorageValue()}`;
-    } else if (searchParams) {
-      url += `?search=${searchParams.trim()}`;
-    }
-
-    return url;
-  }
-
-  fetchData(searchParams?: string): void {
+  async fetchData(searchParams?: string): Promise<void> {
     this.setState({ isLoading: true });
 
-    const url: string = this.getFetchUrl(searchParams);
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          cards: data.results,
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          isError: true,
-        });
-        console.error('Error fetching data', error);
-        throw error;
-      })
-      .finally(() => {
-        this.setState({
-          isLoading: false,
-        });
+    try {
+      const cards = await Api.fetchData(searchParams);
+      this.setState({ cards: cards });
+    } catch (err) {
+      console.error(`Error fetch data ${err}`);
+      throw err;
+    } finally {
+      this.setState({
+        isLoading: false,
       });
+    }
   }
 
   handleSearch(searchParams: string): void {
