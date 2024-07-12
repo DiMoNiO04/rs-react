@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
 import ResultsBlock from './components/ResultsBlock/ResultsBlock';
-import Search from './components/Searh';
+import Search from './components/Serch/Searh';
 import Api from './components/Api';
 import { ICardProps } from './components/Card/types';
 import { ETextError } from './utils/consts';
