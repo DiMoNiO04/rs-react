@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Search from '../Serch/Searh';
 import ResultsBlock from '../ResultsBlock/ResultsBlock';
 import { ICardProps } from '../Card/types';
-import { ETextError } from '../../utils/consts';
-import Api from '../Api';
+import Api from '../../api/Api';
+import { ETextError } from '../../errors/types';
 import styles from './main.module.scss';
 
 const Main: React.FC = () => {

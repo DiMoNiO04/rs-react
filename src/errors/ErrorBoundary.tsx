@@ -1,7 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { IErrorBoundaryProps, IErrorBoundaryState } from './types';
-import ErrorContent from '../ErrorContent/ErrorContent';
-import { ETextError } from '../../utils/consts';
+import { ETextError, IErrorBoundaryProps, IErrorBoundaryState } from './types';
+import ErrorContent from '../components/ErrorContent/ErrorContent';
 
 class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
   constructor(props: IErrorBoundaryProps) {

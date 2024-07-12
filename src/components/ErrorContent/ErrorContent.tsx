@@ -1,5 +1,5 @@
 import React from 'react';
-import { ETextError } from '../../utils/consts';
+import { ETextError } from '../../errors/types';
 import styles from './errorContent.module.scss';
 
 const ErrorContent: React.FC = () => {
