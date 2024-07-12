@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react';
-import ResultsBlock from './components/ResultsBlock';
+import ResultsBlock from './components/ResultsBlock/ResultsBlock';
 import Search from './components/Searh';
 import Api from './components/Api';
 import { ICardProps } from './components/Card/types';
