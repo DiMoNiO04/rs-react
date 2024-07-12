@@ -1,6 +1,7 @@
 import { Component, ReactNode } from 'react';
-import Card, { ICardProps } from './Card';
+import Card from './Card/Card';
 import { getStorageValue } from '../utils/localeStorage';
+import { ICardProps } from './Card/types';
 
 interface IResultBlockProps {
   cards: ICardProps[];

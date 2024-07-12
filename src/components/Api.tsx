@@ -1,15 +1,15 @@
 import { API_URL } from '../utils/consts';
 import { getStorageValue } from '../utils/localeStorage';
-import { ICardProps } from './Card';
+import { ICardProps } from './Card/types';
 
 class Api {
   static getFetchUrl(searchParams: string | undefined): string {
     let url: string = API_URL;
 
     if (getStorageValue()) {
-      url += `?search${getStorageValue()}`;
+      url += `?search=${getStorageValue()}`;
     } else if (searchParams) {
-      url += `?search${searchParams.trim()}`;
+      url += `?search=${searchParams.trim()}`;
     }
 
     return url;

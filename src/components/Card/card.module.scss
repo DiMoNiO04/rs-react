@@ -1,3 +1,5 @@
+@import '../../styles/settings/index';
+
 .card {
   background-color: $grey;
   border: 3px solid $black;
@@ -5,20 +7,20 @@
   border-radius: 12px;
   @include flexColumn;
   row-gap: 12px;
+}
 
-  &__block {
-    @include flexColumn;
-    row-gap: 4px;
+.block {
+  @include flexColumn;
+  row-gap: 4px;
 
-    b {
-      color: $red;
-      font-size: 18px;
-    }
+  b {
+    color: $red;
+    font-size: 18px;
+  }
 
-    p {
-      color: $blue;
-      font-size: 16px;
-    }
+  p {
+    color: $blue;
+    font-size: 16px;
   }
 }
 
@@ -33,16 +35,17 @@
   .card {
     padding: 12px;
     row-gap: 4px;
+  }
 
-    &__block {
-      row-gap: 2px;
-      b {
-        font-size: 16px;
-      }
+  .block {
+    row-gap: 2px;
 
-      p {
-        font-size: 14px;
-      }
+    b {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 14px;
     }
   }
 }
