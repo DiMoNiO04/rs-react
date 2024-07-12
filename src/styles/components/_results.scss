@@ -44,12 +44,6 @@
       opacity: 0.8;
     }
   }
-
-  &__error-msg {
-    width: 100vh;
-    height: 100vh;
-    @include flexCenter;
-  }
 }
 
 @media (max-width: $laptop) {
