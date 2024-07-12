@@ -33,7 +33,6 @@ class App extends Component<object, IAppState> {
     try {
       const cards = await Api.fetchData(searchParams);
       this.setState({ cards: cards });
-      console.log(cards);
     } catch (err) {
       console.error(`Error fetch data ${err}`);
       throw err;
