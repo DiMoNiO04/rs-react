@@ -3,6 +3,7 @@ import ResultsBlock from './components/ResultsBlock';
 import Search from './components/Searh';
 import Api from './components/Api';
 import { ICardProps } from './components/Card/types';
+import { ETextError } from './utils/consts';
 
 interface IAppState {
   cards: ICardProps[];
@@ -34,7 +35,7 @@ class App extends Component<object, IAppState> {
       const cards = await Api.fetchData(searchParams);
       this.setState({ cards: cards });
     } catch (err) {
-      console.error(`Error fetch data ${err}`);
+      console.error(`${ETextError.FETCH_ERR} ${err}`);
       throw err;
     } finally {
       this.setState({
@@ -50,7 +51,7 @@ class App extends Component<object, IAppState> {
 
   throwError(): void {
     this.setState(() => {
-      throw new Error('Triggered Error');
+      throw new Error(ETextError.TRIGGER_ERR);
     });
   }
 

@@ -1,6 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { IErrorBoundaryProps, IErrorBoundaryState } from './types';
 import ErrorContent from '../ErrorContent/ErrorContent';
+import { ETextError } from '../../utils/consts';
 
 class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
   constructor(props: IErrorBoundaryProps) {
@@ -15,7 +16,7 @@ class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> 
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error('ErrorBoundary caught an error', error, errorInfo);
+    console.error(ETextError.CAUGHT_ERR, error, errorInfo);
   }
 
   render(): ReactNode {

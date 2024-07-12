@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './errorContent.module.scss';
+import { ETextError } from '../../utils/consts';
 
 const ErrorContent: React.FC = () => {
   return (
     <div className="container">
       <div className={styles.text}>
-        <h2>Oooops. An unexpected error occurred. Restart the application!</h2>
+        <h2>{ETextError.UI_ERR}</h2>
       </div>
     </div>
   );
