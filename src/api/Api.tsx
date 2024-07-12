@@ -1,6 +1,7 @@
-import { API_URL, ETextError } from '../utils/consts';
+import { API_URL } from '../utils/consts';
 import { getStorageValue } from '../utils/localeStorage';
 import { ICardProps } from '../components/Card/types';
+import { ETextError } from '../errors/types';
 
 class Api {
   static getFetchUrl(searchParams: string | undefined): string {
