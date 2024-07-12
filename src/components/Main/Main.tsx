@@ -4,7 +4,6 @@ import ResultsBlock from '../ResultsBlock/ResultsBlock';
 import { ICardProps } from '../Card/types';
 import Api from '../../api/Api';
 import { ETextError } from '../../errors/types';
-import styles from './main.module.scss';
 
 const Main: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -29,10 +28,6 @@ const Main: React.FC = () => {
     }
   };
 
-  const throwError = (): void => {
-    throw new Error(ETextError.TRIGGER_ERR);
-  };
-
   const handleSearch = (searchParams: string): void => {
     setSearchParams(searchParams);
     fetchData(searchParams);
@@ -42,13 +37,6 @@ const Main: React.FC = () => {
     <>
       <Search searchParams={searchParams} handleSearch={handleSearch} isLoading={isLoading} />
       <ResultsBlock cards={cards} isLoading={isLoading} />
-      <section className="section">
-        <div className="container">
-          <button className={styles.errorBtn} onClick={throwError}>
-            Trigger Error
-          </button>
-        </div>
-      </section>
     </>
   );
 };
