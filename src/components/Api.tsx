@@ -1,4 +1,4 @@
-import { API_URL } from '../utils/consts';
+import { API_URL, ETextError } from '../utils/consts';
 import { getStorageValue } from '../utils/localeStorage';
 import { ICardProps } from './Card/types';
 
@@ -23,7 +23,7 @@ class Api {
       const data = await response.json();
       return data.results as ICardProps[];
     } else {
-      throw new Error('Network not ok');
+      throw new Error(ETextError.NETWOOK_ERR);
     }
   }
 }
