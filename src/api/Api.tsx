@@ -1,41 +1,41 @@
-import { API_URL } from '../utils/consts';
+import { API_URL, FIRST_PAGE } from '../utils/consts';
 import { getStorageValue } from '../utils/localeStorage';
 import { ETextError } from '../errors/types';
-import { IFetchResponse, IGetFetch } from './types';
+import { IFetchResponse, IGetFetch, IGetFetchReturn } from './types';
 
 class Api {
-  static getFetchUrl({ searchParams, pageParams }: IGetFetch): string {
+  static getFetchUrl({ searchParam, pageParam }: IGetFetch): IGetFetchReturn {
     let url: string = API_URL;
 
     const storageValue = getStorageValue();
     const params = new URLSearchParams();
 
-    // const urlPar = us
-
     if (storageValue) {
       params.append('search', storageValue);
-    } else if (searchParams) {
-      params.append('search', searchParams.trim());
+    } else if (searchParam) {
+      params.append('search', searchParam.trim());
     }
 
-    if (pageParams !== 1) {
-      params.append('page', String(pageParams));
+    if (pageParam !== FIRST_PAGE) {
+      params.append('page', String(pageParam));
     }
 
-    if (params.toString()) {
-      url += `?${params.toString()}`;
+    const stringParams: string = params.toString();
+
+    if (stringParams) {
+      url += `?${stringParams}`;
     }
 
-    return url;
+    return { url, stringParams };
   }
 
-  static async fetchData({ searchParams, pageParams }: IGetFetch): Promise<IFetchResponse> {
-    const url: string = this.getFetchUrl({ searchParams, pageParams });
+  static async fetchData({ searchParam, pageParam }: IGetFetch): Promise<IFetchResponse> {
+    const { url, stringParams }: IGetFetchReturn = this.getFetchUrl({ searchParam, pageParam });
 
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
-      return data;
+      return { data, stringParams };
     } else {
       throw new Error(ETextError.NETWORK_ERR);
     }

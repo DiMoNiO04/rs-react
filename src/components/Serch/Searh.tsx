@@ -4,8 +4,8 @@ import { getStorageValue } from '../../utils/localeStorage';
 import { ISearchProps } from './types';
 import styles from './search.module.scss';
 
-const Search: React.FC<ISearchProps> = ({ searchParams, handleSearch, isLoading }) => {
-  const [inputValue, setInputValue] = useState<string>(searchParams || '');
+const Search: React.FC<ISearchProps> = ({ searchParam, handleSearch, isLoading }) => {
+  const [inputValue, setInputValue] = useState<string>(searchParam || '');
 
   useEffect(() => {
     const storageValue: string | null = getStorageValue();

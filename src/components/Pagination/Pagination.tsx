@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './pagination.module.scss';
 import { IPaginationProps } from './types';
+import { FIRST_PAGE } from '../../utils/consts';
 
 const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePage }) => {
   const totalPage: number | undefined = count && Math.ceil(count / 10);
@@ -20,7 +21,7 @@ const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePa
             </div>
           </div>
           <div className={styles.btns}>
-            <button type="button" className={styles.btn} onClick={handlePrev} disabled={currentPage === 1}>
+            <button type="button" className={styles.btn} onClick={handlePrev} disabled={currentPage === FIRST_PAGE}>
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16 19L9 12L16 5"

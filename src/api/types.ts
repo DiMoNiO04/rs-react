@@ -1,13 +1,21 @@
 import { ICardProps } from '../components/Card/types';
 
 interface IGetFetch {
-  searchParams?: string;
-  pageParams?: number;
+  searchParam?: string;
+  pageParam?: number;
 }
 
 interface IFetchResponse {
-  count: number;
-  results: ICardProps[];
+  data: {
+    count: number;
+    results: ICardProps[];
+  };
+  stringParams: string;
 }
 
-export type { IGetFetch, IFetchResponse };
+interface IGetFetchReturn {
+  url: string;
+  stringParams: string;
+}
+
+export type { IGetFetch, IFetchResponse, IGetFetchReturn };
