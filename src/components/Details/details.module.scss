@@ -21,6 +21,7 @@
   text-align: center;
   font-size: 24px;
   line-height: 130%;
+  margin-bottom: 40px;
 }
 
 .close {
@@ -28,4 +29,24 @@
   top: 20px;
   right: 20px;
   color: $red;
+}
+
+.list {
+  @include flexColumn;
+  row-gap: 12px;
+}
+
+.block {
+  display: flex;
+  column-gap: 4px;
+
+  b {
+    color: $black;
+    font-size: 18px;
+  }
+
+  p {
+    color: $blue;
+    font-size: 16px;
+  }
 }

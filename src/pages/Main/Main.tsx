@@ -80,7 +80,7 @@ const Main: React.FC = () => {
       <Search searchParam={searchParam} handleSearch={handleSearch} isLoading={isLoading} />
       <ResultsBlock cards={cards} isLoading={isLoading} searchValue={searchParam} handleClickCard={handleClickCard} />
       {!isLoading && count && <Pagination count={count} currentPage={pageParam} onChangePage={handleChangePage} />}
-      {isOpenDetails && <Details isOpen={isOpenDetails} onClose={handleCloseDetails} />}
+      {isOpenDetails && <Details id={detailsParam} isOpen={isOpenDetails} onClose={handleCloseDetails} />}
     </>
   );
 };

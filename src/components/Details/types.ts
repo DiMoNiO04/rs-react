@@ -1,40 +1,39 @@
 enum EDetailesData {
   NAME = 'Name: ',
-  Height = 'Height: ',
+  HEIGHT = 'Height: ',
   MASS = 'Mass: ',
-  BIRTH_DAY = 'Birth Year: ',
-  GENDER = 'Gender',
-  EYE_COLOR = 'Eye color:',
+  BIRTH_YEAR = 'Birth Year: ',
+  GENDER = 'Gender: ',
+  EYE_COLOR = 'Eye color: ',
   HAIR_COLOR = 'Hair color: ',
   FILMS = 'Films: ',
 }
 
-// interface IDetailsProps {
-//   name: string;
-//   height: string;
-//   mass: string;
-//   birth_year: string;
-//   gender: string;
-//   eyeColor: string;
-//   hairColor: string;
-//   films: IFilmProps[];
-// }
+interface IDetailsFetch {
+  name: string;
+  height: string;
+  mass: string;
+  birth_year: string;
+  gender: string;
+  eye_color: string;
+  hair_color: string;
+  films: string[];
+}
 
 interface IFilmProps {
   title: string;
-  director: string;
-  producer: string;
 }
 
 interface IDataCard {
   title: EDetailesData;
-  value: string | IFilmProps;
+  value: string | IFilmProps[];
 }
 
 interface IDetailsProps {
+  id: string;
   isOpen: boolean;
   onClose: () => void;
 }
 
 export { EDetailesData };
-export type { IDetailsProps, IDataCard };
+export type { IDetailsProps, IDataCard, IDetailsFetch, IFilmProps };
