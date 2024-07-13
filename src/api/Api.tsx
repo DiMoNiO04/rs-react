@@ -10,6 +10,8 @@ class Api {
     const storageValue = getStorageValue();
     const params = new URLSearchParams();
 
+    // const urlPar = us
+
     if (storageValue) {
       params.append('search', storageValue);
     } else if (searchParams) {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ResultsBlock from '../ResultsBlock/ResultsBlock';
-import { ICardProps } from '../Card/types';
+import { ICardProps } from '../../components/Card/types';
+import { IGetFetch } from '../../api/types';
 import Api from '../../api/Api';
 import { ETextError } from '../../errors/types';
-import Pagination from '../Pagination/Pagination';
-import Search from '../Serch/Searh';
-import { IGetFetch } from '../../api/types';
+import Search from '../../components/Serch/Searh';
+import ResultsBlock from '../../components/ResultsBlock/ResultsBlock';
+import Pagination from '../../components/Pagination/Pagination';
 
 const Main: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
