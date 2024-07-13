@@ -1,5 +1,5 @@
 interface ISearchProps {
-  searchParams: string;
+  searchParams: string | undefined;
   handleSearch: (searchQuery: string) => void;
   isLoading: boolean;
 }

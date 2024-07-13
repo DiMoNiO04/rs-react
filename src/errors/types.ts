@@ -13,7 +13,7 @@ enum ETextError {
   UI_ERR = 'Oooops. An unexpected error occurred. Restart the application!',
   FETCH_ERR = 'Error fetch data',
   TRIGGER_ERR = 'Triggered Error',
-  NETWOOK_ERR = 'Network not ok',
+  NETWORK_ERR = 'Network not ok',
 }
 
 export { ETextError };
