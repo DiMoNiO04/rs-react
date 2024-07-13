@@ -1,18 +1,9 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { STORAGE_KEY } from '../../utils/consts';
-import { getStorageValue } from '../../utils/localeStorage';
+import React, { ChangeEvent, useState } from 'react';
 import { ISearchProps } from './types';
 import styles from './search.module.scss';
 
 const Search: React.FC<ISearchProps> = ({ searchParam, handleSearch, isLoading }) => {
-  const [inputValue, setInputValue] = useState<string>(searchParam || '');
-
-  useEffect(() => {
-    const storageValue: string | null = getStorageValue();
-    if (storageValue !== null) {
-      setInputValue(storageValue);
-    }
-  }, []);
+  const [inputValue, setInputValue] = useState(searchParam);
 
   const changeInputValue = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
@@ -20,7 +11,6 @@ const Search: React.FC<ISearchProps> = ({ searchParam, handleSearch, isLoading }
 
   const handleSearchAction = (): void => {
     setInputValue(inputValue.trim());
-    localStorage.setItem(STORAGE_KEY, inputValue);
     handleSearch(inputValue);
   };
 

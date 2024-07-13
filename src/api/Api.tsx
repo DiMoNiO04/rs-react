@@ -1,27 +1,20 @@
 import { API_URL, FIRST_PAGE } from '../utils/consts';
-import { getStorageValue } from '../utils/localeStorage';
 import { ETextError } from '../errors/types';
 import { IFetchResponse, IGetFetch, IGetFetchReturn } from './types';
 
 class Api {
   static getFetchUrl({ searchParam, pageParam }: IGetFetch): IGetFetchReturn {
-    let url: string = API_URL;
-
-    const storageValue = getStorageValue();
     const params = new URLSearchParams();
 
-    if (storageValue) {
-      params.append('search', storageValue);
-    } else if (searchParam) {
+    if (searchParam) {
       params.append('search', searchParam.trim());
     }
-
     if (pageParam !== FIRST_PAGE) {
       params.append('page', String(pageParam));
     }
-
     const stringParams: string = params.toString();
 
+    let url: string = API_URL;
     if (stringParams) {
       url += `?${stringParams}`;
     }

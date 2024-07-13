@@ -1,18 +1,15 @@
 import React from 'react';
 import Card from '../Card/Card';
-import { getStorageValue } from '../../utils/localeStorage';
 import { IResultBlockProps } from './types';
 import styles from './resultsBlock.module.scss';
 
-const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading }) => {
-  const storageValue: string = getStorageValue() || 'ALL';
-
+const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchValue }) => {
   return (
     <section className="section">
       <div className="container">
         <div>
           <div className={styles.title}>
-            Found peoples matching your request: <span>{storageValue}</span>
+            Found peoples matching your request: <span>{searchValue || 'All'}</span>
           </div>
 
           {isLoading ? (
@@ -21,7 +18,7 @@ const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading }) => {
             </div>
           ) : cards.length === 0 ? (
             <div className={styles.none}>
-              No results were found for your request <span>{storageValue}</span>. Try again!
+              No results were found for your request <span>{searchValue}</span>. Try again!
             </div>
           ) : (
             <ul className={styles.list}>
