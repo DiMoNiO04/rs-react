@@ -14,6 +14,7 @@ enum ETextError {
   FETCH_ERR = 'Error fetch data',
   TRIGGER_ERR = 'Triggered Error',
   NETWORK_ERR = 'Network not ok',
+  LOCALSTORAGE_ERR = 'Error parsing localStorage value for key',
 }
 
 export { ETextError };

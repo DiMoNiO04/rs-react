@@ -7,6 +7,12 @@
   border-radius: 12px;
   @include flexColumn;
   row-gap: 12px;
+  @include transition(background-color);
+
+  @include hover {
+    background-color: $white;
+    cursor: pointer;
+  }
 }
 
 .block {

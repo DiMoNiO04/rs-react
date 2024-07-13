@@ -12,6 +12,8 @@ interface ICardProps {
   mass: string;
   birth_year: string;
   gender: string;
+  url: string;
+  handleClickCard: (val: number) => void;
 }
 
 interface IDataCard {
