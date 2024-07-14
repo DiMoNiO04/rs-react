@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { ETextError } from '../errors/types';
 
-export enum ELocaleKeys {
-  SEARCH = 'searchParam',
-  PAGE = 'pageParam',
-  DETAILS = 'detailsParam',
+export enum EStorageKeys {
+  SEARCH = 'search',
+  PAGE = 'page',
+  DETAILS = 'details',
 }
 
-export const useLocaleStorage = (key: ELocaleKeys, initialValue: string | number) => {
+export const useLocaleStorage = (key: EStorageKeys, initialValue: string | number) => {
   const getInitialStorageValue = () => {
     const lsValue = localStorage.getItem(key);
     if (lsValue !== null) {
@@ -26,7 +26,7 @@ export const useLocaleStorage = (key: ELocaleKeys, initialValue: string | number
     localStorage.setItem(key, JSON.stringify(storageValue));
   }, [key, storageValue]);
 
-  return [storageValue, setStorageValue];
+  return [storageValue, setStorageValue] as const;
 };
 
 export default useLocaleStorage;

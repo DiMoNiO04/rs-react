@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './details.module.scss';
 import { EDetailesData, IDetailsFetch } from '../../components/Details/types';
 import Api from '../../api/Api';
@@ -7,6 +7,7 @@ import { ETextError } from '../../errors/types';
 import Loading from '../../components/Loading/Loading';
 import DetailsInfo from '../../components/DetailsInfo/DetailsInfo';
 import { EMPTY_STR } from '../../utils/consts';
+import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
 
 const DetailsPage: React.FC = () => {
   const [params] = useSearchParams();
@@ -16,18 +17,25 @@ const DetailsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<IDetailsFetch | null>(null);
   const [films, setFilms] = useState<string[]>([]);
+  const [detailsParam, setDetailsParam] = useLocaleStorage(EStorageKeys.DETAILS, EMPTY_STR);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (id) {
+    const storedDetailsParam = detailsParam || id;
+
+    const params = new URLSearchParams(location.search);
+    if (storedDetailsParam) params.append(EStorageKeys.DETAILS, storedDetailsParam);
+
+    if (storedDetailsParam) {
       setIsOpen(true);
-      fetchData(id);
+      fetchData(storedDetailsParam);
     } else {
       setIsOpen(false);
       setData(null);
       setFilms([]);
     }
-  }, [id]);
+  }, [id, detailsParam]);
 
   const fetchData = async (id: string): Promise<void> => {
     setIsLoading(true);
@@ -35,11 +43,11 @@ const DetailsPage: React.FC = () => {
       const data = await Api.fetchDataPerson(id);
       setData(data);
 
-      const filmData = data.films.map((url: string) => Api.fetchDataFilm(url));
-      const filmsPerson = await Promise.all(filmData);
-      setFilms(filmsPerson.map((film) => film.title));
+      const filmData = await Promise.all(data.films.map((url: string) => Api.fetchDataFilm(url)));
+      const filmsPerson = filmData.map((film) => film.title);
+      setFilms(filmsPerson);
     } catch (err) {
-      console.log(`${ETextError.FETCH_ERR} ${err}`);
+      console.error(`${ETextError.FETCH_ERR} ${err}`);
     } finally {
       setIsLoading(false);
     }
@@ -47,8 +55,11 @@ const DetailsPage: React.FC = () => {
 
   const handleClickClose = (): void => {
     setIsOpen(false);
+    setDetailsParam(EMPTY_STR);
+    localStorage.setItem(EStorageKeys.DETAILS, '');
+
     const currentParams = new URLSearchParams(params);
-    currentParams.delete('details');
+    currentParams.delete(EStorageKeys.DETAILS);
     navigate(`?${currentParams.toString()}`, { replace: true });
   };
 
