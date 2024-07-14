@@ -3,7 +3,7 @@ import Card from '../Card/Card';
 import { IResultBlockProps } from './types';
 import styles from './resultsBlock.module.scss';
 
-const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchValue, handleClickCard }) => {
+const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchValue }) => {
   return (
     <section className="section">
       <div className="container">
@@ -23,7 +23,7 @@ const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchVal
           ) : (
             <ul className={styles.list}>
               {cards.map((card) => (
-                <Card key={card.name} {...card} handleClickCard={handleClickCard} />
+                <Card key={card.name} {...card} />
               ))}
             </ul>
           )}

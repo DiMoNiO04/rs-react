@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFoundPage from './pages/NotFound/NotFound';
 import Main from './pages/Main/Main';
+import DetailsPage from './pages/Details/DetailsPage';
 
 enum IUrls {
   HOME = '/',
@@ -12,7 +13,9 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={IUrls.HOME} index element={<Main />} />
+        <Route path={IUrls.HOME} element={<Main />}>
+          <Route index element={<DetailsPage />} />
+        </Route>
         <Route path={IUrls.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
