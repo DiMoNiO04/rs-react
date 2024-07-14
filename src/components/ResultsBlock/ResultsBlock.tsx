@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../Card/Card';
 import { IResultBlockProps } from './types';
 import styles from './resultsBlock.module.scss';
+import Loading from '../Loading/Loading';
 
 const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchValue }) => {
   return (
@@ -13,9 +14,7 @@ const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchVal
           </div>
 
           {isLoading ? (
-            <div className={styles.loader}>
-              <img src="./loading.gif" alt="Loading..." />
-            </div>
+            <Loading />
           ) : cards.length === 0 ? (
             <div className={styles.none}>
               No results were found for your request <span>{searchValue}</span>. Try again!

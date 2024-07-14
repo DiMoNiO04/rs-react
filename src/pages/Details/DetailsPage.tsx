@@ -4,6 +4,9 @@ import styles from './details.module.scss';
 import { EDetailesData, IDetailsFetch } from '../../components/Details/types';
 import Api from '../../api/Api';
 import { ETextError } from '../../errors/types';
+import Loading from '../../components/Loading/Loading';
+import DetailsInfo from '../../components/DetailsInfo/DetailsInfo';
+import { EMPTY_STR } from '../../utils/consts';
 
 const DetailsPage: React.FC = () => {
   const [params] = useSearchParams();
@@ -28,7 +31,6 @@ const DetailsPage: React.FC = () => {
 
   const fetchData = async (id: string): Promise<void> => {
     setIsLoading(true);
-
     try {
       const data = await Api.fetchDataPerson(id);
       setData(data);
@@ -50,25 +52,11 @@ const DetailsPage: React.FC = () => {
     navigate(`?${currentParams.toString()}`, { replace: true });
   };
 
-  const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {
-    if ((event.target as HTMLElement).classList.contains(styles.details)) {
-      handleClickClose();
-    }
-  };
-
   if (isLoading && isOpen) {
     return (
-      <section className={styles.details} onClick={handleClickOutside}>
-        <div className={styles.container}>
-          <button className={styles.close} onClick={handleClickClose}>
-            Close
-          </button>
-          <h2 className={styles.title}>Details for #{id}</h2>
-          <div className={styles.loader}>
-            <img src="./loading.gif" alt="Loading..." />
-          </div>
-        </div>
-      </section>
+      <DetailsInfo id={id || EMPTY_STR} handleClickClose={handleClickClose}>
+        <Loading />
+      </DetailsInfo>
     );
   }
 
@@ -88,22 +76,16 @@ const DetailsPage: React.FC = () => {
   ];
 
   return (
-    <section className={styles.details} onClick={handleClickOutside}>
-      <div className={styles.container}>
-        <button className={styles.close} onClick={handleClickClose}>
-          Close
-        </button>
-        <h2 className={styles.title}>Details for #{id}</h2>
-        <ul className={styles.list}>
-          {detailsData.map((detail) => (
-            <li key={detail.title} className={styles.block}>
-              <b>{detail.title}</b>
-              <p>{detail.value}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <DetailsInfo id={id || EMPTY_STR} handleClickClose={handleClickClose}>
+      <ul className={styles.list}>
+        {detailsData.map((detail) => (
+          <li key={detail.title} className={styles.block}>
+            <b>{detail.title}</b>
+            <p>{detail.value}</p>
+          </li>
+        ))}
+      </ul>
+    </DetailsInfo>
   );
 };
 

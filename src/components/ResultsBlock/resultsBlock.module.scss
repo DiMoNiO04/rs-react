@@ -11,11 +11,6 @@
   }
 }
 
-.loader {
-  @include sizes(120px, 120px);
-  margin: 0 auto;
-}
-
 .none {
   font-size: 32px;
   line-height: 48px;

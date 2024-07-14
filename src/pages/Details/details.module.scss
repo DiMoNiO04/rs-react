@@ -1,36 +1,5 @@
 @import '../../styles/settings/index';
 
-.details {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  @include sizes(100%, 100vh);
-  z-index: 10;
-  top: 0;
-  left: 0;
-}
-
-.container {
-  @include sizes(300px, 100%);
-  background-color: $grey;
-  padding: 60px 40px;
-  margin: 0 0 0 auto;
-}
-
-.title {
-  margin: 0 auto;
-  text-align: center;
-  font-size: 24px;
-  line-height: 130%;
-  margin-bottom: 40px;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: $red;
-}
-
 .list {
   @include flexColumn;
   row-gap: 12px;
