@@ -8,7 +8,7 @@ import ResultsBlock from '../../components/ResultsBlock/ResultsBlock';
 import Pagination from '../../components/Pagination/Pagination';
 import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
 import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
-import Search from '../../components/Serch/Searh';
+import SearchComponent from '../../components/Serch/Searh';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <Search searchParam={searchParam} handleSearch={handleSearch} isLoading={isLoading} />
+      <SearchComponent searchParam={searchParam} handleSearch={handleSearch} isLoading={isLoading} />
       <ResultsBlock cards={cards} isLoading={isLoading} searchValue={searchParam} />
       {!isLoading && count && <Pagination count={count} currentPage={pageParam} onChangePage={handleChangePage} />}
       <Outlet />

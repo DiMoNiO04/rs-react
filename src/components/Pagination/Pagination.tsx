@@ -21,7 +21,13 @@ const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePa
             </div>
           </div>
           <div className={styles.btns}>
-            <button type="button" className={styles.btn} onClick={handlePrev} disabled={currentPage === FIRST_PAGE}>
+            <button
+              type="button"
+              data-testid="btn-prev"
+              className={styles.btn}
+              onClick={handlePrev}
+              disabled={currentPage === FIRST_PAGE}
+            >
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16 19L9 12L16 5"
@@ -32,7 +38,13 @@ const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePa
                 />
               </svg>
             </button>
-            <button type="button" className={styles.btn} onClick={handleNext} disabled={currentPage === totalPage}>
+            <button
+              type="button"
+              data-testid="btn-next"
+              className={styles.btn}
+              onClick={handleNext}
+              disabled={currentPage === totalPage}
+            >
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 19L16 12L9 5" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

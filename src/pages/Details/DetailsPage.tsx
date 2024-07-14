@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './details.module.scss';
-import { EDetailesData, IDetailsFetch } from '../../components/Details/types';
 import Api from '../../api/Api';
 import { ETextError } from '../../errors/types';
 import Loading from '../../components/Loading/Loading';
 import DetailsInfo from '../../components/DetailsInfo/DetailsInfo';
 import { EMPTY_STR } from '../../utils/consts';
 import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
+import { EDetailesData, IDetailsFetch } from './types';
 
 const DetailsPage: React.FC = () => {
   const [params] = useSearchParams();
@@ -56,7 +56,7 @@ const DetailsPage: React.FC = () => {
   const handleClickClose = (): void => {
     setIsOpen(false);
     setDetailsParam(EMPTY_STR);
-    localStorage.setItem(EStorageKeys.DETAILS, '');
+    localStorage.setItem(EStorageKeys.DETAILS, EMPTY_STR);
 
     const currentParams = new URLSearchParams(params);
     currentParams.delete(EStorageKeys.DETAILS);

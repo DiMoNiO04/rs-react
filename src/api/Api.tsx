@@ -1,7 +1,7 @@
 import { API_URL, FIRST_PAGE } from '../utils/consts';
 import { ETextError } from '../errors/types';
 import { IFetchResponse, IGetFetch, IGetFetchReturn } from './types';
-import { IDetailsFetch, IFilmProps } from '../components/Details/types';
+import { IDetailsFetch, IFilmProps } from '../pages/Details/types';
 
 class Api {
   static getFetchUrl({ searchParam, pageParam }: IGetFetch): IGetFetchReturn {
