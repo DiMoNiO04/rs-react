@@ -12,7 +12,8 @@
     "prepare": "husky install",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "react": "^18.3.1",
