@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ECardData, ICardProps, IDataCard } from './types';
 import styles from './card.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { EMPTY_STR } from '../../utils/consts';
+import ThemeContext, { ETheme } from '../../context/themeContext';
 
 const Card: React.FC<ICardProps> = ({ name, height, mass, birth_year, gender, url }) => {
+  const theme = useContext(ThemeContext);
+
   const dataCard: IDataCard[] = [
     { title: ECardData.NAME, value: name },
     { title: ECardData.HEIGHT, value: height },
@@ -27,7 +30,7 @@ const Card: React.FC<ICardProps> = ({ name, height, mass, birth_year, gender, ur
   };
 
   return (
-    <li className={styles.card} data-id={getId} onClick={handleClick}>
+    <li className={`${styles.card} ${theme === ETheme.DARK && styles.dark}`} data-id={getId} onClick={handleClick}>
       {dataCard.map((item, index) => (
         <div className={styles.block} key={index}>
           <b>{item.title}</b>

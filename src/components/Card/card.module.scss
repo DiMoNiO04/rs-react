@@ -13,6 +13,25 @@
     background-color: $white;
     cursor: pointer;
   }
+
+  &.dark {
+    background-color: $darkGrey;
+    border-color: $darkBlack;
+
+    @include hover {
+      background-color: $darkWhite;
+    }
+
+    .block {
+      b {
+        color: $black;
+      }
+
+      p {
+        color: $blue;
+      }
+    }
+  }
 }
 
 .block {

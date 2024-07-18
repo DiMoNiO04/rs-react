@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFoundPage from './pages/NotFound/NotFound';
 import Main from './pages/Main/Main';
@@ -15,6 +15,15 @@ const App: React.FC = () => {
   const [theme, setTheme] = useState(ETheme.LIGHT);
 
   const toggleTheme = () => setTheme(theme === ETheme.DARK ? ETheme.LIGHT : ETheme.DARK);
+
+  useEffect(() => {
+    const body = document.body;
+    if (theme === ETheme.DARK) {
+      body.classList.add(ETheme.DARK);
+    } else {
+      body.classList.remove(ETheme.DARK);
+    }
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={theme}>

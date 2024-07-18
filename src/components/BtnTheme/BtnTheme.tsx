@@ -5,10 +5,10 @@ import { IBtnTheme } from './types';
 
 const BtnTheme: React.FC<IBtnTheme> = ({ theme, onClick }) => {
   return (
-    <div className={styles.block}>
-      <p className={styles.text}>Сейчас используется: {theme === ETheme.DARK ? 'Темная' : 'Светлая'} тема</p>
+    <div className={`${styles.block} ${theme === ETheme.DARK && styles.dark}`}>
+      <p className={styles.text}>Currently using: {theme === ETheme.DARK ? ETheme.DARK : ETheme.LIGHT} theme</p>
       <button type="button" className={styles.btn} onClick={onClick}>
-        {theme === ETheme.DARK ? 'Светлая' : 'Темная'} тема
+        {theme === ETheme.DARK ? ETheme.LIGHT : ETheme.DARK} theme
       </button>
     </div>
   );

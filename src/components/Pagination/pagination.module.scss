@@ -6,6 +6,36 @@
   column-gap: 24px;
   justify-content: flex-end;
   align-items: flex-end;
+
+  &.dark {
+    .titleNumbers {
+      span {
+        &:first-child {
+          color: $blue;
+        }
+      }
+    }
+
+    .btn {
+      background-color: $blue;
+      color: $darkBlack;
+      border-color: $darkBlack;
+
+      &:not(:disabled) {
+        @include hover {
+          color: $darkBlack;
+          border-color: $black;
+          background-color: $darkGrey;
+        }
+      }
+
+      svg {
+        path {
+          stroke: $black;
+        }
+      }
+    }
+  }
 }
 
 .btns {
