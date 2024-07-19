@@ -1,4 +1,4 @@
-import { ICardProps } from '../components/Card/types';
+import { ICardProps } from '../../components/Card/types';
 
 interface IGetFetch {
   searchParam?: string;
@@ -6,11 +6,8 @@ interface IGetFetch {
 }
 
 interface IFetchResponse {
-  data: {
-    count: number;
-    results: ICardProps[];
-  };
-  stringParams: string;
+  count: number;
+  results: ICardProps[];
 }
 
 interface IGetFetchReturn {

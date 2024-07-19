@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './detail.module.scss';
-import Api from '../../api/Api';
-import { ETextError } from '../../errors/types';
 import Loading from '../../components/Loading/Loading';
 import DetailInfo from '../../components/DetailInfo/DetailInfo';
 import { EMPTY_STR } from '../../utils/consts';
 import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
-import { EDetailData, IDetailFetch } from './types';
+import { EDetailData } from './types';
+import { useFetchCardPersonQuery } from '../../store/api/api';
 
 const DetailPage: React.FC = () => {
   const navigate = useNavigate();
@@ -16,13 +15,11 @@ const DetailPage: React.FC = () => {
   const [params] = useSearchParams();
   const detailQuery = params.get(EStorageKeys.DETAIL);
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState<IDetailFetch | null>(null);
-  const [films, setFilms] = useState<string[]>([]);
-
   const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAIL);
   const [detail, setDetail] = useState<string>(detailQuery || detailStorage || EMPTY_STR);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { data, isLoading } = useFetchCardPersonQuery(detail);
 
   useEffect(() => {
     setDetailStorage(detail);
@@ -38,8 +35,6 @@ const DetailPage: React.FC = () => {
 
     if (!detailQuery) {
       setIsOpen(false);
-      setData(null);
-      setFilms([]);
     }
   }, [detailQuery]);
 
@@ -52,31 +47,8 @@ const DetailPage: React.FC = () => {
       navigate(`?${params.toString()}`);
     }
 
-    if (detail) {
-      fetchData(detail);
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-      setData(null);
-      setFilms([]);
-    }
+    detail ? setIsOpen(true) : setIsOpen(false);
   }, [detail]);
-
-  const fetchData = async (id: string): Promise<void> => {
-    setIsLoading(true);
-    try {
-      const data = await Api.fetchDataPerson(id);
-      setData(data);
-
-      const filmData = await Promise.all(data.films.map((url: string) => Api.fetchDataFilm(url)));
-      const filmsPerson = filmData.map((film) => film.title);
-      setFilms(filmsPerson);
-    } catch (err) {
-      console.error(`${ETextError.FETCH_ERR} ${err}`);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const handleClickClose = (): void => {
     setIsOpen(false);
@@ -92,7 +64,7 @@ const DetailPage: React.FC = () => {
     );
   }
 
-  if (!data || !films || !isOpen) {
+  if (!data || !isOpen) {
     return null;
   }
 
@@ -104,7 +76,6 @@ const DetailPage: React.FC = () => {
     { title: EDetailData.GENDER, value: data.gender },
     { title: EDetailData.EYE_COLOR, value: data.eye_color },
     { title: EDetailData.HAIR_COLOR, value: data.hair_color },
-    { title: EDetailData.FILMS, value: films.join(', ') },
   ];
 
   return (

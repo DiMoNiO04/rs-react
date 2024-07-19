@@ -6,7 +6,6 @@ enum EDetailData {
   GENDER = 'Gender: ',
   EYE_COLOR = 'Eye color: ',
   HAIR_COLOR = 'Hair color: ',
-  FILMS = 'Films: ',
 }
 
 interface IDetailFetch {
@@ -17,16 +16,10 @@ interface IDetailFetch {
   gender: string;
   eye_color: string;
   hair_color: string;
-  films: string[];
-}
-
-interface IFilmProps {
-  title: string;
 }
 
 interface IDataCard {
   title: EDetailData;
-  value: string | IFilmProps[];
 }
 
 interface IDetailProps {
@@ -36,4 +29,4 @@ interface IDetailProps {
 }
 
 export { EDetailData };
-export type { IDetailProps, IDataCard, IDetailFetch, IFilmProps };
+export type { IDetailProps, IDataCard, IDetailFetch };
