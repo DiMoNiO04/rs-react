@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ETextError } from '../errors/types';
 
 export enum EStorageKeys {
   SEARCH = 'search',
@@ -7,26 +6,32 @@ export enum EStorageKeys {
   DETAILS = 'details',
 }
 
-export const useLocaleStorage = (key: EStorageKeys, initialValue: string | number) => {
-  const getInitialStorageValue = () => {
-    const lsValue = localStorage.getItem(key);
-    if (lsValue !== null) {
-      try {
-        return JSON.parse(lsValue);
-      } catch (error) {
-        console.error(`${ETextError.LOCALSTORAGE_ERR} ${key}: ${error}`);
-      }
-    }
-    return initialValue;
-  };
-
-  const [storageValue, setStorageValue] = useState(getInitialStorageValue());
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(storageValue));
-  }, [key, storageValue]);
-
-  return [storageValue, setStorageValue] as const;
+const getItem = (key: string) => {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? item : '';
+  } catch (e) {
+    console.error(e);
+    return '';
+  }
 };
 
-export default useLocaleStorage;
+const setItem = (key: string, value: string) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const useLocalStorage = (key: string) => {
+  const [value, setValue] = useState(() => getItem(key));
+
+  useEffect(() => {
+    setItem(key, value);
+  }, [key, value]);
+
+  return [value, setValue] as const;
+};
+
+export default useLocalStorage;

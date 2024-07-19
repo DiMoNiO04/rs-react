@@ -10,32 +10,51 @@ import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { EDetailesData, IDetailsFetch } from './types';
 
 const DetailsPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [params] = useSearchParams();
-  const id = params.get('details');
+  const detailQuery = params.get(EStorageKeys.DETAILS);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<IDetailsFetch | null>(null);
   const [films, setFilms] = useState<string[]>([]);
-  const [detailsParam, setDetailsParam] = useLocaleStorage(EStorageKeys.DETAILS, EMPTY_STR);
-  const navigate = useNavigate();
-  const location = useLocation();
+
+  const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAILS);
+  const [detail, setDetail] = useState<string>(detailQuery || detailStorage || EMPTY_STR);
 
   useEffect(() => {
-    const storedDetailsParam = detailsParam || id;
+    setDetailStorage(detail);
+  }, []);
 
+  useEffect(() => {
+    if (detailQuery && detailQuery !== detail) {
+      setDetail(detailQuery);
+      setDetailStorage(detailQuery);
+    } else if (!detailQuery && detailStorage) {
+      setDetail(detailStorage);
+    }
+  }, [detailQuery]);
+
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
-    if (storedDetailsParam) params.append(EStorageKeys.DETAILS, storedDetailsParam);
 
-    if (storedDetailsParam) {
+    detail ? params.set(EStorageKeys.DETAILS, detail) : params.delete(EStorageKeys.DETAILS);
+
+    if (location.search !== `?${params.toString()}`) {
+      navigate(`?${params.toString()}`);
+    }
+
+    if (detail) {
+      fetchData(detail);
       setIsOpen(true);
-      fetchData(storedDetailsParam);
     } else {
       setIsOpen(false);
       setData(null);
       setFilms([]);
     }
-  }, [id, detailsParam]);
+  }, [detail]);
 
   const fetchData = async (id: string): Promise<void> => {
     setIsLoading(true);
@@ -55,17 +74,13 @@ const DetailsPage: React.FC = () => {
 
   const handleClickClose = (): void => {
     setIsOpen(false);
-    setDetailsParam(EMPTY_STR);
-    localStorage.setItem(EStorageKeys.DETAILS, EMPTY_STR);
-
-    const currentParams = new URLSearchParams(params);
-    currentParams.delete(EStorageKeys.DETAILS);
-    navigate(`?${currentParams.toString()}`, { replace: true });
+    setDetailStorage(EMPTY_STR);
+    setDetail(EMPTY_STR);
   };
 
   if (isLoading && isOpen) {
     return (
-      <DetailsInfo id={id || EMPTY_STR} handleClickClose={handleClickClose}>
+      <DetailsInfo id={detail} handleClickClose={handleClickClose}>
         <Loading />
       </DetailsInfo>
     );
@@ -87,7 +102,7 @@ const DetailsPage: React.FC = () => {
   ];
 
   return (
-    <DetailsInfo id={id || EMPTY_STR} handleClickClose={handleClickClose}>
+    <DetailsInfo id={detail} handleClickClose={handleClickClose}>
       <ul className={styles.list}>
         {detailsData.map((detail) => (
           <li key={detail.title} className={styles.block}>

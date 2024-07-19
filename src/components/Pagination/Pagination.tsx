@@ -8,8 +8,8 @@ const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePa
   const theme = useContext(ThemeContext);
 
   const totalPage: number | undefined = count && Math.ceil(count / 10);
-  const handlePrev = (): void => onChangePage(currentPage - 1);
-  const handleNext = (): void => onChangePage(currentPage + 1);
+  const handlePrev = (): void => onChangePage(String(currentPage - 1));
+  const handleNext = (): void => onChangePage(String(currentPage + 1));
 
   return (
     <section className="section">

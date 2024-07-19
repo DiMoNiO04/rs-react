@@ -1,7 +1,7 @@
 interface IPaginationProps {
   count: number | undefined;
   currentPage: number;
-  onChangePage: (val: number) => void;
+  onChangePage: (val: string) => void;
 }
 
 export type { IPaginationProps };

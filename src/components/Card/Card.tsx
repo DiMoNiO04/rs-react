@@ -3,7 +3,6 @@ import { ECardData, ICardProps, IDataCard } from './types';
 import styles from './card.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
-import { EMPTY_STR } from '../../utils/consts';
 import ThemeContext, { ETheme } from '../../context/themeContext';
 
 const Card: React.FC<ICardProps> = ({ name, height, mass, birth_year, gender, url }) => {
@@ -17,16 +16,16 @@ const Card: React.FC<ICardProps> = ({ name, height, mass, birth_year, gender, ur
     { title: ECardData.GENDER, value: gender },
   ];
 
-  const getId: number = Number(url.split('/').reverse()[1]);
   const location = useLocation();
   const navigate = useNavigate();
-  const [, setDetailsParam] = useLocaleStorage(EStorageKeys.DETAILS, EMPTY_STR);
+  const [, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAILS);
+  const getId: number = Number(url.split('/').reverse()[1]);
 
   const handleClick = () => {
     const params = new URLSearchParams(location.search);
     params.set(EStorageKeys.DETAILS, getId.toString());
-    navigate(`?${params.toString()}`, { replace: true });
-    setDetailsParam(getId.toString());
+    navigate(`?${params.toString()}`);
+    setDetailStorage(getId.toString());
   };
 
   return (
