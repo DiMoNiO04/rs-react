@@ -17,7 +17,7 @@ const Main: React.FC = () => {
   const [queryParams] = useSearchParams();
   const searchQuery = queryParams.get(EStorageKeys.SEARCH);
   const pageQuery = queryParams.get(EStorageKeys.PAGE);
-  const detailQuery = queryParams.get(EStorageKeys.DETAILS);
+  // const detailQuery = queryParams.get(EStorageKeys.DETAIL);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cards, setCards] = useState<ICardProps[]>([]);
@@ -29,13 +29,13 @@ const Main: React.FC = () => {
   const [searchStorage, setSearchStorage] = useLocaleStorage(EStorageKeys.SEARCH);
   const [search, setSearch] = useState<string>(searchQuery || searchStorage || EMPTY_STR);
 
-  const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAILS);
-  const [detail] = useState<string>(detailQuery || detailStorage || EMPTY_STR);
+  // const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAIL);
+  // const [detail] = useState<string>(detailQuery || detailStorage || EMPTY_STR);
 
   useEffect(() => {
     setPageStorage(page);
     setSearchStorage(search);
-    setDetailStorage(detail);
+    // setDetailStorage(detail);
   }, []);
 
   useEffect(() => {
@@ -57,16 +57,16 @@ const Main: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
 
-    page ? params.set(EStorageKeys.PAGE, page) : params.delete(EStorageKeys.PAGE);
     search ? params.set(EStorageKeys.SEARCH, search) : params.delete(EStorageKeys.SEARCH);
-    detail ? params.set(EStorageKeys.DETAILS, detail) : params.delete(EStorageKeys.DETAILS);
+    page ? params.set(EStorageKeys.PAGE, page) : params.delete(EStorageKeys.PAGE);
+    // detail ? params.set(EStorageKeys.DETAIL, detail) : params.delete(EStorageKeys.DETAIL);
 
     if (location.search !== `?${params.toString()}`) {
       navigate(`?${params.toString()}`);
     }
 
     fetchData({ searchParam: search, pageParam: Number(page) });
-  }, [page, search, detail]);
+  }, [page, search]);
 
   const fetchData = async ({ searchParam, pageParam }: IGetFetch): Promise<void> => {
     setIsLoading(true);

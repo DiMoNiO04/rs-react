@@ -14,14 +14,14 @@ const DetailPage: React.FC = () => {
   const location = useLocation();
 
   const [params] = useSearchParams();
-  const detailQuery = params.get(EStorageKeys.DETAILS);
+  const detailQuery = params.get(EStorageKeys.DETAIL);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<IDetailFetch | null>(null);
   const [films, setFilms] = useState<string[]>([]);
 
-  const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAILS);
+  const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAIL);
   const [detail, setDetail] = useState<string>(detailQuery || detailStorage || EMPTY_STR);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const DetailPage: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
 
-    detail ? params.set(EStorageKeys.DETAILS, detail) : params.delete(EStorageKeys.DETAILS);
+    detail ? params.set(EStorageKeys.DETAIL, detail) : params.delete(EStorageKeys.DETAIL);
 
     if (location.search !== `?${params.toString()}`) {
       navigate(`?${params.toString()}`);

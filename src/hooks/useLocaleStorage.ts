@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export enum EStorageKeys {
   SEARCH = 'search',
   PAGE = 'page',
-  DETAILS = 'details',
+  DETAIL = 'detail',
 }
 
 const getItem = (key: string) => {

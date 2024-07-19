@@ -7,7 +7,7 @@ const DetailInfo: React.FC<IDetailInfoProps> = ({ id, handleClickClose, children
   const theme = useContext(ThemeContext);
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {
-    if ((event.target as HTMLElement).classList.contains(styles.details)) {
+    if ((event.target as HTMLElement).classList.contains(styles.detail)) {
       handleClickClose();
     }
   };

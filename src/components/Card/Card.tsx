@@ -18,12 +18,12 @@ const Card: React.FC<ICardProps> = ({ name, height, mass, birth_year, gender, ur
 
   const location = useLocation();
   const navigate = useNavigate();
-  const [, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAILS);
+  const [, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAIL);
   const getId: number = Number(url.split('/').reverse()[1]);
 
   const handleClick = () => {
     const params = new URLSearchParams(location.search);
-    params.set(EStorageKeys.DETAILS, getId.toString());
+    params.set(EStorageKeys.DETAIL, getId.toString());
     navigate(`?${params.toString()}`);
     setDetailStorage(getId.toString());
   };
