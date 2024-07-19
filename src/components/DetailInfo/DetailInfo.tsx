@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import styles from './detailsInfo.module.scss';
-import { IDetailsInfoProps } from './types';
+import styles from './detailInfo.module.scss';
+import { IDetailInfoProps } from './types';
 import ThemeContext, { ETheme } from '../../context/themeContext';
 
-const DetailsInfo: React.FC<IDetailsInfoProps> = ({ id, handleClickClose, children }) => {
+const DetailInfo: React.FC<IDetailInfoProps> = ({ id, handleClickClose, children }) => {
   const theme = useContext(ThemeContext);
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -13,7 +13,7 @@ const DetailsInfo: React.FC<IDetailsInfoProps> = ({ id, handleClickClose, childr
   };
 
   return (
-    <section className={`${styles.details} ${theme === ETheme.DARK && styles.dark}`} onClick={handleClickOutside}>
+    <section className={`${styles.detail} ${theme === ETheme.DARK && styles.dark}`} onClick={handleClickOutside}>
       <div className={styles.container}>
         <button className={styles.close} onClick={handleClickClose}>
           Close
@@ -25,4 +25,4 @@ const DetailsInfo: React.FC<IDetailsInfoProps> = ({ id, handleClickClose, childr
   );
 };
 
-export default DetailsInfo;
+export default DetailInfo;

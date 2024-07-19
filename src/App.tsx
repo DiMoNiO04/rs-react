@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFoundPage from './pages/NotFound/NotFound';
 import Main from './pages/Main/Main';
-import DetailsPage from './pages/Details/DetailsPage';
+import DetailsPage from './pages/Detail/DetailPage';
 import ThemeContext, { ETheme } from './context/themeContext';
 import BtnTheme from './components/BtnTheme/BtnTheme';
 

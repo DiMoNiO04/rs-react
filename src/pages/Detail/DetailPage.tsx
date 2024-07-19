@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import styles from './details.module.scss';
+import styles from './detail.module.scss';
 import Api from '../../api/Api';
 import { ETextError } from '../../errors/types';
 import Loading from '../../components/Loading/Loading';
-import DetailsInfo from '../../components/DetailsInfo/DetailsInfo';
+import DetailInfo from '../../components/DetailInfo/DetailInfo';
 import { EMPTY_STR } from '../../utils/consts';
 import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
-import { EDetailesData, IDetailsFetch } from './types';
+import { EDetailData, IDetailFetch } from './types';
 
-const DetailsPage: React.FC = () => {
+const DetailPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,7 +18,7 @@ const DetailsPage: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState<IDetailsFetch | null>(null);
+  const [data, setData] = useState<IDetailFetch | null>(null);
   const [films, setFilms] = useState<string[]>([]);
 
   const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAILS);
@@ -80,9 +80,9 @@ const DetailsPage: React.FC = () => {
 
   if (isLoading && isOpen) {
     return (
-      <DetailsInfo id={detail} handleClickClose={handleClickClose}>
+      <DetailInfo id={detail} handleClickClose={handleClickClose}>
         <Loading />
-      </DetailsInfo>
+      </DetailInfo>
     );
   }
 
@@ -91,18 +91,18 @@ const DetailsPage: React.FC = () => {
   }
 
   const detailsData = [
-    { title: EDetailesData.NAME, value: data.name },
-    { title: EDetailesData.HEIGHT, value: data.height },
-    { title: EDetailesData.MASS, value: data.mass },
-    { title: EDetailesData.BIRTH_YEAR, value: data.birth_year },
-    { title: EDetailesData.GENDER, value: data.gender },
-    { title: EDetailesData.EYE_COLOR, value: data.eye_color },
-    { title: EDetailesData.HAIR_COLOR, value: data.hair_color },
-    { title: EDetailesData.FILMS, value: films.join(', ') },
+    { title: EDetailData.NAME, value: data.name },
+    { title: EDetailData.HEIGHT, value: data.height },
+    { title: EDetailData.MASS, value: data.mass },
+    { title: EDetailData.BIRTH_YEAR, value: data.birth_year },
+    { title: EDetailData.GENDER, value: data.gender },
+    { title: EDetailData.EYE_COLOR, value: data.eye_color },
+    { title: EDetailData.HAIR_COLOR, value: data.hair_color },
+    { title: EDetailData.FILMS, value: films.join(', ') },
   ];
 
   return (
-    <DetailsInfo id={detail} handleClickClose={handleClickClose}>
+    <DetailInfo id={detail} handleClickClose={handleClickClose}>
       <ul className={styles.list}>
         {detailsData.map((detail) => (
           <li key={detail.title} className={styles.block}>
@@ -111,8 +111,8 @@ const DetailsPage: React.FC = () => {
           </li>
         ))}
       </ul>
-    </DetailsInfo>
+    </DetailInfo>
   );
 };
 
-export default DetailsPage;
+export default DetailPage;
