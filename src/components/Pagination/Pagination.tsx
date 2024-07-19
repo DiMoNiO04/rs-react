@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './pagination.module.scss';
 import { IPaginationProps } from './types';
 import { FIRST_PAGE } from '../../utils/consts';
+import ThemeContext, { ETheme } from '../../context/themeContext';
 
 const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePage }) => {
+  const theme = useContext(ThemeContext);
+
   const totalPage: number | undefined = count && Math.ceil(count / 10);
-  const handlePrev = (): void => onChangePage(currentPage - 1);
-  const handleNext = (): void => onChangePage(currentPage + 1);
+  const handlePrev = (): void => onChangePage(String(currentPage - 1));
+  const handleNext = (): void => onChangePage(String(currentPage + 1));
 
   return (
     <section className="section">
       <div className="container">
-        <div className={styles.pagination}>
+        <div className={`${styles.pagination} ${theme === ETheme.DARK && styles.dark}`}>
           <div className={styles.title}>
             <div className={styles.titlePage}>Page:</div>
             <div className={styles.titleNumbers}>

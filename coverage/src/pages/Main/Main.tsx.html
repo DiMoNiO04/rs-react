@@ -224,7 +224,7 @@ import { IGetFetch } from '../../api/types';
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  const [searchParam, setSearchParam] = useLocaleStorage(EStorageKeys.SEARCH, EMPTY_STR);</span>
 <span class="cstat-no" title="statement not covered" >  const [pageParam, setPageParam] = useLocaleStorage(EStorageKeys.PAGE, FIRST_PAGE);</span>
-<span class="cstat-no" title="statement not covered" >  const [detailsParam] = useLocaleStorage(EStorageKeys.DETAILS, EMPTY_STR);</span>
+<span class="cstat-no" title="statement not covered" >  const [detailsParam] = useLocaleStorage(EStorageKeys.DETAIL, EMPTY_STR);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    fetchData({ searchParam, pageParam });</span>
@@ -234,7 +234,7 @@ import { IGetFetch } from '../../api/types';
 <span class="cstat-no" title="statement not covered" >    const params = new URLSearchParams();</span>
 <span class="cstat-no" title="statement not covered" >    if (searchParam) params.append(EStorageKeys.SEARCH, searchParam);</span>
 <span class="cstat-no" title="statement not covered" >    if (pageParam &amp;&amp; pageParam !== FIRST_PAGE) params.append(EStorageKeys.PAGE, pageParam.toString());</span>
-<span class="cstat-no" title="statement not covered" >    if (detailsParam) params.append(EStorageKeys.DETAILS, detailsParam);</span>
+<span class="cstat-no" title="statement not covered" >    if (detailsParam) params.append(EStorageKeys.DETAIL, detailsParam);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    navigate(`?${params.toString()}`, { replace: true });</span>
 <span class="cstat-no" title="statement not covered" >  }, [searchParam, pageParam]);</span>

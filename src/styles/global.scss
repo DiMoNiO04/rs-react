@@ -102,6 +102,10 @@ body {
   font-weight: 700;
   line-height: 130%;
   position: relative;
+
+  &.dark {
+    background-color: $darkBlue;
+  }
 }
 
 .container {
@@ -115,6 +119,12 @@ h1 {
   margin-top: 32px;
   color: $blue;
   text-align: center;
+}
+
+.dark {
+  h1 {
+    color: $darkBlack;
+  }
 }
 
 @media (max-width: $laptop) {

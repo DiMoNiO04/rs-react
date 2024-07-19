@@ -164,11 +164,11 @@ const Card: React.FC&lt;ICardProps&gt; = ({ name, height, mass, birth_year, gend
   const getId: number = Number(url.split('/').reverse()[1]);
   const location = useLocation();
   const navigate = useNavigate();
-  const [, setDetailsParam] = useLocaleStorage(EStorageKeys.DETAILS, EMPTY_STR);
+  const [, setDetailsParam] = useLocaleStorage(EStorageKeys.DETAIL, EMPTY_STR);
 &nbsp;
   const handleClick = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const params = new URLSearchParams(location.search);</span>
-<span class="cstat-no" title="statement not covered" >    params.set(EStorageKeys.DETAILS, getId.toString());</span>
+<span class="cstat-no" title="statement not covered" >    params.set(EStorageKeys.DETAIL, getId.toString());</span>
 <span class="cstat-no" title="statement not covered" >    navigate(`?${params.toString()}`, { replace: true });</span>
 <span class="cstat-no" title="statement not covered" >    setDetailsParam(getId.toString());</span>
 <span class="cstat-no" title="statement not covered" >  };</span>

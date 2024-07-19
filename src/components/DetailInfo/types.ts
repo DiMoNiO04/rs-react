@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface IDetailsInfoProps {
+interface IDetailInfoProps {
   id: string;
   handleClickClose: () => void;
   children: React.ReactNode;
 }
 
-export type { IDetailsInfoProps };
+export type { IDetailInfoProps };

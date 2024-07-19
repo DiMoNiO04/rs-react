@@ -6,6 +6,20 @@
   align-items: center;
   justify-content: center;
   @include sizes(100%, 100vh);
+
+  &.dark {
+    .button {
+      background-color: $blue;
+      color: $darkBlack;
+      border-color: $darkBlack;
+
+      @include hover {
+        color: $darkBlack;
+        border-color: $black;
+        background-color: $darkGrey;
+      }
+    }
+  }
 }
 
 .title {

@@ -2,6 +2,33 @@
 
 .search {
   margin: 24px 0 48px;
+
+  &.dark {
+    .input {
+      &::placeholder {
+        color: $darkBlack;
+      }
+
+      &:focus {
+        background-color: $darkWhite;
+      }
+
+      background-color: $darkGrey;
+      border-color: $darkBlack;
+    }
+
+    .button {
+      background-color: $blue;
+      color: $darkBlack;
+      border-color: $darkBlack;
+
+      @include hover {
+        color: $darkBlack;
+        border-color: $black;
+        background-color: $darkGrey;
+      }
+    }
+  }
 }
 
 .block {

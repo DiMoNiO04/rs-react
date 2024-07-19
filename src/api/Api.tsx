@@ -1,7 +1,7 @@
 import { API_URL, FIRST_PAGE } from '../utils/consts';
 import { ETextError } from '../errors/types';
 import { IFetchResponse, IGetFetch, IGetFetchReturn } from './types';
-import { IDetailsFetch, IFilmProps } from '../pages/Details/types';
+import { IDetailFetch, IFilmProps } from '../pages/Detail/types';
 
 class Api {
   static getFetchUrl({ searchParam, pageParam }: IGetFetch): IGetFetchReturn {
@@ -35,7 +35,7 @@ class Api {
     }
   }
 
-  static async fetchDataPerson(id: string): Promise<IDetailsFetch> {
+  static async fetchDataPerson(id: string): Promise<IDetailFetch> {
     const url: string = `${API_URL}${id}/`;
 
     const response = await fetch(url);

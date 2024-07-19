@@ -9,6 +9,12 @@
     color: $red;
     font-size: 28px;
   }
+
+  &.dark {
+    span {
+      color: $blue;
+    }
+  }
 }
 
 .none {
@@ -18,6 +24,12 @@
 
   span {
     color: $red;
+  }
+
+  &.dark {
+    span {
+      color: $blue;
+    }
   }
 }
 

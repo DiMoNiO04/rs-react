@@ -288,7 +288,7 @@
 <span class="cstat-no" title="statement not covered" >  const [isLoading, setIsLoading] = useState&lt;boolean&gt;(false);</span>
 <span class="cstat-no" title="statement not covered" >  const [data, setData] = useState&lt;IDetailsFetch | null&gt;(null);</span>
 <span class="cstat-no" title="statement not covered" >  const [films, setFilms] = useState&lt;string[]&gt;([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [detailsParam, setDetailsParam] = useLocaleStorage(EStorageKeys.DETAILS, EMPTY_STR);</span>
+<span class="cstat-no" title="statement not covered" >  const [detailsParam, setDetailsParam] = useLocaleStorage(EStorageKeys.DETAIL, EMPTY_STR);</span>
 <span class="cstat-no" title="statement not covered" >  const navigate = useNavigate();</span>
 <span class="cstat-no" title="statement not covered" >  const location = useLocation();</span>
 &nbsp;
@@ -296,7 +296,7 @@
 <span class="cstat-no" title="statement not covered" >    const storedDetailsParam = detailsParam || id;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    const params = new URLSearchParams(location.search);</span>
-<span class="cstat-no" title="statement not covered" >    if (storedDetailsParam) params.append(EStorageKeys.DETAILS, storedDetailsParam);</span>
+<span class="cstat-no" title="statement not covered" >    if (storedDetailsParam) params.append(EStorageKeys.DETAIL, storedDetailsParam);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (storedDetailsParam) {</span>
 <span class="cstat-no" title="statement not covered" >      setIsOpen(true);</span>
@@ -327,10 +327,10 @@
 <span class="cstat-no" title="statement not covered" >  const handleClickClose = (): void =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    setIsOpen(false);</span>
 <span class="cstat-no" title="statement not covered" >    setDetailsParam(EMPTY_STR);</span>
-<span class="cstat-no" title="statement not covered" >    localStorage.removeItem(EStorageKeys.DETAILS);</span>
+<span class="cstat-no" title="statement not covered" >    localStorage.removeItem(EStorageKeys.DETAIL);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    const currentParams = new URLSearchParams(params);</span>
-<span class="cstat-no" title="statement not covered" >    currentParams.delete(EStorageKeys.DETAILS);</span>
+<span class="cstat-no" title="statement not covered" >    currentParams.delete(EStorageKeys.DETAIL);</span>
 <span class="cstat-no" title="statement not covered" >    navigate(`?${currentParams.toString()}`, { replace: true });</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 &nbsp;

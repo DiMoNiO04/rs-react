@@ -1,4 +1,4 @@
-enum EDetailesData {
+enum EDetailData {
   NAME = 'Name: ',
   HEIGHT = 'Height: ',
   MASS = 'Mass: ',
@@ -9,7 +9,7 @@ enum EDetailesData {
   FILMS = 'Films: ',
 }
 
-interface IDetailsFetch {
+interface IDetailFetch {
   name: string;
   height: string;
   mass: string;
@@ -25,15 +25,15 @@ interface IFilmProps {
 }
 
 interface IDataCard {
-  title: EDetailesData;
+  title: EDetailData;
   value: string | IFilmProps[];
 }
 
-interface IDetailsProps {
+interface IDetailProps {
   id: string;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export { EDetailesData };
-export type { IDetailsProps, IDataCard, IDetailsFetch, IFilmProps };
+export { EDetailData };
+export type { IDetailProps, IDataCard, IDetailFetch, IFilmProps };
