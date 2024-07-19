@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFoundPage from './pages/NotFound/NotFound';
 import Main from './pages/Main/Main';
 import DetailsPage from './pages/Detail/DetailPage';
 import ThemeContext, { ETheme } from './context/themeContext';
 import BtnTheme from './components/BtnTheme/BtnTheme';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from './store/store';
+import { toggleTheme } from './store/theme/slice';
 
 enum IUrls {
   HOME = '/',
@@ -12,9 +15,8 @@ enum IUrls {
 }
 
 const App: React.FC = () => {
-  const [theme, setTheme] = useState(ETheme.LIGHT);
-
-  const toggleTheme = () => setTheme(theme === ETheme.DARK ? ETheme.LIGHT : ETheme.DARK);
+  const theme = useSelector((state: RootState) => state.theme.value);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const body = document.body;
@@ -27,7 +29,7 @@ const App: React.FC = () => {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <BtnTheme theme={theme} onClick={toggleTheme} />
+      <BtnTheme theme={theme} onClick={() => dispatch(toggleTheme())} />
       <BrowserRouter>
         <Routes>
           <Route path={IUrls.HOME} element={<Main />}>

@@ -1,7 +1,7 @@
 import { ETheme } from '../../context/themeContext';
 
 interface IBtnTheme {
-  theme: ETheme;
+  theme: string | ETheme;
   onClick: () => void;
 }
 

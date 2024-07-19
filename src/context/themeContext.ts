@@ -5,6 +5,6 @@ export enum ETheme {
   DARK = 'dark',
 }
 
-const ThemeContext = createContext(ETheme.LIGHT);
+const ThemeContext = createContext<ETheme | string>(ETheme.LIGHT);
 
 export default ThemeContext;

@@ -35,6 +35,12 @@ const DetailPage: React.FC = () => {
     } else if (!detailQuery && detailStorage) {
       setDetail(detailStorage);
     }
+
+    if (!detailQuery) {
+      setIsOpen(false);
+      setData(null);
+      setFilms([]);
+    }
   }, [detailQuery]);
 
   useEffect(() => {
