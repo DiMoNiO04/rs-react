@@ -17,7 +17,7 @@ const Modal: React.FC = () => {
 
   const onClickDownload = () => {
     if (allFavoriteCards.length > 0) {
-      const data = JSON.stringify(allFavoriteCards);
+      const data = allFavoriteCards;
       const fileName: string = `${countSelects}_peoples`;
       const exportType = exportFromJSON.types.csv;
 

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './detail.module.scss';
 import Loading from '../../components/Loading/Loading';
 import DetailInfo from '../../components/DetailInfo/DetailInfo';
-import { EMPTY_STR } from '../../utils/consts';
-import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
+import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { EDetailData } from './types';
 import { useFetchCardPersonQuery } from '../../store/api/api';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { clearDetailId, setDetailId } from '../../store/detail/slice';
+import { selectorGetDetailId, selectorGetIsOpenBlock } from '../../store/detail/selectors';
 
 const DetailPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,28 +17,19 @@ const DetailPage: React.FC = () => {
   const [params] = useSearchParams();
   const detailQuery = params.get(EStorageKeys.DETAIL);
 
-  const [detailStorage, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAIL);
-  const [detail, setDetail] = useState<string>(detailQuery || detailStorage || EMPTY_STR);
+  const dispatch = useAppDispatch();
+  const detail = useAppSelector(selectorGetDetailId());
+  const isOpen = useAppSelector(selectorGetIsOpenBlock());
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { data, isLoading } = useFetchCardPersonQuery(detail);
 
   useEffect(() => {
-    setDetailStorage(detail);
-  }, []);
-
-  useEffect(() => {
-    if (detailQuery && detailQuery !== detail) {
-      setDetail(detailQuery);
-      setDetailStorage(detailQuery);
-    } else if (!detailQuery && detailStorage) {
-      setDetail(detailStorage);
+    if (detailQuery) {
+      dispatch(setDetailId(detailQuery));
+    } else {
+      dispatch(clearDetailId());
     }
-
-    if (!detailQuery) {
-      setIsOpen(false);
-    }
-  }, [detailQuery]);
+  }, [detailQuery, dispatch]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -46,14 +39,10 @@ const DetailPage: React.FC = () => {
     if (location.search !== `?${params.toString()}`) {
       navigate(`?${params.toString()}`);
     }
-
-    detail ? setIsOpen(true) : setIsOpen(false);
   }, [detail]);
 
   const handleClickClose = (): void => {
-    setIsOpen(false);
-    setDetailStorage(EMPTY_STR);
-    setDetail(EMPTY_STR);
+    dispatch(clearDetailId());
   };
 
   if (isLoading && isOpen) {
