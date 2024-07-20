@@ -2,14 +2,19 @@ import React, { useContext } from 'react';
 import styles from './pagination.module.scss';
 import { FIRST_PAGE } from '../../utils/consts';
 import ThemeContext, { ETheme } from '../../context/themeContext';
-import { IPaginationProps } from './types';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { selectorCurrentPage, selectorTotalPage } from '../../store/pagination/selectors';
+import { handleNextPage, handlePrevPage } from '../../store/pagination/slice';
 
-const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePage }) => {
+const Pagination: React.FC = () => {
   const theme = useContext(ThemeContext);
 
-  const totalPage: number | undefined = count && Math.ceil(count / 10);
-  const handlePrev = (): void => onChangePage(String(currentPage - 1));
-  const handleNext = (): void => onChangePage(String(currentPage + 1));
+  const dispatch = useAppDispatch();
+  const currentPage = useAppSelector(selectorCurrentPage());
+  const totalPage = useAppSelector(selectorTotalPage());
+
+  const handlePrev = () => dispatch(handlePrevPage());
+  const handleNext = () => dispatch(handleNextPage());
 
   return (
     <section className="section">

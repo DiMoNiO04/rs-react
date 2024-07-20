@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPaginationSliceState } from './types';
 import { EStorageKeys } from '../../hooks/useLocaleStorage';
-import { FIRST_PAGE } from '../../utils/consts';
 import { setDataStorage } from '../../utils/localeStorage';
+import getInitialPage from '../../utils/getInitialPage';
 
 const initialState: IPaginationSliceState = {
-  currentPage: FIRST_PAGE,
+  currentPage: getInitialPage(),
   totalPage: 0,
   count: 10,
 };

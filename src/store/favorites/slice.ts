@@ -4,6 +4,7 @@ import getFavoritesFromLs from '../../utils/getFavoritesFromLs';
 import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { ICardProps } from '../../components/Card/types';
 import { removeDataStorage, setDataStorage } from '../../utils/localeStorage';
+import exportFromJSON from 'export-from-json';
 
 const initialState: IFavoritesSliceState = {
   items: getFavoritesFromLs(),
@@ -26,8 +27,15 @@ const favoritesSlice = createSlice({
       state.items = [];
       removeDataStorage(EStorageKeys.FAVORITES);
     },
+    downloadFavorites(state) {
+      const data = state.items;
+      const fileName = `${state.items.length}_peoples`;
+      const exportType = exportFromJSON.types.csv;
+
+      exportFromJSON({ data, fileName, exportType });
+    },
   },
 });
 
-export const { toggleFavorite, clearFavorites } = favoritesSlice.actions;
+export const { toggleFavorite, clearFavorites, downloadFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;

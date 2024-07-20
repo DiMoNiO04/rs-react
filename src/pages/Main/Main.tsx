@@ -7,6 +7,9 @@ import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
 import SearchComponent from '../../components/Serch/Searh';
 import { useFetchCardsQuery } from '../../store/api/api';
 import Modal from '../../components/Modal/Modal';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { setCurrentPage, setTotalCount } from '../../store/pagination/slice';
+import { selectorCurrentPage } from '../../store/pagination/selectors';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -15,8 +18,8 @@ const Main: React.FC = () => {
   const searchQuery = queryParams.get(EStorageKeys.SEARCH);
   const pageQuery = queryParams.get(EStorageKeys.PAGE);
 
-  const [pageStorage, setPageStorage] = useLocaleStorage(EStorageKeys.PAGE);
-  const [page, setPage] = useState<string>(pageQuery || pageStorage || String(FIRST_PAGE));
+  const dispatch = useAppDispatch();
+  const page = useAppSelector(selectorCurrentPage());
 
   const [searchStorage, setSearchStorage] = useLocaleStorage(EStorageKeys.SEARCH);
   const [search, setSearch] = useState<string>(searchQuery || searchStorage || EMPTY_STR);
@@ -24,16 +27,18 @@ const Main: React.FC = () => {
   const { data, isLoading } = useFetchCardsQuery({ searchParam: search, pageParam: Number(page) });
 
   useEffect(() => {
-    setPageStorage(page);
+    if (data) {
+      dispatch(setTotalCount(data.count));
+    }
+  }, [data, dispatch]);
+
+  useEffect(() => {
     setSearchStorage(search);
   }, []);
 
   useEffect(() => {
-    if (pageQuery && pageQuery !== page) {
-      setPage(pageQuery);
-      setPageStorage(pageQuery);
-    } else if (!pageQuery && pageStorage) {
-      setPage(pageStorage);
+    if (pageQuery && Number(pageQuery) !== page) {
+      dispatch(setCurrentPage(Number(pageQuery)));
     }
 
     if (searchQuery && searchQuery !== search) {
@@ -47,30 +52,24 @@ const Main: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     search ? params.set(EStorageKeys.SEARCH, search) : params.delete(EStorageKeys.SEARCH);
-    page ? params.set(EStorageKeys.PAGE, page) : params.delete(EStorageKeys.PAGE);
+    page ? params.set(EStorageKeys.PAGE, String(page)) : params.delete(EStorageKeys.PAGE);
 
     if (location.search !== `?${params.toString()}`) {
       navigate(`?${params.toString()}`);
     }
   }, [page, search]);
 
-  const handleChangePage = (newPage: string): void => {
-    setPage(newPage);
-    setPageStorage(newPage);
-  };
-
   const handleSearch = (newSearch: string): void => {
     setSearch(newSearch);
     setSearchStorage(newSearch);
-    setPage(String(FIRST_PAGE));
-    setPageStorage(String(FIRST_PAGE));
+    dispatch(setCurrentPage(FIRST_PAGE));
   };
 
   return (
     <>
       <SearchComponent searchParam={search} handleSearch={handleSearch} isLoading={isLoading} />
       <ResultsBlock cards={data?.results || []} isLoading={isLoading} searchValue={search} />
-      {data?.count && <Pagination count={data.count} currentPage={Number(page)} onChangePage={handleChangePage} />}
+      {data?.count && <Pagination />}
       <Modal />
       <Outlet />
     </>
