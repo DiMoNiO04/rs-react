@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import { ECardData, ICardProps, IDataCard } from './types';
 import styles from './card.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
-import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
+import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import ThemeContext, { ETheme } from '../../context/themeContext';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { toggleFavorite } from '../../store/favorites/slice';
 import { selectFavoriteCard } from '../../store/favorites/selectors';
+import { setDetailId } from '../../store/detail/slice';
 
 const Card: React.FC<ICardProps> = (props) => {
   const { name, height, mass, birth_year, gender, url } = props;
@@ -17,9 +18,7 @@ const Card: React.FC<ICardProps> = (props) => {
   const theme = useContext(ThemeContext);
   const dispatch = useAppDispatch();
 
-  const [, setDetailStorage] = useLocaleStorage(EStorageKeys.DETAIL);
   const getId: number = Number(url.split('/').reverse()[1]);
-
   const isFavorite = useAppSelector(selectFavoriteCard(url));
 
   const dataCard: IDataCard[] = [
@@ -34,7 +33,7 @@ const Card: React.FC<ICardProps> = (props) => {
     const params = new URLSearchParams(location.search);
     params.set(EStorageKeys.DETAIL, getId.toString());
     navigate(`?${params.toString()}`);
-    setDetailStorage(getId.toString());
+    dispatch(setDetailId(getId.toString()));
   };
 
   const onChangeFavorite = () => {

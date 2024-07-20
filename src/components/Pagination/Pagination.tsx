@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styles from './pagination.module.scss';
-import { IPaginationProps } from './types';
 import { FIRST_PAGE } from '../../utils/consts';
 import ThemeContext, { ETheme } from '../../context/themeContext';
+import { IPaginationProps } from './types';
 
 const Pagination: React.FC<IPaginationProps> = ({ count, currentPage, onChangePage }) => {
   const theme = useContext(ThemeContext);
