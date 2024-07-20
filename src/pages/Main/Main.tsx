@@ -6,6 +6,7 @@ import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
 import useLocaleStorage, { EStorageKeys } from '../../hooks/useLocaleStorage';
 import SearchComponent from '../../components/Serch/Searh';
 import { useFetchCardsQuery } from '../../store/api/api';
+import Modal from '../../components/Modal/Modal';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -70,6 +71,7 @@ const Main: React.FC = () => {
       <SearchComponent searchParam={search} handleSearch={handleSearch} isLoading={isLoading} />
       <ResultsBlock cards={data?.results || []} isLoading={isLoading} searchValue={search} />
       {data?.count && <Pagination count={data.count} currentPage={Number(page)} onChangePage={handleChangePage} />}
+      <Modal />
       <Outlet />
     </>
   );
