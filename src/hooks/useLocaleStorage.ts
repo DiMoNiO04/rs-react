@@ -5,6 +5,7 @@ export enum EStorageKeys {
   PAGE = 'page',
   DETAIL = 'detail',
   THEME = 'theme',
+  FAVORITES = 'favorites',
 }
 
 const getItem = (key: string) => {

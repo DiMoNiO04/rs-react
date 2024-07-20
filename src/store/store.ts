@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import favoritesReducer from './favorites/slice';
 import themeReducer from './theme/slice';
 import { api } from './api/api';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
+    favorites: favoritesReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
