@@ -8,7 +8,9 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { toggleFavorite } from '../../store/favorites/slice';
 import { selectFavoriteCard } from '../../store/favorites/selectors';
 
-const Card: React.FC<ICardProps> = ({ name, height, mass, birth_year, gender, url }) => {
+const Card: React.FC<ICardProps> = (props) => {
+  const { name, height, mass, birth_year, gender, url } = props;
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -36,7 +38,7 @@ const Card: React.FC<ICardProps> = ({ name, height, mass, birth_year, gender, ur
   };
 
   const onChangeFavorite = () => {
-    dispatch(toggleFavorite(url));
+    dispatch(toggleFavorite(props));
   };
 
   return (

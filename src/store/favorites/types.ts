@@ -1,9 +1,7 @@
-interface IFavoriteItem {
-  url: string;
-}
+import { ICardProps } from '../../components/Card/types';
 
 interface IFavoritesSliceState {
-  items: IFavoriteItem[];
+  items: ICardProps[];
 }
 
-export type { IFavoriteItem, IFavoritesSliceState };
+export type { IFavoritesSliceState };
