@@ -7,8 +7,9 @@ import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { EDetailData } from './types';
 import { useFetchCardPersonQuery } from '../../store/api/api';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { clearDetailId, setDetailId } from '../../store/detail/slice';
+import { setDetailId } from '../../store/detail/slice';
 import { selectorGetDetailId, selectorGetIsOpenBlock } from '../../store/detail/selectors';
+import { EMPTY_STR } from '../../utils/consts';
 
 const DetailPage: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const DetailPage: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const detail = useAppSelector(selectorGetDetailId());
-  const isOpen = useAppSelector(selectorGetIsOpenBlock());
+  const isOpenBlock = useAppSelector(selectorGetIsOpenBlock());
 
   const { data, isLoading } = useFetchCardPersonQuery(detail);
 
@@ -27,7 +28,7 @@ const DetailPage: React.FC = () => {
     if (detailQuery) {
       dispatch(setDetailId(detailQuery));
     } else {
-      dispatch(clearDetailId());
+      dispatch(setDetailId(EMPTY_STR));
     }
   }, [detailQuery, dispatch]);
 
@@ -42,10 +43,10 @@ const DetailPage: React.FC = () => {
   }, [detail]);
 
   const handleClickClose = (): void => {
-    dispatch(clearDetailId());
+    dispatch(setDetailId(EMPTY_STR));
   };
 
-  if (isLoading && isOpen) {
+  if (isLoading && isOpenBlock) {
     return (
       <DetailInfo id={detail} handleClickClose={handleClickClose}>
         <Loading />
@@ -53,7 +54,7 @@ const DetailPage: React.FC = () => {
     );
   }
 
-  if (!data || !isOpen) {
+  if (!data || !isOpenBlock) {
     return null;
   }
 

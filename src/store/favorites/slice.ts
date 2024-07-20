@@ -3,6 +3,7 @@ import { IFavoritesSliceState } from './types';
 import getFavoritesFromLs from '../../utils/getFavoritesFromLs';
 import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { ICardProps } from '../../components/Card/types';
+import { removeDataStorage, setDataStorage } from '../../utils/localeStorage';
 
 const initialState: IFavoritesSliceState = {
   items: getFavoritesFromLs(),
@@ -19,11 +20,11 @@ const favoritesSlice = createSlice({
       } else {
         state.items.push(card);
       }
-      localStorage.setItem(EStorageKeys.FAVORITES, JSON.stringify(state.items));
+      setDataStorage(EStorageKeys.FAVORITES, JSON.stringify(state.items));
     },
     clearFavorites(state) {
       state.items = [];
-      localStorage.removeItem(EStorageKeys.FAVORITES);
+      removeDataStorage(EStorageKeys.FAVORITES);
     },
   },
 });
