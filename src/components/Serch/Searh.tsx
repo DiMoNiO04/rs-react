@@ -2,10 +2,13 @@ import React, { ChangeEvent, useContext, useState } from 'react';
 import { ISearchProps } from './types';
 import styles from './search.module.scss';
 import ThemeContext, { ETheme } from '../../context/themeContext';
+import { useAppSelector } from '../../store/store';
+import { selectorCurrentSearch } from '../../store/search/selectors';
 
-const SearchComponent: React.FC<ISearchProps> = ({ searchParam, handleSearch, isLoading }) => {
+const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isLoading }) => {
   const theme = useContext(ThemeContext);
 
+  const searchParam = useAppSelector(selectorCurrentSearch());
   const [inputValue, setInputValue] = useState(searchParam);
 
   const changeInputValue = (event: ChangeEvent<HTMLInputElement>): void => {
