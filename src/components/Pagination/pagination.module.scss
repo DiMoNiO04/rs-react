@@ -1,0 +1,124 @@
+@import '../../styles/settings/index';
+
+.pagination {
+  margin: auto 0 32px 0;
+  display: flex;
+  column-gap: 24px;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  &.dark {
+    .titleNumbers {
+      span {
+        &:first-child {
+          color: $blue;
+        }
+      }
+    }
+
+    .btn {
+      background-color: $blue;
+      color: $darkBlack;
+      border-color: $darkBlack;
+
+      &:not(:disabled) {
+        @include hover {
+          color: $darkBlack;
+          border-color: $black;
+          background-color: $darkGrey;
+        }
+      }
+
+      svg {
+        path {
+          stroke: $black;
+        }
+      }
+    }
+  }
+}
+
+.btns {
+  display: flex;
+  column-gap: 8px;
+}
+
+.btn {
+  border-radius: 8px;
+  padding: 12px;
+  background-color: $blue;
+  border: 2px solid transparent;
+  @include flexCenter;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+
+  svg {
+    path {
+      stroke: $white;
+      transition: stroke 0.2s ease;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.8;
+  }
+
+  &:not(:disabled) {
+    @include hover {
+      border-color: $black;
+      background-color: $white;
+
+      svg path {
+        stroke: $black;
+      }
+    }
+  }
+}
+
+.title {
+  display: flex;
+  column-gap: 10px;
+}
+
+.titlePage {
+  font-size: 24px;
+}
+
+.titleNumbers {
+  display: flex;
+  column-gap: 4px;
+
+  span {
+    font-size: 24px;
+
+    &:first-child {
+      color: $red;
+    }
+  }
+}
+
+@media (max-width: $mob) {
+  .pagination {
+    column-gap: 20px;
+  }
+
+  .btn {
+    padding: 6px;
+
+    svg {
+      @include sizes(20px, 20px);
+    }
+  }
+
+  .titlePage {
+    font-size: 20px;
+  }
+
+  .titleNumbers {
+    span {
+      font-size: 20px;
+    }
+  }
+}

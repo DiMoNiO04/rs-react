@@ -1,0 +1,21 @@
+@import '../../styles/settings/index';
+
+.list {
+  @include flexColumn;
+  row-gap: 12px;
+}
+
+.block {
+  display: flex;
+  column-gap: 4px;
+
+  b {
+    color: $black;
+    font-size: 18px;
+  }
+
+  p {
+    color: $blue;
+    font-size: 16px;
+  }
+}
