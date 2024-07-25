@@ -5,7 +5,7 @@ import ThemeContext, { ETheme } from '../../context/themeContext';
 import { useAppSelector } from '../../store/store';
 import { selectorCurrentSearch } from '../../store/search/selectors';
 
-const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isLoading }) => {
+const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isFetching }) => {
   const theme = useContext(ThemeContext);
 
   const searchParam = useAppSelector(selectorCurrentSearch());
@@ -33,7 +33,7 @@ const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isLoading }) =>
               className={styles.input}
               onChange={(event) => changeInputValue(event)}
             />
-            <button disabled={isLoading} type="button" className={styles.button} onClick={handleSearchAction}>
+            <button disabled={isFetching} type="button" className={styles.button} onClick={handleSearchAction}>
               Search
             </button>
           </div>

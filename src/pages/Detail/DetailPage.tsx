@@ -22,7 +22,7 @@ const DetailPage: React.FC = () => {
   const detail = useAppSelector(selectorGetDetailId());
   const isOpenBlock = useAppSelector(selectorGetIsOpenBlock());
 
-  const { data, isLoading } = useFetchCardPersonQuery(detail);
+  const { data, isFetching } = useFetchCardPersonQuery(detail);
 
   useEffect(() => {
     if (detailQuery) {
@@ -46,7 +46,7 @@ const DetailPage: React.FC = () => {
     dispatch(setDetailId(EMPTY_STR));
   };
 
-  if (isLoading && isOpenBlock) {
+  if (isFetching && isOpenBlock) {
     return (
       <DetailInfo id={detail} handleClickClose={handleClickClose}>
         <Loading />

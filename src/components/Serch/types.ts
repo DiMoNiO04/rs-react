@@ -1,6 +1,6 @@
 interface ISearchProps {
   handleSearch: (searchQuery: string) => void;
-  isLoading: boolean;
+  isFetching: boolean;
 }
 
 export type { ISearchProps };

@@ -4,13 +4,20 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: 'tests/setup.ts',
+    setupFiles: 'src/tests/setup.ts',
+    css: false,
     coverage: {
-      provider: 'v8',
-      reporter: ['text', 'html'],
-      include: ['src/**/*.{ts,tsx}'],
+      enabled: true,
       all: true,
+      provider: 'v8',
+      reporter: ['text'],
+      include: ['src/**/*.{ts,tsx}'],
       exclude: ['**/types.ts', 'src/utils/**/*', 'src/tests/**/*'],
+      thresholds: {
+        statements: 80,
+      },
     },
+    silent: true,
+    watch: false,
   },
 });

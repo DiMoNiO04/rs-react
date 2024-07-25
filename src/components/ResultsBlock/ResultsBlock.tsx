@@ -5,7 +5,7 @@ import styles from './resultsBlock.module.scss';
 import Loading from '../Loading/Loading';
 import ThemeContext, { ETheme } from '../../context/themeContext';
 
-const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchValue }) => {
+const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isFetching, searchValue }) => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -16,7 +16,7 @@ const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isLoading, searchVal
             Found peoples matching your request: <span>{searchValue || 'All'}</span>
           </div>
 
-          {isLoading ? (
+          {isFetching ? (
             <Loading />
           ) : cards.length === 0 ? (
             <div className={`${styles.none} ${theme === ETheme.DARK && styles.dark}`}>

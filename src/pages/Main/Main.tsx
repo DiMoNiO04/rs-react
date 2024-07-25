@@ -24,7 +24,7 @@ const Main: React.FC = () => {
   const page = useAppSelector(selectorCurrentPage());
   const search = useAppSelector(selectorCurrentSearch());
 
-  const { data, isLoading } = useFetchCardsQuery({ searchParam: search, pageParam: Number(page) });
+  const { data, isFetching } = useFetchCardsQuery({ searchParam: search, pageParam: Number(page) });
 
   useEffect(() => {
     if (data) {
@@ -59,8 +59,8 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <SearchComponent handleSearch={handleSearch} isLoading={isLoading} />
-      <ResultsBlock cards={data?.results || []} isLoading={isLoading} searchValue={search} />
+      <SearchComponent handleSearch={handleSearch} isFetching={isFetching} />
+      <ResultsBlock cards={data?.results || []} isFetching={isFetching} searchValue={search} />
       {data?.count && <Pagination />}
       <Modal />
       <Outlet />
