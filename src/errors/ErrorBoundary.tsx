@@ -1,3 +1,4 @@
+import React from 'react';
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { ETextError, IErrorBoundaryProps, IErrorBoundaryState } from './types';
 import ErrorContent from '../components/ErrorContent/ErrorContent';

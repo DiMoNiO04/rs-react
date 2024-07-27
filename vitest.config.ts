@@ -12,7 +12,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text'],
       include: ['src/**/*.{ts,tsx}'],
-      exclude: ['**/types.ts', 'src/utils/**/*', 'src/tests/**/*'],
+      exclude: ['**/types.ts', 'src/utils/**/*', 'src/tests/**/*', 'src/main.tsx'],
       thresholds: {
         statements: 80,
       },

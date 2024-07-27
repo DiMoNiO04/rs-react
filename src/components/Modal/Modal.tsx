@@ -14,17 +14,17 @@ const Modal: React.FC = () => {
   const onClickReset = () => dispatch(clearFavorites());
   const onClickDownload = () => dispatch(downloadFavorites());
 
-  if (countSelects === 0) return;
+  if (countSelects === 0) return null;
 
   return (
-    <div className={`${styles.modal} ${theme === ETheme.DARK && styles.dark}`}>
-      <div className={styles.title}>Выбрано {countSelects} элемента</div>
+    <div className={`${styles.modal} ${theme === ETheme.DARK ? styles.dark : ''}`}>
+      <div className={styles.title}>{countSelects} item selected</div>
       <div className={styles.btns}>
         <button type="button" className={styles.btnClear} onClick={onClickReset}>
-          Отменить выбор всех
+          Deselect all
         </button>
         <button type="button" className={styles.btnDown} onClick={onClickDownload}>
-          Загрузить
+          Download
         </button>
       </div>
     </div>
