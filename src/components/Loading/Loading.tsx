@@ -1,11 +1,10 @@
 import React from 'react';
-import loadingGif from '../../../public/loading.gif';
 import styles from './loading.module.scss';
 
 const Loading: React.FC = () => {
   return (
     <div className={styles.loader}>
-      <img src={loadingGif} alt="Loading..." />
+      <img src="./loading.gif" alt="Loading..." />
     </div>
   );
 };
