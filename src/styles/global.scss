@@ -1,5 +1,9 @@
 @import './settings/index.scss';
 
+* {
+  font-family: var(--font-nunito), sans-serif;
+}
+
 img {
   height: 100%;
   width: 100%;
