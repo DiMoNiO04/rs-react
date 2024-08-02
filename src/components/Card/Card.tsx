@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext } from 'react';
 import { ECardData, ICardProps, IDataCard } from './types';
 import styles from './card.module.scss';

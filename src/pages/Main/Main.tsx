@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import ResultsBlock from '../../components/ResultsBlock/ResultsBlock';

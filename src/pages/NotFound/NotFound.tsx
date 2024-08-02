@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext } from 'react';
 import styles from './notFound.module.scss';
 import { Link } from 'react-router-dom';

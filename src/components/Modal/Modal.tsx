@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext } from 'react';
 import styles from './modal.module.scss';
 import ThemeContext, { ETheme } from '../../context/themeContext';

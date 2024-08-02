@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './detail.module.scss';

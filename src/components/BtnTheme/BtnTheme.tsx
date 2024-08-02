@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import styles from './BtnTheme.module.scss';
 import { ETheme } from '../../context/themeContext';

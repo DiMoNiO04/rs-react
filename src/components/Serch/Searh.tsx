@@ -1,3 +1,5 @@
+'use client';
+
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { ISearchProps } from './types';
 import styles from './search.module.scss';

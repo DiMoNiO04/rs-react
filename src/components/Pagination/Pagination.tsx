@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext } from 'react';
 import styles from './pagination.module.scss';
 import { FIRST_PAGE } from '../../utils/consts';
