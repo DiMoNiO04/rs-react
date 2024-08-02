@@ -1,7 +1,13 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Outputs a Single-Page Application (SPA).
-  distDir: './dist', // Changes the build output directory to `./dist/`.
+  output: 'export',
+  distDir: './dist',
+  sassOptions: {
+    includePaths: [path.join(path.dirname(fileURLToPath(import.meta.url)), 'src/styles')],
+  },
 };
 
 export default nextConfig;
