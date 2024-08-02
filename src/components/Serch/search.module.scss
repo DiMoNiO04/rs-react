@@ -1,114 +1,112 @@
-@import '../../styles/settings/index';
+// .search {
+//   margin: 24px 0 48px;
 
-.search {
-  margin: 24px 0 48px;
+//   &.dark {
+//     .input {
+//       &::placeholder {
+//         color: $darkBlack;
+//       }
 
-  &.dark {
-    .input {
-      &::placeholder {
-        color: $darkBlack;
-      }
+//       &:focus {
+//         background-color: $darkWhite;
+//       }
 
-      &:focus {
-        background-color: $darkWhite;
-      }
+//       background-color: $darkGrey;
+//       border-color: $darkBlack;
+//     }
 
-      background-color: $darkGrey;
-      border-color: $darkBlack;
-    }
+//     .button {
+//       background-color: $blue;
+//       color: $darkBlack;
+//       border-color: $darkBlack;
 
-    .button {
-      background-color: $blue;
-      color: $darkBlack;
-      border-color: $darkBlack;
+//       @include hover {
+//         color: $darkBlack;
+//         border-color: $black;
+//         background-color: $darkGrey;
+//       }
+//     }
+//   }
+// }
 
-      @include hover {
-        color: $darkBlack;
-        border-color: $black;
-        background-color: $darkGrey;
-      }
-    }
-  }
-}
+// .block {
+//   @include flexCenterBetween;
+//   column-gap: 48px;
+// }
 
-.block {
-  @include flexCenterBetween;
-  column-gap: 48px;
-}
+// .input {
+//   border: 3px solid $black;
+//   border-radius: 12px;
+//   width: 100%;
+//   padding: 12px;
+//   background-color: $grey;
+//   color: $black;
+//   font-weight: 700;
+//   font-size: 18px;
+//   height: 60px;
+//   transition: background-color 0.2s ease;
 
-.input {
-  border: 3px solid $black;
-  border-radius: 12px;
-  width: 100%;
-  padding: 12px;
-  background-color: $grey;
-  color: $black;
-  font-weight: 700;
-  font-size: 18px;
-  height: 60px;
-  transition: background-color 0.2s ease;
+//   &:focus {
+//     background-color: $white;
+//   }
+// }
 
-  &:focus {
-    background-color: $white;
-  }
-}
+// .button {
+//   border-radius: 12px;
+//   padding: 0 48px;
+//   border: 3px solid transparent;
+//   background-color: $blue;
+//   font-weight: 700;
+//   font-size: 20px;
+//   height: 60px;
+//   @include flexCenter;
+//   color: $white;
+//   transition:
+//     color 0.2s ease,
+//     border-color 0.2s ease,
+//     background-color 0.2s ease;
 
-.button {
-  border-radius: 12px;
-  padding: 0 48px;
-  border: 3px solid transparent;
-  background-color: $blue;
-  font-weight: 700;
-  font-size: 20px;
-  height: 60px;
-  @include flexCenter;
-  color: $white;
-  transition:
-    color 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+//   &:not(:disabled) {
+//     @include hover {
+//       color: $black;
+//       border-color: $black;
+//       background-color: $white;
+//     }
+//   }
 
-  &:not(:disabled) {
-    @include hover {
-      color: $black;
-      border-color: $black;
-      background-color: $white;
-    }
-  }
+//   &:disabled {
+//     opacity: 0.8;
+//     cursor: default;
+//   }
+// }
 
-  &:disabled {
-    opacity: 0.8;
-    cursor: default;
-  }
-}
+// @media (max-width: $laptop) {
+//   .search {
+//     margin: 20px 0 40px;
+//   }
 
-@media (max-width: $laptop) {
-  .search {
-    margin: 20px 0 40px;
-  }
+//   .block {
+//     column-gap: 40px;
+//   }
 
-  .block {
-    column-gap: 40px;
-  }
+//   .input {
+//     height: 50px;
+//   }
 
-  .input {
-    height: 50px;
-  }
+//   .button {
+//     height: 50px;
+//     padding: 0 40px;
+//   }
+// }
 
-  .button {
-    height: 50px;
-    padding: 0 40px;
-  }
-}
+// @media (max-width: $mob) {
+//   .block {
+//     @include flexColumn;
+//     row-gap: 12px;
+//   }
 
-@media (max-width: $mob) {
-  .block {
-    @include flexColumn;
-    row-gap: 12px;
-  }
-
-  .button {
-    width: 100%;
-    font-size: 20px;
-  }
-}
+//   .button {
+//     width: 100%;
+//     font-size: 20px;
+//   }
+// }

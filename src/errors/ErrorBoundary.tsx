@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { ETextError, IErrorBoundaryProps, IErrorBoundaryState } from './types';

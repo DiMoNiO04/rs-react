@@ -1,42 +1,40 @@
-@import '../../styles/settings/index';
+// .detail {
+//   position: fixed;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   @include sizes(100%, 100vh);
+//   z-index: 10;
+//   top: 0;
+//   left: 0;
 
-.detail {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  @include sizes(100%, 100vh);
-  z-index: 10;
-  top: 0;
-  left: 0;
+//   &.dark {
+//     .container {
+//       background-color: $darkBlue;
+//     }
 
-  &.dark {
-    .container {
-      background-color: $darkBlue;
-    }
+//     .close {
+//       color: $blue;
+//     }
+//   }
+// }
 
-    .close {
-      color: $blue;
-    }
-  }
-}
+// .container {
+//   @include sizes(300px, 100%);
+//   background-color: $grey;
+//   padding: 60px 40px;
+//   margin: 0 0 0 auto;
+// }
 
-.container {
-  @include sizes(300px, 100%);
-  background-color: $grey;
-  padding: 60px 40px;
-  margin: 0 0 0 auto;
-}
+// .title {
+//   margin: 0 auto;
+//   text-align: center;
+//   font-size: 24px;
+//   line-height: 130%;
+//   margin-bottom: 40px;
+// }
 
-.title {
-  margin: 0 auto;
-  text-align: center;
-  font-size: 24px;
-  line-height: 130%;
-  margin-bottom: 40px;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: $red;
-}
+// .close {
+//   position: absolute;
+//   top: 20px;
+//   right: 20px;
+//   color: $red;
+// }

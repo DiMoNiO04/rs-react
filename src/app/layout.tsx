@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import './globals.css';
+import { Provider } from 'react-redux';
+import { store } from '../store/store';
+import ErrorBoundary from '../errors/ErrorBoundary';
 
 const nunito = Nunito({
   subsets: ['cyrillic'],
@@ -21,7 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <div id="root">{children}</div>
+        <Provider store={store}>
+          <ErrorBoundary>
+            <div id="root">{children}</div>
+          </ErrorBoundary>
+        </Provider>
       </body>
     </html>
   );
