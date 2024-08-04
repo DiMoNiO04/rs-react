@@ -3,19 +3,19 @@
 import React, { useContext } from 'react';
 import { ECardData, ICardProps, IDataCard } from './types';
 import styles from './card.module.scss';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import ThemeContext, { ETheme } from '../../context/themeContext';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { toggleFavorite } from '../../store/favorites/slice';
 import { selectFavoriteCard } from '../../store/favorites/selectors';
 import { setDetailId } from '../../store/detail/slice';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const Card: React.FC<ICardProps> = (props) => {
   const { name, height, mass, birth_year, gender, url } = props;
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const theme = useContext(ThemeContext);
   const dispatch = useAppDispatch();
@@ -32,9 +32,9 @@ const Card: React.FC<ICardProps> = (props) => {
   ];
 
   const handleClick = () => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(searchParams.toString());
     params.set(EStorageKeys.DETAIL, getId.toString());
-    navigate(`?${params.toString()}`);
+    router.push(`?${params.toString()}`);
     dispatch(setDetailId(getId.toString()));
   };
 

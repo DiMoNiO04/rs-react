@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import { IResultBlockProps } from './types';
 import styles from './resultsBlock.module.scss';
@@ -9,13 +9,18 @@ import ThemeContext, { ETheme } from '../../context/themeContext';
 
 const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isFetching, searchValue }) => {
   const theme = useContext(ThemeContext);
+  const [clientSearchValue, setClientSearchValue] = useState(searchValue || 'All');
+
+  useEffect(() => {
+    setClientSearchValue(searchValue || 'All');
+  }, [searchValue]);
 
   return (
     <section className="section">
       <div className="container">
         <div>
           <div className={`${styles.title} ${theme === ETheme.DARK && styles.dark}`}>
-            Found peoples matching your request: <span>{searchValue || 'All'}</span>
+            Found peoples matching your request: <span>{clientSearchValue}</span>
           </div>
 
           {isFetching ? (

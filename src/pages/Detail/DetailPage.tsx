@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './detail.module.scss';
 import Loading from '../../components/Loading/Loading';
 import DetailInfo from '../../components/DetailInfo/DetailInfo';
-import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { EDetailData } from './types';
 import { useFetchCardPersonQuery } from '../../store/api/api';
 import { useAppDispatch, useAppSelector } from '../../store/store';
@@ -14,11 +13,9 @@ import { selectorGetDetailId, selectorGetIsOpenBlock } from '../../store/detail/
 import { EMPTY_STR } from '../../utils/consts';
 
 const DetailPage: React.FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const [params] = useSearchParams();
-  const detailQuery = params.get(EStorageKeys.DETAIL);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const detailQuery = searchParams && searchParams.get('detail');
 
   const dispatch = useAppDispatch();
   const detail = useAppSelector(selectorGetDetailId());
@@ -35,14 +32,11 @@ const DetailPage: React.FC = () => {
   }, [detailQuery, dispatch]);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams();
+    detail ? params.set('detail', detail) : params.delete('detail');
 
-    detail ? params.set(EStorageKeys.DETAIL, detail) : params.delete(EStorageKeys.DETAIL);
-
-    if (location.search !== `?${params.toString()}`) {
-      navigate(`?${params.toString()}`);
-    }
-  }, [detail]);
+    router.push(`/?${params.toString()}`);
+  }, [detail, router]);
 
   const handleClickClose = (): void => {
     dispatch(setDetailId(EMPTY_STR));

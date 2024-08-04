@@ -9,7 +9,6 @@ import { selectorCurrentSearch } from '../../store/search/selectors';
 
 const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isFetching }) => {
   const theme = useContext(ThemeContext);
-
   const searchParam = useAppSelector(selectorCurrentSearch());
   const [inputValue, setInputValue] = useState(searchParam);
 
@@ -33,7 +32,7 @@ const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isFetching }) =
               placeholder="Search peoples"
               value={inputValue}
               className={styles.input}
-              onChange={(event) => changeInputValue(event)}
+              onChange={changeInputValue}
             />
             <button disabled={isFetching} type="button" className={styles.button} onClick={handleSearchAction}>
               Search

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './notFoundContent.module.scss';
+import Link from 'next/link';
 
 const NotFoundContent: React.FC = () => {
   return (
@@ -8,9 +9,9 @@ const NotFoundContent: React.FC = () => {
         <div className={styles.container}>
           <h1 className={styles.title}>404</h1>
           <p className={styles.text}>Page not found</p>
-          <a href="/" className={styles.button}>
+          <Link href="/" className={styles.button}>
             Home
-          </a>
+          </Link>
         </div>
       </div>
     </section>
