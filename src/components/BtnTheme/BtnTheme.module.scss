@@ -1,45 +1,45 @@
-// .block {
-//   margin: 16px;
-//   @include flexColumn;
-//   row-gap: 6px;
+.block {
+  margin: 16px;
+  @include flexColumn;
+  row-gap: 6px;
 
-//   &.dark {
-//     .btn {
-//       background-color: $blue;
-//       color: $darkBlack;
-//       border-color: $darkBlack;
+  &.dark {
+    .btn {
+      background-color: $blue;
+      color: $darkBlack;
+      border-color: $darkBlack;
 
-//       @include hover {
-//         color: $darkBlack;
-//         border-color: $black;
-//         background-color: $darkGrey;
-//       }
-//     }
-//   }
-// }
+      @include hover {
+        color: $darkBlack;
+        border-color: $black;
+        background-color: $darkGrey;
+      }
+    }
+  }
+}
 
-// .btn {
-//   border-radius: 12px;
-//   border: 3px solid $black;
-//   background-color: $blue;
-//   width: fit-content;
-//   color: $white;
-//   font-size: 16px;
-//   line-height: 20px;
-//   padding: 12px;
-//   transition:
-//     color 0.2s ease,
-//     border-color 0.2s ease,
-//     background-color 0.2s ease;
+.btn {
+  border-radius: 12px;
+  border: 3px solid $black;
+  background-color: $blue;
+  width: fit-content;
+  color: $white;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 12px;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 
-//   @include hover {
-//     color: $black;
-//     border-color: $black;
-//     background-color: $white;
-//   }
-// }
+  @include hover {
+    color: $black;
+    border-color: $black;
+    background-color: $white;
+  }
+}
 
-// .text {
-//   font-size: 14px;
-//   line-height: 18px;
-// }
+.text {
+  font-size: 14px;
+  line-height: 18px;
+}

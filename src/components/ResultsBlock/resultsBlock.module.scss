@@ -1,66 +1,66 @@
-// .title {
-//   margin: 0 auto 24px auto;
-//   text-align: center;
-//   font-size: 24px;
+.title {
+  margin: 0 auto 24px auto;
+  text-align: center;
+  font-size: 24px;
 
-//   span {
-//     color: $red;
-//     font-size: 28px;
-//   }
+  span {
+    color: $red;
+    font-size: 28px;
+  }
 
-//   &.dark {
-//     span {
-//       color: $blue;
-//     }
-//   }
-// }
+  &.dark {
+    span {
+      color: $blue;
+    }
+  }
+}
 
-// .none {
-//   font-size: 32px;
-//   line-height: 48px;
-//   margin-top: 48px;
+.none {
+  font-size: 32px;
+  line-height: 48px;
+  margin-top: 48px;
 
-//   span {
-//     color: $red;
-//   }
+  span {
+    color: $red;
+  }
 
-//   &.dark {
-//     span {
-//       color: $blue;
-//     }
-//   }
-// }
+  &.dark {
+    span {
+      color: $blue;
+    }
+  }
+}
 
-// .list {
-//   @include grid(5);
-//   grid-gap: 16px;
-//   margin-bottom: 24px;
-// }
+.list {
+  @include grid(5);
+  grid-gap: 16px;
+  margin-bottom: 24px;
+}
 
-// @media (max-width: $laptop) {
-//   .list {
-//     @include grid(4);
-//     margin-bottom: 20px;
-//   }
+@media (max-width: $laptop) {
+  .list {
+    @include grid(4);
+    margin-bottom: 20px;
+  }
 
-//   .title {
-//     margin-bottom: 20px;
-//   }
-// }
+  .title {
+    margin-bottom: 20px;
+  }
+}
 
-// @media (max-width: $mob) {
-//   .list {
-//     @include grid(2);
-//     margin-bottom: 16px;
-//     grid-gap: 12px;
-//   }
+@media (max-width: $mob) {
+  .list {
+    @include grid(2);
+    margin-bottom: 16px;
+    grid-gap: 12px;
+  }
 
-//   .title {
-//     font-size: 20px;
-//     margin-bottom: 16px;
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
 
-//     span {
-//       font-size: 22px;
-//     }
-//   }
-// }
+    span {
+      font-size: 22px;
+    }
+  }
+}

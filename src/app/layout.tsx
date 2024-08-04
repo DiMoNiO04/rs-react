@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
-import './globals.css';
 import ProviderApp from './provider';
+import './globals.css';
 
 const nunito = Nunito({
   subsets: ['cyrillic'],

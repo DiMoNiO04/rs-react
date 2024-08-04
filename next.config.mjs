@@ -7,7 +7,7 @@ const nextConfig = {
   distDir: './dist',
   sassOptions: {
     includePaths: [path.join(path.dirname(fileURLToPath(import.meta.url)), 'src/styles')],
-    // prependData: '@import "/styles/settings/index";',
+    prependData: '@import "../../styles/settings/index.scss";',
   },
 };
 

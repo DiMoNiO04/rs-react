@@ -1,10 +1,10 @@
-// .loader {
-//   @include sizes(120px, 120px);
-//   margin: 0 auto;
-// }
+.loader {
+  @include sizes(120px, 120px);
+  margin: 0 auto;
+}
 
-// @media (max-width: $mob) {
-//   .loader {
-//     @include sizes(60px, 60px);
-//   }
-// }
+@media (max-width: $mob) {
+  .loader {
+    @include sizes(60px, 60px);
+  }
+}
