@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NotFoundPage from './pages/NotFound/NotFound';
 import Main from './pages/Main/Main';
 import DetailsPage from './pages/Detail/DetailPage';
 import ThemeContext, { ETheme } from './context/themeContext';
@@ -13,7 +12,6 @@ import { toggleTheme } from './store/theme/slice';
 
 enum IUrls {
   HOME = '/',
-  NOT_FOUND = '*',
 }
 
 const App: React.FC = () => {
@@ -37,7 +35,6 @@ const App: React.FC = () => {
           <Route path={IUrls.HOME} element={<Main />}>
             <Route index element={<DetailsPage />} />
           </Route>
-          <Route path={IUrls.NOT_FOUND} element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeContext.Provider>
