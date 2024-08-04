@@ -1,5 +1,12 @@
-import App from '../App';
+'use client';
 
-export default function Page() {
+import React from 'react';
+import dynamic from 'next/dynamic';
+
+const App = dynamic(() => import('../App'), { ssr: false });
+
+function Page() {
   return <App />;
 }
+
+export default Page;
