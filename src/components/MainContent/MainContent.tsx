@@ -54,7 +54,7 @@ const MainContent: React.FC = () => {
   }, [data, dispatch]);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams();
     search ? params.set(EStorageKeys.SEARCH, search) : params.delete(EStorageKeys.SEARCH);
     page ? params.set(EStorageKeys.PAGE, String(page)) : params.delete(EStorageKeys.PAGE);
     detail ? params.set(EStorageKeys.DETAIL, detail) : params.delete(EStorageKeys.DETAIL);

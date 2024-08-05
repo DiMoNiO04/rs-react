@@ -1,7 +1,8 @@
 import { AppProps } from 'next/app';
 import { Nunito } from 'next/font/google';
-import ProviderApp from './provider';
 import Head from 'next/head';
+import ProviderStore from '../providers/providerStore';
+import ProviderTheme from '../providers/providerTheme';
 import '../styles/globals.css';
 
 const nunito = Nunito({
@@ -12,16 +13,18 @@ const nunito = Nunito({
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ProviderApp>
+    <ProviderStore>
       <div className={nunito.className}>
-        <Head>
-          <meta name="description" content="App Star Wars Search" />
-          <link rel="icon" href="/favicon.ico" />
-          <title>Star Wars Search</title>
-        </Head>
-        <Component {...pageProps} />
+        <ProviderTheme>
+          <Head>
+            <meta name="description" content="App Star Wars Search" />
+            <link rel="icon" href="/favicon.ico" />
+            <title>Star Wars Search</title>
+          </Head>
+          <Component {...pageProps} />
+        </ProviderTheme>
       </div>
-    </ProviderApp>
+    </ProviderStore>
   );
 };
 
