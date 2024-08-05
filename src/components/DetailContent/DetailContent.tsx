@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Loading from '../Loading/Loading';
 import DetailInfo from '../DetailInfo/DetailInfo';
 import { useFetchCardPersonQuery } from '../../store/api/api';
@@ -11,11 +11,11 @@ import { selectorGetDetailId, selectorGetIsOpenBlock } from '../../store/detail/
 import { EMPTY_STR } from '../../utils/consts';
 import styles from './detailContent.module.scss';
 import { EDetailData } from './types';
+import { EStorageKeys } from '../../utils/localeStorage';
 
 const DetailContent = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const detailQuery = searchParams && searchParams.get('detail');
+  const detailQuery = searchParams && searchParams.get(EStorageKeys.DETAIL);
 
   const dispatch = useAppDispatch();
   const detail = useAppSelector(selectorGetDetailId());
@@ -30,13 +30,6 @@ const DetailContent = () => {
       dispatch(setDetailId(EMPTY_STR));
     }
   }, [detailQuery, dispatch]);
-
-  useEffect(() => {
-    const params = new URLSearchParams();
-    detail ? params.set('detail', detail) : params.delete('detail');
-
-    router.push(`/?${params.toString()}`);
-  }, [detail, router]);
 
   const handleClickClose = (): void => {
     dispatch(setDetailId(EMPTY_STR));

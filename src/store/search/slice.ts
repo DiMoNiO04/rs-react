@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ISearchSliceState } from './types';
-import getInitialSearch from '../../utils/getInitialSearch';
 import { EStorageKeys, setDataStorage } from '../../utils/localeStorage';
+import { EMPTY_STR } from '../../utils/consts';
 
 const initialState: ISearchSliceState = {
-  search: getInitialSearch(),
+  search: EMPTY_STR,
 };
 
 export const searchSlice = createSlice({

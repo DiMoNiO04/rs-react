@@ -15,18 +15,37 @@ import { setCurrentSearch } from '../../store/search/slice';
 import { selectorCurrentSearch } from '../../store/search/selectors';
 import DetailPage from '../../pages/detail';
 import { EStorageKeys } from '../../utils/localeStorage';
+import { selectorGetDetailId } from '../../store/detail/selectors';
 
 const MainContent: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const searchQuery = searchParams ? searchParams.get(EStorageKeys.SEARCH) || EMPTY_STR : EMPTY_STR;
-  const pageQuery = searchParams ? searchParams.get(EStorageKeys.PAGE) || FIRST_PAGE : FIRST_PAGE;
+
+  const searchQuery = searchParams && searchParams.get(EStorageKeys.SEARCH);
+  const pageQuery = searchParams && searchParams.get(EStorageKeys.PAGE);
 
   const dispatch = useAppDispatch();
   const page = useAppSelector(selectorCurrentPage());
   const search = useAppSelector(selectorCurrentSearch());
+  const detail = useAppSelector(selectorGetDetailId());
 
   const { data, isFetching } = useFetchCardsQuery({ searchParam: search, pageParam: Number(page) });
+
+  useEffect(() => {
+    if (pageQuery) {
+      dispatch(setCurrentPage(Number(pageQuery)));
+    } else {
+      dispatch(setCurrentPage(FIRST_PAGE));
+    }
+  }, [pageQuery, dispatch]);
+
+  useEffect(() => {
+    if (searchQuery) {
+      dispatch(setCurrentSearch(searchQuery));
+    } else {
+      dispatch(setCurrentSearch(EMPTY_STR));
+    }
+  }, [searchQuery, dispatch]);
 
   useEffect(() => {
     if (data) {
@@ -35,24 +54,13 @@ const MainContent: React.FC = () => {
   }, [data, dispatch]);
 
   useEffect(() => {
-    if (Number(pageQuery) !== page) {
-      dispatch(setCurrentPage(Number(pageQuery)));
-    }
-
-    if (searchQuery !== search) {
-      dispatch(setCurrentSearch(searchQuery));
-    }
-  }, [searchQuery, pageQuery, dispatch, search, page]);
-
-  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     search ? params.set(EStorageKeys.SEARCH, search) : params.delete(EStorageKeys.SEARCH);
     page ? params.set(EStorageKeys.PAGE, String(page)) : params.delete(EStorageKeys.PAGE);
+    detail ? params.set(EStorageKeys.DETAIL, detail) : params.delete(EStorageKeys.DETAIL);
 
-    if (window.location.search !== `?${params.toString()}`) {
-      router.push(`?${params.toString()}`);
-    }
-  }, [page, search, router]);
+    router.push(`?${params.toString()}`);
+  }, [page, search, detail, router]);
 
   const handleSearch = (newSearch: string): void => {
     dispatch(setCurrentSearch(newSearch));
@@ -63,7 +71,7 @@ const MainContent: React.FC = () => {
     <>
       <SearchComponent handleSearch={handleSearch} isFetching={isFetching} />
       <ResultsBlock cards={data?.results || []} isFetching={isFetching} searchValue={search} />
-      {data?.count && <Pagination />}
+      {data?.count && !isFetching && <Pagination />}
       <Modal />
       <DetailPage />
     </>

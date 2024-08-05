@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../../utils/consts';
-import { IDetailFetch, IFetchResponse, IGetFetch } from './types';
+import { IFetchResponse, IGetFetch } from './types';
 import { EStorageKeys } from '../../utils/localeStorage';
+import { IDetailFetch } from '../../components/DetailContent/types';
 
 export const api = createApi({
   reducerPath: 'api',
