@@ -1,4 +1,10 @@
-import { EStorageKeys } from '../hooks/useLocaleStorage';
+export enum EStorageKeys {
+  SEARCH = 'search',
+  PAGE = 'page',
+  DETAIL = 'detail',
+  THEME = 'theme',
+  FAVORITES = 'favorites',
+}
 
 export const isClient = typeof window !== 'undefined';
 

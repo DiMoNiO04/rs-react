@@ -1,6 +1,5 @@
-import { EStorageKeys } from '../hooks/useLocaleStorage';
 import { FIRST_PAGE } from './consts';
-import { getDataStorage, isClient } from './localeStorage';
+import { EStorageKeys, getDataStorage, isClient } from './localeStorage';
 
 const getInitialPage = (): number => {
   if (!isClient) {

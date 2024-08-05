@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPaginationSliceState } from './types';
-import { EStorageKeys } from '../../hooks/useLocaleStorage';
-import { setDataStorage } from '../../utils/localeStorage';
+import { EStorageKeys, setDataStorage } from '../../utils/localeStorage';
 import getInitialPage from '../../utils/getInitialPage';
 
 const initialState: IPaginationSliceState = {

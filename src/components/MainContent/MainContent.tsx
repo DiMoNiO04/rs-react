@@ -2,21 +2,21 @@
 
 import React, { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import ResultsBlock from '../components/ResultsBlock/ResultsBlock';
-import Pagination from '../components/Pagination/Pagination';
-import { EMPTY_STR, FIRST_PAGE } from '../utils/consts';
-import { EStorageKeys } from '../hooks/useLocaleStorage';
-import SearchComponent from '../components/Serch/Searh';
-import { useFetchCardsQuery } from '../store/api/api';
-import Modal from '../components/Modal/Modal';
-import { useAppDispatch, useAppSelector } from '../store/store';
-import { setCurrentPage, setTotalCount } from '../store/pagination/slice';
-import { selectorCurrentPage } from '../store/pagination/selectors';
-import { setCurrentSearch } from '../store/search/slice';
-import { selectorCurrentSearch } from '../store/search/selectors';
-import DetailPage from '../pages/Detail/DetailPage';
+import ResultsBlock from '../ResultsBlock/ResultsBlock';
+import Pagination from '../Pagination/Pagination';
+import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
+import SearchComponent from '../Serch/Searh';
+import { useFetchCardsQuery } from '../../store/api/api';
+import Modal from '../Modal/Modal';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { setCurrentPage, setTotalCount } from '../../store/pagination/slice';
+import { selectorCurrentPage } from '../../store/pagination/selectors';
+import { setCurrentSearch } from '../../store/search/slice';
+import { selectorCurrentSearch } from '../../store/search/selectors';
+import DetailPage from '../../pages/detail';
+import { EStorageKeys } from '../../utils/localeStorage';
 
-const Main: React.FC = () => {
+const MainContent: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchQuery = searchParams ? searchParams.get(EStorageKeys.SEARCH) || EMPTY_STR : EMPTY_STR;
@@ -70,4 +70,4 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default MainContent;

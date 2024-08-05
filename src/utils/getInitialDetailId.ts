@@ -1,6 +1,5 @@
-import { EStorageKeys } from '../hooks/useLocaleStorage';
 import { EMPTY_STR } from './consts';
-import { getDataStorage, isClient } from './localeStorage';
+import { EStorageKeys, getDataStorage, isClient } from './localeStorage';
 
 const getInitialDetailId = (): string => {
   if (!isClient) {

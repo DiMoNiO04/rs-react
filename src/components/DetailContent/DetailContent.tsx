@@ -2,17 +2,17 @@
 
 import React, { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import styles from './detail.module.scss';
-import Loading from '../../components/Loading/Loading';
-import DetailInfo from '../../components/DetailInfo/DetailInfo';
-import { EDetailData } from './types';
+import Loading from '../Loading/Loading';
+import DetailInfo from '../DetailInfo/DetailInfo';
 import { useFetchCardPersonQuery } from '../../store/api/api';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setDetailId } from '../../store/detail/slice';
 import { selectorGetDetailId, selectorGetIsOpenBlock } from '../../store/detail/selectors';
 import { EMPTY_STR } from '../../utils/consts';
+import styles from './detailContent.module.scss';
+import { EDetailData } from './types';
 
-const DetailPage: React.FC = () => {
+const DetailContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const detailQuery = searchParams && searchParams.get('detail');
@@ -78,4 +78,4 @@ const DetailPage: React.FC = () => {
   );
 };
 
-export default DetailPage;
+export default DetailContent;

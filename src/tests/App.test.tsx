@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
-import App from '../app/page';
+import App from '../pages';
 import { ETheme } from '../context/themeContext';
 
 describe('App Component', () => {

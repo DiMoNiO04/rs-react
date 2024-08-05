@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ISearchSliceState } from './types';
 import getInitialSearch from '../../utils/getInitialSearch';
-import { setDataStorage } from '../../utils/localeStorage';
-import { EStorageKeys } from '../../hooks/useLocaleStorage';
+import { EStorageKeys, setDataStorage } from '../../utils/localeStorage';
 
 const initialState: ISearchSliceState = {
   search: getInitialSearch(),

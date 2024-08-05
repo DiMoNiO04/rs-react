@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { IDetailSlice } from './types';
 import getInitialDetailId from '../../utils/getInitialDetailId';
-import { setDataStorage } from '../../utils/localeStorage';
+import { EStorageKeys, setDataStorage } from '../../utils/localeStorage';
 
 const initialState: IDetailSlice = {
   detailId: getInitialDetailId(),

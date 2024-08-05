@@ -29,4 +29,4 @@ interface IDetailProps {
 }
 
 export { EDetailData };
-export type { IDetailProps, IDataCard, IDetailFetch };
+export type { IDetailFetch, IDataCard, IDetailProps };

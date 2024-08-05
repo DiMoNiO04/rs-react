@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IFavoritesSliceState } from './types';
 import getFavoritesFromLs from '../../utils/getFavoritesFromLs';
-import { EStorageKeys } from '../../hooks/useLocaleStorage';
 import { ICardProps } from '../../components/Card/types';
-import { removeDataStorage, setDataStorage } from '../../utils/localeStorage';
+import { EStorageKeys, removeDataStorage, setDataStorage } from '../../utils/localeStorage';
 import exportFromJSON from 'export-from-json';
 
 const initialState: IFavoritesSliceState = {

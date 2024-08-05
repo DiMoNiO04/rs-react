@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ETheme } from '../../context/themeContext';
 import { IThemeState } from './types';
-import { EStorageKeys } from '../../hooks/useLocaleStorage';
-import { getDataStorage, setDataStorage } from '../../utils/localeStorage';
+import { EStorageKeys, getDataStorage, setDataStorage } from '../../utils/localeStorage';
 
 const initialState: IThemeState = {
   value: getDataStorage(EStorageKeys.THEME) || ETheme.LIGHT,

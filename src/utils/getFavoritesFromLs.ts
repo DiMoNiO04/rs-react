@@ -1,5 +1,4 @@
-import { EStorageKeys } from '../hooks/useLocaleStorage';
-import { getDataStorage } from './localeStorage';
+import { EStorageKeys, getDataStorage } from './localeStorage';
 
 const getFavoritesFromLs = () => {
   const data = getDataStorage(EStorageKeys.FAVORITES);
