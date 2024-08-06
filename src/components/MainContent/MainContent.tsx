@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ResultsBlock from '../ResultsBlock/ResultsBlock';
 import Pagination from '../Pagination/Pagination';
-import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
+import { FIRST_PAGE } from '../../utils/consts';
 import SearchComponent from '../Serch/Searh';
 import { useFetchCardsQuery } from '../../store/api/api';
 import Modal from '../Modal/Modal';
@@ -32,20 +32,14 @@ const MainContent: React.FC = () => {
   const { data, isFetching } = useFetchCardsQuery({ searchParam: search, pageParam: Number(page) });
 
   useEffect(() => {
-    if (pageQuery) {
+    if (pageQuery && Number(pageQuery) !== page) {
       dispatch(setCurrentPage(Number(pageQuery)));
-    } else {
-      dispatch(setCurrentPage(FIRST_PAGE));
     }
-  }, [pageQuery, dispatch]);
 
-  useEffect(() => {
-    if (searchQuery) {
+    if (searchQuery && searchQuery !== search) {
       dispatch(setCurrentSearch(searchQuery));
-    } else {
-      dispatch(setCurrentSearch(EMPTY_STR));
     }
-  }, [searchQuery, dispatch]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (data) {

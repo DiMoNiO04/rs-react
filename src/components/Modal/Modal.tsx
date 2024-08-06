@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './modal.module.scss';
 import ThemeContext, { ETheme } from '../../context/themeContext';
 import { useAppDispatch, useAppSelector } from '../../store/store';
@@ -8,6 +8,8 @@ import { selectCount } from '../../store/favorites/selectors';
 import { clearFavorites, downloadFavorites } from '../../store/favorites/slice';
 
 const Modal: React.FC = () => {
+  const [isClient, setIsClient] = useState<boolean>(false);
+
   const theme = useContext(ThemeContext);
 
   const dispatch = useAppDispatch();
@@ -16,7 +18,11 @@ const Modal: React.FC = () => {
   const onClickReset = () => dispatch(clearFavorites());
   const onClickDownload = () => dispatch(downloadFavorites());
 
-  if (countSelects === 0) return null;
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (countSelects === 0 || !isClient) return null;
 
   return (
     <div className={`${styles.modal} ${theme === ETheme.DARK ? styles.dark : ''}`}>

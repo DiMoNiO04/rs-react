@@ -9,7 +9,12 @@ import ThemeContext, { ETheme } from '../../context/themeContext';
 
 const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isFetching, searchValue }) => {
   const theme = useContext(ThemeContext);
+  const [isClient, setIsClient] = useState<boolean>(false);
   const [clientSearchValue, setClientSearchValue] = useState(searchValue || 'All');
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     setClientSearchValue(searchValue || 'All');
@@ -19,9 +24,11 @@ const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isFetching, searchVa
     <section className="section">
       <div className="container">
         <div>
-          <div className={`${styles.title} ${theme === ETheme.DARK && styles.dark}`}>
-            Found peoples matching your request: <span>{clientSearchValue}</span>
-          </div>
+          {isClient && (
+            <div className={`${styles.title} ${theme === ETheme.DARK && styles.dark}`}>
+              Found peoples matching your request: <span>{clientSearchValue}</span>
+            </div>
+          )}
 
           {isFetching ? (
             <Loading />
