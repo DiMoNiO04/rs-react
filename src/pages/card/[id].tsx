@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { IDetailFetch } from '../../components/DetailContent/types';
-import MainContent from '../../components/MainContent/MainContent';
 import fetchDetailData from '../../api/fetchDataCard';
 import fetchData from '../../api/fetchData';
+import MainContent from '../../components/MainContent/MainContent';
 import { IFetchResponse } from '../../api/types';
+import { IDetailFetch } from '../../components/DetailContent/types';
 
 interface DetailPageProps {
   data: IFetchResponse | null;

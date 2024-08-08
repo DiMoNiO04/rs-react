@@ -9,6 +9,7 @@ enum EDetailData {
 }
 
 interface IDetailFetch {
+  url: string;
   name: string;
   height: string;
   mass: string;

@@ -66,7 +66,13 @@ const MainContent: React.FC<IMainContentProps> = ({ dataCard, data }) => {
     if (search) params.set(EStorageKeys.SEARCH, search);
     if (page) params.set(EStorageKeys.PAGE, String(page));
 
-    router.push(`?${params.toString()}`);
+    const id = Number(dataCard?.url.split('/').reverse()[1]);
+
+    if (id) {
+      router.push(`/card/${id}?${params.toString()}`);
+    } else {
+      router.push(`?${params.toString()}`);
+    }
   }, [page, search]);
 
   const handleSearch = (newSearch: string): void => {
