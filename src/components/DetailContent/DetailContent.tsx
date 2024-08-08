@@ -1,60 +1,38 @@
-'use client';
-
-import React, { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Loading from '../Loading/Loading';
+import React, { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import DetailInfo from '../DetailInfo/DetailInfo';
-import { useFetchCardPersonQuery } from '../../store/api/api';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import { setDetailId } from '../../store/detail/slice';
-import { selectorGetDetailId, selectorGetIsOpenBlock } from '../../store/detail/selectors';
-import { EMPTY_STR } from '../../utils/consts';
 import styles from './detailContent.module.scss';
-import { EDetailData } from './types';
-import { EStorageKeys } from '../../utils/localeStorage';
+import { EDetailData, IDetailContentProps } from './types';
+import { EStorageKeys, getDataStorage, setDataStorage } from '../../utils/localeStorage';
+import { EMPTY_STR } from '../../utils/consts';
 
-const DetailContent = () => {
+const DetailContent: React.FC<IDetailContentProps> = ({ dataCard }) => {
   const searchParams = useSearchParams();
-  const detailQuery = searchParams && searchParams.get(EStorageKeys.DETAIL);
-
-  const dispatch = useAppDispatch();
-  const detail = useAppSelector(selectorGetDetailId());
-  const isOpenBlock = useAppSelector(selectorGetIsOpenBlock());
-
-  const { data, isFetching } = useFetchCardPersonQuery(detail);
-
-  useEffect(() => {
-    if (detailQuery) {
-      dispatch(setDetailId(detailQuery));
-    } else {
-      dispatch(setDetailId(EMPTY_STR));
-    }
-  }, [detailQuery, dispatch]);
+  const router = useRouter();
+  const detail = getDataStorage(EStorageKeys.DETAIL);
 
   const handleClickClose = (): void => {
-    dispatch(setDetailId(EMPTY_STR));
+    const params = new URLSearchParams(searchParams.toString());
+    router.push(`/?${params.toString()}`);
+    setDataStorage(EStorageKeys.DETAIL, EMPTY_STR);
   };
 
-  if (isFetching && isOpenBlock) {
-    return (
-      <DetailInfo id={detail} handleClickClose={handleClickClose}>
-        <Loading />
-      </DetailInfo>
-    );
-  }
+  const [isClient, setIsClient] = useState<boolean>(false);
 
-  if (!data || !isOpenBlock) {
-    return null;
-  }
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!dataCard || !detail || !isClient) return null;
 
   const detailsData = [
-    { title: EDetailData.NAME, value: data.name },
-    { title: EDetailData.HEIGHT, value: data.height },
-    { title: EDetailData.MASS, value: data.mass },
-    { title: EDetailData.BIRTH_YEAR, value: data.birth_year },
-    { title: EDetailData.GENDER, value: data.gender },
-    { title: EDetailData.EYE_COLOR, value: data.eye_color },
-    { title: EDetailData.HAIR_COLOR, value: data.hair_color },
+    { title: EDetailData.NAME, value: dataCard.name },
+    { title: EDetailData.HEIGHT, value: dataCard.height },
+    { title: EDetailData.MASS, value: dataCard.mass },
+    { title: EDetailData.BIRTH_YEAR, value: dataCard.birth_year },
+    { title: EDetailData.GENDER, value: dataCard.gender },
+    { title: EDetailData.EYE_COLOR, value: dataCard.eye_color },
+    { title: EDetailData.HAIR_COLOR, value: dataCard.hair_color },
   ];
 
   return (

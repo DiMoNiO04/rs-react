@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useContext } from 'react';
 import styles from './detailInfo.module.scss';
 import { IDetailInfoProps } from './types';

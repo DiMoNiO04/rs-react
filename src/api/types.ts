@@ -1,4 +1,4 @@
-import { ICardProps } from '../../components/Card/types';
+import { ICardProps } from '../components/Card/types';
 
 interface IGetFetch {
   searchParam?: string;

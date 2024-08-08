@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import { ISearchProps } from './types';
 import styles from './search.module.scss';
 import ThemeContext, { ETheme } from '../../context/themeContext';
@@ -11,13 +11,6 @@ const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isFetching }) =
   const theme = useContext(ThemeContext);
   const searchParam = useAppSelector(selectorCurrentSearch());
   const [inputValue, setInputValue] = useState(searchParam);
-  const [isClient, setIsClient] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) return null;
 
   const changeInputValue = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);

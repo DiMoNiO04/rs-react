@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './pagination.module.scss';
 import { FIRST_PAGE } from '../../utils/consts';
 import ThemeContext, { ETheme } from '../../context/themeContext';
@@ -9,6 +9,7 @@ import { selectorCurrentPage, selectorTotalPage } from '../../store/pagination/s
 import { handleNextPage, handlePrevPage } from '../../store/pagination/slice';
 
 const Pagination: React.FC = () => {
+  const [isClient, setIsClient] = useState<boolean>(false);
   const theme = useContext(ThemeContext);
 
   const dispatch = useAppDispatch();
@@ -17,6 +18,12 @@ const Pagination: React.FC = () => {
 
   const handlePrev = () => dispatch(handlePrevPage());
   const handleNext = () => dispatch(handleNextPage());
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   return (
     <section className="section">

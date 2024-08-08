@@ -28,5 +28,9 @@ interface IDetailProps {
   onClose: () => void;
 }
 
+interface IDetailContentProps {
+  dataCard: IDetailFetch | null;
+}
+
 export { EDetailData };
-export type { IDetailFetch, IDataCard, IDetailProps };
+export type { IDetailFetch, IDataCard, IDetailProps, IDetailContentProps };
