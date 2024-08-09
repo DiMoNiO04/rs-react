@@ -1,29 +1,35 @@
-'use client';
-
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import styles from './pagination.module.scss';
 import { FIRST_PAGE } from '../../utils/consts';
 import ThemeContext, { ETheme } from '../../context/themeContext';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import { selectorCurrentPage, selectorTotalPage } from '../../store/pagination/selectors';
-import { handleNextPage, handlePrevPage } from '../../store/pagination/slice';
+import { IPaginationProps } from './types';
+import { useRouter } from 'next/router';
 
-const Pagination: React.FC = () => {
-  const [isClient, setIsClient] = useState<boolean>(false);
+const Pagination: React.FC<IPaginationProps> = ({ count }) => {
   const theme = useContext(ThemeContext);
 
-  const dispatch = useAppDispatch();
-  const currentPage = useAppSelector(selectorCurrentPage());
-  const totalPage = useAppSelector(selectorTotalPage());
+  const router = useRouter();
+  const { page } = router.query;
+  const currentPage = page ? Number(page) : FIRST_PAGE;
+  const totalPage = Math.ceil(Number(count) / 10);
 
-  const handlePrev = () => dispatch(handlePrevPage());
-  const handleNext = () => dispatch(handleNextPage());
+  const handlePrev = () => {
+    if (currentPage > FIRST_PAGE) {
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query, page: currentPage - 1 },
+      });
+    }
+  };
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) return null;
+  const handleNext = () => {
+    if (currentPage < totalPage) {
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query, page: currentPage + 1 },
+      });
+    }
+  };
 
   return (
     <section className="section">

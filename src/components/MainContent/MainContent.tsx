@@ -4,12 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ResultsBlock from '../ResultsBlock/ResultsBlock';
 import Pagination from '../Pagination/Pagination';
-import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
+import { EMPTY_STR } from '../../utils/consts';
 import SearchComponent from '../Serch/Searh';
 import Modal from '../Modal/Modal';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { setCurrentPage, setTotalCount } from '../../store/pagination/slice';
-import { selectorCurrentPage } from '../../store/pagination/selectors';
 import { setCurrentSearch } from '../../store/search/slice';
 import { selectorCurrentSearch } from '../../store/search/selectors';
 import { EStorageKeys } from '../../utils/localeStorage';
@@ -22,10 +20,8 @@ const MainContent: React.FC<IMainContentProps> = ({ dataCard, data }) => {
   const searchParams = useSearchParams();
 
   const searchQuery = searchParams?.get(EStorageKeys.SEARCH) || EMPTY_STR;
-  const pageQuery = searchParams?.get(EStorageKeys.PAGE) || FIRST_PAGE;
 
   const dispatch = useAppDispatch();
-  const page = useAppSelector(selectorCurrentPage());
   const search = useAppSelector(selectorCurrentSearch());
 
   const [isLoading, setLoading] = useState(false);
@@ -40,14 +36,6 @@ const MainContent: React.FC<IMainContentProps> = ({ dataCard, data }) => {
   }, []);
 
   useEffect(() => {
-    if (pageQuery) {
-      dispatch(setCurrentPage(Number(pageQuery)));
-    } else {
-      dispatch(setCurrentPage(FIRST_PAGE));
-    }
-  }, [pageQuery, dispatch]);
-
-  useEffect(() => {
     if (searchQuery) {
       dispatch(setCurrentSearch(searchQuery));
     } else {
@@ -56,15 +44,8 @@ const MainContent: React.FC<IMainContentProps> = ({ dataCard, data }) => {
   }, [searchQuery, dispatch]);
 
   useEffect(() => {
-    if (data) {
-      dispatch(setTotalCount(data.count));
-    }
-  }, [data, dispatch]);
-
-  useEffect(() => {
     const params = new URLSearchParams();
     if (search) params.set(EStorageKeys.SEARCH, search);
-    if (page) params.set(EStorageKeys.PAGE, String(page));
 
     const id = Number(dataCard?.url.split('/').reverse()[1]);
 
@@ -73,18 +54,17 @@ const MainContent: React.FC<IMainContentProps> = ({ dataCard, data }) => {
     } else {
       router.push(`?${params.toString()}`);
     }
-  }, [page, search]);
+  }, [search]);
 
   const handleSearch = (newSearch: string): void => {
     dispatch(setCurrentSearch(newSearch));
-    dispatch(setCurrentPage(FIRST_PAGE));
   };
 
   return (
     <>
       <SearchComponent handleSearch={handleSearch} isFetching={isLoading} />
       <ResultsBlock cards={data?.results || []} searchValue={search} isFetching={isLoading} />
-      {data?.count && !isLoading && <Pagination />}
+      {data?.count && !isLoading && <Pagination count={data.count} />}
       <Modal />
       {dataCard && <DetailContent dataCard={dataCard} />}
     </>
