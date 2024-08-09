@@ -33,8 +33,8 @@ const Card: React.FC<ICardProps> = (props) => {
     <li data-id={getId}>
       <Link
         href={{
-          pathname: `/card/${getId}`, // динамический сегмент с явным значением
-          query: { ...router.query, id: getId }, // добавляем текущие query параметры
+          pathname: `/card/${getId}`,
+          query: { ...router.query },
         }}
         onClick={handleClick}
         className={`${styles.card} ${theme === ETheme.DARK && styles.dark}`}

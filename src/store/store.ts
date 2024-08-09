@@ -1,11 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import favoritesReducer from './favorites/slice';
-import searchReducer from './search/slice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const rootReducer = combineReducers({
   favorites: favoritesReducer,
-  search: searchReducer,
 });
 
 export const store = configureStore({

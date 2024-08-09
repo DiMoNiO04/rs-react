@@ -1,15 +1,16 @@
-'use client';
-
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { ISearchProps } from './types';
 import styles from './search.module.scss';
 import ThemeContext, { ETheme } from '../../context/themeContext';
-import { useAppSelector } from '../../store/store';
-import { selectorCurrentSearch } from '../../store/search/selectors';
+import { useRouter } from 'next/router';
+import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
 
-const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isFetching }) => {
+const SearchComponent: React.FC<ISearchProps> = ({ isFetching }) => {
   const theme = useContext(ThemeContext);
-  const searchParam = useAppSelector(selectorCurrentSearch());
+
+  const router = useRouter();
+  const { search } = router.query;
+  const searchParam = search ? search : EMPTY_STR;
   const [inputValue, setInputValue] = useState(searchParam);
 
   const changeInputValue = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -17,8 +18,11 @@ const SearchComponent: React.FC<ISearchProps> = ({ handleSearch, isFetching }) =
   };
 
   const handleSearchAction = (): void => {
-    setInputValue(inputValue.trim());
-    handleSearch(inputValue);
+    setInputValue(inputValue);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, search: inputValue, page: FIRST_PAGE },
+    });
   };
 
   return (

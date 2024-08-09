@@ -1,5 +1,4 @@
 interface ISearchProps {
-  handleSearch: (searchQuery: string) => void;
   isFetching: boolean;
 }
 
