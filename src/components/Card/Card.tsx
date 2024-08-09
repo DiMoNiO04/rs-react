@@ -33,7 +33,7 @@ const Card: React.FC<ICardProps> = (props) => {
     <li data-id={getId}>
       <Link
         href={{
-          pathname: `/card/${getId}`,
+          pathname: `/${getId}`,
           query: { ...router.query },
         }}
         onClick={handleClick}
