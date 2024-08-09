@@ -5,7 +5,7 @@ import ThemeContext, { ETheme } from '../../context/themeContext';
 import { useRouter } from 'next/router';
 import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
 
-const SearchComponent: React.FC<ISearchProps> = ({ isFetching }) => {
+const Search: React.FC<ISearchProps> = ({ isFetching }) => {
   const theme = useContext(ThemeContext);
 
   const router = useRouter();
@@ -48,4 +48,4 @@ const SearchComponent: React.FC<ISearchProps> = ({ isFetching }) => {
   );
 };
 
-export default SearchComponent;
+export default Search;
