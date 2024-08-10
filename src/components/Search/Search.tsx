@@ -2,15 +2,16 @@ import React, { ChangeEvent, useContext, useState } from 'react';
 import { ISearchProps } from './types';
 import styles from './search.module.scss';
 import ThemeContext, { ETheme } from '../../context/themeContext';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { EMPTY_STR, FIRST_PAGE } from '../../utils/consts';
+import { EStorageKeys } from '../../utils/localeStorage';
 
 const Search: React.FC<ISearchProps> = ({ isFetching }) => {
   const theme = useContext(ThemeContext);
 
   const router = useRouter();
-  const { search } = router.query;
-  const searchParam = search ? search : EMPTY_STR;
+  const searchParams = useSearchParams();
+  const searchParam = searchParams.get(EStorageKeys.SEARCH) || EMPTY_STR;
   const [inputValue, setInputValue] = useState(searchParam);
 
   const changeInputValue = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -19,10 +20,18 @@ const Search: React.FC<ISearchProps> = ({ isFetching }) => {
 
   const handleSearchAction = (): void => {
     setInputValue(inputValue);
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, search: inputValue, page: FIRST_PAGE },
-    });
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (inputValue) {
+      params.set(EStorageKeys.SEARCH, inputValue);
+    } else {
+      params.delete(EStorageKeys.SEARCH);
+    }
+    params.set('page', FIRST_PAGE.toString());
+
+    const newPath = `/?${params.toString()}`;
+    router.push(newPath);
   };
 
   return (

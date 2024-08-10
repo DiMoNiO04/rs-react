@@ -6,16 +6,16 @@ import { IResultBlockProps } from './types';
 import styles from './resultsBlock.module.scss';
 import Loading from '../Loading/Loading';
 import ThemeContext, { ETheme } from '../../context/themeContext';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { EMPTY_STR } from '../../utils/consts';
+import { EStorageKeys } from '../../utils/localeStorage';
 
 const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isFetching }) => {
   const theme = useContext(ThemeContext);
   const [isClient, setIsClient] = useState<boolean>(false);
 
-  const router = useRouter();
-  const { search } = router.query;
-  const searchValue = search ? search : EMPTY_STR;
+  const searchParams = useSearchParams();
+  const searchValue = searchParams.get(EStorageKeys.SEARCH) || EMPTY_STR;
   const [clientSearchValue, setClientSearchValue] = useState(searchValue || 'All');
 
   useEffect(() => {

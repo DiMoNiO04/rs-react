@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ECardData, ICardProps, IDataCard } from './types';
 import ThemeContext, { ETheme } from '../../context/themeContext';
@@ -12,6 +12,7 @@ import { EStorageKeys, setDataStorage } from '../../utils/localeStorage';
 const Card: React.FC<ICardProps> = (props) => {
   const { name, height, mass, birth_year, gender, url } = props;
   const router = useRouter();
+  const searchParams = useSearchParams();
   const theme = useContext(ThemeContext);
   const dispatch = useAppDispatch();
 
@@ -26,17 +27,26 @@ const Card: React.FC<ICardProps> = (props) => {
     { title: ECardData.GENDER, value: gender },
   ];
 
-  const handleClick = () => setDataStorage(EStorageKeys.DETAIL, getId.toString());
-  const onChangeFavorite = () => dispatch(toggleFavorite(props));
+  const handleClick = () => {
+    setDataStorage(EStorageKeys.DETAIL, getId.toString());
+  };
+
+  const onChangeFavorite = () => {
+    dispatch(toggleFavorite(props));
+  };
+
+  const handleNavigation = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleClick();
+    const currentSearchParams = searchParams.toString();
+    router.push(`/${getId}?${currentSearchParams}`);
+  };
 
   return (
     <li data-id={getId}>
       <Link
-        href={{
-          pathname: `/${getId}`,
-          query: { ...router.query },
-        }}
-        onClick={handleClick}
+        href={`/${getId}`}
+        onClick={handleNavigation}
         className={`${styles.card} ${theme === ETheme.DARK && styles.dark}`}
       >
         <div className={styles.checkbox}>

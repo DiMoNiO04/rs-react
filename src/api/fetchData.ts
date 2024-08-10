@@ -1,17 +1,16 @@
-import { GetServerSidePropsContext } from 'next';
-import { ParsedUrlQuery } from 'querystring';
 import { API_URL, EMPTY_STR, FIRST_PAGE } from '../utils/consts';
 import { EStorageKeys } from '../utils/localeStorage';
 import { IFetchResponse } from './types';
 
-async function fetchData(context: GetServerSidePropsContext<ParsedUrlQuery>): Promise<IFetchResponse | null> {
+async function fetchData(
+  searchParam: string = EMPTY_STR,
+  pageParam: number = FIRST_PAGE
+): Promise<IFetchResponse | null> {
   let data: IFetchResponse | null = null;
-  const searchParam = context.query[EStorageKeys.SEARCH] || EMPTY_STR;
-  const pageParam = context.query[EStorageKeys.PAGE] || FIRST_PAGE;
   const params = new URLSearchParams();
 
-  if (searchParam) params.set(EStorageKeys.SEARCH, searchParam.toString().trim());
-  if (pageParam) params.set(EStorageKeys.PAGE, pageParam.toString());
+  if (searchParam) params.set(EStorageKeys.SEARCH, searchParam.trim());
+  if (pageParam) params.set(EStorageKeys.PAGE, String(pageParam));
 
   try {
     const dataRes = await fetch(`${API_URL}?${params.toString()}`);

@@ -3,31 +3,32 @@ import styles from './pagination.module.scss';
 import { FIRST_PAGE } from '../../utils/consts';
 import ThemeContext, { ETheme } from '../../context/themeContext';
 import { IPaginationProps } from './types';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { EStorageKeys } from '../../utils/localeStorage';
 
 const Pagination: React.FC<IPaginationProps> = ({ count }) => {
   const theme = useContext(ThemeContext);
 
   const router = useRouter();
-  const { page } = router.query;
-  const currentPage = page ? Number(page) : FIRST_PAGE;
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get(EStorageKeys.PAGE) || FIRST_PAGE;
   const totalPage = Math.ceil(Number(count) / 10);
 
   const handlePrev = () => {
-    if (currentPage > FIRST_PAGE) {
-      router.push({
-        pathname: router.pathname,
-        query: { ...router.query, page: currentPage - 1 },
-      });
+    if (Number(currentPage) > FIRST_PAGE) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('page', (Number(currentPage) - 1).toString());
+      const newPath = `/?${params.toString()}`;
+      router.push(newPath);
     }
   };
 
   const handleNext = () => {
-    if (currentPage < totalPage) {
-      router.push({
-        pathname: router.pathname,
-        query: { ...router.query, page: currentPage + 1 },
-      });
+    if (Number(currentPage) < totalPage) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('page', (Number(currentPage) + 1).toString());
+      const newPath = `/?${params.toString()}`;
+      router.push(newPath);
     }
   };
 
@@ -49,7 +50,7 @@ const Pagination: React.FC<IPaginationProps> = ({ count }) => {
               data-testid="btn-prev"
               className={styles.btn}
               onClick={handlePrev}
-              disabled={currentPage === FIRST_PAGE}
+              disabled={+currentPage === FIRST_PAGE}
             >
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -66,7 +67,7 @@ const Pagination: React.FC<IPaginationProps> = ({ count }) => {
               data-testid="btn-next"
               className={styles.btn}
               onClick={handleNext}
-              disabled={currentPage === totalPage}
+              disabled={+currentPage === totalPage}
             >
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 19L16 12L9 5" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
