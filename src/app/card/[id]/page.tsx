@@ -1,17 +1,21 @@
 import MainContent from '../../../components/MainContent/MainContent';
 import { IFetchResponse } from '../../../api/types';
-import { Suspense } from 'react';
-import Loading from '../../../components/Loading/Loading';
 import fetchData from '../../../api/fetchData';
 import { EStorageKeys } from '../../../utils/localeStorage';
 import { EMPTY_STR, FIRST_PAGE } from '../../../utils/consts';
 import { IDetailFetch } from '../../../components/DetailContent/types';
 import fetchDetailData from '../../../api/fetchDataCard';
+import { Metadata } from 'next';
 
 interface IPageProps {
   searchParams: { [key: string]: string | undefined };
   params: { id: string };
 }
+
+export const metadata: Metadata = {
+  title: 'Card | Star Wars Search',
+  description: 'Card | Star Wars Search description',
+};
 
 const DetailPage = async ({ searchParams, params }: IPageProps) => {
   const { id } = params;
@@ -40,11 +44,7 @@ const DetailPage = async ({ searchParams, params }: IPageProps) => {
   const data: IFetchResponse | null = await fetchDataWrapper();
   const dataCard: IDetailFetch | null = await fetchDataCardWrapper();
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <MainContent data={data} dataCard={dataCard} />
-    </Suspense>
-  );
+  return <MainContent data={data} dataCard={dataCard} />;
 };
 
 export default DetailPage;

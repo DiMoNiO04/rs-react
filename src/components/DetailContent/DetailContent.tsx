@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import React from 'react';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import DetailInfo from '../DetailInfo/DetailInfo';
 import styles from './detailContent.module.scss';
 import { EDetailData, IDetailContentProps } from './types';
-import { EStorageKeys, getDataStorage, setDataStorage } from '../../utils/localeStorage';
+import { EStorageKeys, setDataStorage } from '../../utils/localeStorage';
 import { EMPTY_STR } from '../../utils/consts';
 
 const DetailContent: React.FC<IDetailContentProps> = ({ dataCard }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const detail = getDataStorage(EStorageKeys.DETAIL);
+  const { id } = useParams();
 
   const handleClickClose = (): void => {
     const params = new URLSearchParams(searchParams.toString());
@@ -17,13 +17,7 @@ const DetailContent: React.FC<IDetailContentProps> = ({ dataCard }) => {
     setDataStorage(EStorageKeys.DETAIL, EMPTY_STR);
   };
 
-  const [isClient, setIsClient] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!dataCard || !detail || !isClient) return null;
+  if (!dataCard || !id) return null;
 
   const detailsData = [
     { title: EDetailData.NAME, value: dataCard.name },
@@ -36,7 +30,7 @@ const DetailContent: React.FC<IDetailContentProps> = ({ dataCard }) => {
   ];
 
   return (
-    <DetailInfo id={detail} handleClickClose={handleClickClose}>
+    <DetailInfo id={String(id)} handleClickClose={handleClickClose}>
       <ul className={styles.list}>
         {detailsData.map((detail) => (
           <li key={detail.title} className={styles.block}>

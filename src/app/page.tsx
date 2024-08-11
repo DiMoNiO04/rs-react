@@ -1,10 +1,15 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import MainContent from '../components/MainContent/MainContent';
 import fetchData from '../api/fetchData';
 import { IFetchResponse } from '../api/types';
 import { EStorageKeys } from '../utils/localeStorage';
 import { EMPTY_STR, FIRST_PAGE } from '../utils/consts';
-import Loading from '../components/Loading/Loading';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Star Wars Search',
+  description: 'Star Wars Search description',
+};
 
 interface IPageProps {
   searchParams: { [key: string]: string | undefined };
@@ -25,11 +30,7 @@ const Home = async ({ searchParams }: IPageProps) => {
 
   const data: IFetchResponse | null = await fetchDataWrapper();
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <MainContent data={data} />
-    </Suspense>
-  );
+  return <MainContent data={data} />;
 };
 
 export default Home;

@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useContext, useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import { IResultBlockProps } from './types';
@@ -12,15 +10,10 @@ import { EStorageKeys } from '../../utils/localeStorage';
 
 const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isFetching }) => {
   const theme = useContext(ThemeContext);
-  const [isClient, setIsClient] = useState<boolean>(false);
 
   const searchParams = useSearchParams();
   const searchValue = searchParams.get(EStorageKeys.SEARCH) || EMPTY_STR;
   const [clientSearchValue, setClientSearchValue] = useState(searchValue || 'All');
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   useEffect(() => {
     setClientSearchValue(searchValue || 'All');
@@ -30,11 +23,9 @@ const ResultsBlock: React.FC<IResultBlockProps> = ({ cards, isFetching }) => {
     <section className="section">
       <div className="container">
         <div>
-          {isClient && (
-            <div className={`${styles.title} ${theme === ETheme.DARK && styles.dark}`}>
-              Found peoples matching your request: <span>{clientSearchValue}</span>
-            </div>
-          )}
+          <div className={`${styles.title} ${theme === ETheme.DARK && styles.dark}`}>
+            Found peoples matching your request: <span>{clientSearchValue}</span>
+          </div>
 
           {isFetching ? (
             <Loading />

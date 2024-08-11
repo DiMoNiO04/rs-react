@@ -1,13 +1,7 @@
 import React from 'react';
 import { Nunito } from 'next/font/google';
-import type { Metadata } from 'next';
 import Providers from '../providers/providers';
 import '../styles/globals.css';
-
-export const metadata: Metadata = {
-  title: 'Star Wars Search',
-  description: 'Star Wars Search description',
-};
 
 const nunito = Nunito({
   subsets: ['cyrillic'],
