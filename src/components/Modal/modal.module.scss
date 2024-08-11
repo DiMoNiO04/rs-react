@@ -1,0 +1,60 @@
+.modal {
+  position: fixed;
+  padding: 24px;
+  border-radius: 12px;
+  border: 3px solid $black;
+  bottom: 16px;
+  left: 16px;
+  background-color: $darkYellow;
+
+  &.dark {
+    background-color: $blue;
+    border-color: $darkBlack;
+
+    .btnClear,
+    .btnDown {
+      color: $black;
+    }
+  }
+}
+
+.title {
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 20px;
+}
+
+.btns {
+  @include flexColumn;
+  row-gap: 8px;
+}
+
+.btnClear,
+.btnDown {
+  padding: 12px;
+  border-radius: 12px;
+  width: 100%;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+  text-align: center;
+  border: 2px solid $black;
+}
+
+.btnClear {
+  background-color: $red;
+  color: $white;
+
+  @include hover {
+    background-color: $darkRed;
+  }
+}
+
+.btnDown {
+  background-color: $blue;
+  color: $white;
+
+  @include hover {
+    background-color: $darkBlue;
+  }
+}

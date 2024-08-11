@@ -1,0 +1,84 @@
+.card {
+  background-color: $grey;
+  border: 3px solid $black;
+  padding: 20px;
+  border-radius: 12px;
+  @include flexColumn;
+  row-gap: 12px;
+  @include transition(background-color);
+
+  @include hover {
+    background-color: $white;
+    cursor: pointer;
+  }
+
+  &.dark {
+    background-color: $darkGrey;
+    border-color: $darkBlack;
+
+    @include hover {
+      background-color: $darkWhite;
+    }
+
+    .block {
+      b {
+        color: $black;
+      }
+
+      p {
+        color: $blue;
+      }
+    }
+  }
+}
+
+.block {
+  @include flexColumn;
+  row-gap: 4px;
+
+  b {
+    color: $red;
+    font-size: 18px;
+  }
+
+  p {
+    color: $blue;
+    font-size: 16px;
+  }
+}
+.checkbox {
+  margin: 0 0 0 auto;
+  @include sizes(20px, 20px);
+
+  input {
+    border-radius: 4px;
+    border: 3px solid $black;
+    @include fullSize;
+  }
+}
+
+@media (max-width: $laptop) {
+  .card {
+    padding: 16px;
+    row-gap: 8px;
+  }
+}
+
+@media (max-width: $mob) {
+  .card {
+    padding: 12px;
+    row-gap: 4px;
+  }
+
+  .block {
+    row-gap: 2px;
+
+    b {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
