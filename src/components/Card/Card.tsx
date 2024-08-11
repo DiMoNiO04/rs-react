@@ -39,7 +39,7 @@ const Card: React.FC<ICardProps> = (props) => {
     e.preventDefault();
     handleClick();
     const currentSearchParams = searchParams.toString();
-    router.push(`/${getId}?${currentSearchParams}`);
+    router.push(`/card/${getId}?${currentSearchParams}`);
   };
 
   return (

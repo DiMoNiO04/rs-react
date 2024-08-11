@@ -6,11 +6,11 @@ import { EStorageKeys } from '../utils/localeStorage';
 import { EMPTY_STR, FIRST_PAGE } from '../utils/consts';
 import Loading from '../components/Loading/Loading';
 
-interface HomeProps {
+interface IPageProps {
   searchParams: { [key: string]: string | undefined };
 }
 
-const Home = async ({ searchParams }: HomeProps) => {
+const Home = async ({ searchParams }: IPageProps) => {
   const searchParam = searchParams[EStorageKeys.SEARCH] || EMPTY_STR;
   const pageParam = searchParams[EStorageKeys.PAGE] || FIRST_PAGE;
 

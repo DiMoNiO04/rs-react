@@ -1,8 +1,8 @@
+import { IDetailFetch } from '../components/DetailContent/types';
 import { API_URL } from '../utils/consts';
-import { IFetchResponse } from './types';
 
-async function fetchDetailData(id: string): Promise<IFetchResponse | null> {
-  let dataCard: IFetchResponse | null = null;
+async function fetchDetailData(id: string): Promise<IDetailFetch | null> {
+  let dataCard: IDetailFetch | null = null;
 
   try {
     const dataCardRes = await fetch(`${API_URL}/${id}`);
