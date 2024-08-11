@@ -6,22 +6,17 @@ import MainContent from '../components/MainContent/MainContent';
 import { store } from '../store/store';
 import { Provider } from 'react-redux';
 
-vi.mock('next/router', () => {
-  const events = {
-    on: vi.fn(),
-    off: vi.fn(),
-  };
-  return {
-    useRouter: () => ({
-      pathname: '/1',
-      query: {},
-      push: vi.fn(),
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+  }),
+  useSearchParams: () => ({
+    get: vi.fn().mockImplementation((key) => {
+      if (key === 'search') return 'Luke';
+      return null;
     }),
-    Router: {
-      events,
-    },
-  };
-});
+  }),
+}));
 
 describe('MainContent Component', () => {
   const mockProps: IMainContentProps = {

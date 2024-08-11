@@ -4,11 +4,15 @@ import { describe, it, expect, vi } from 'vitest';
 import Pagination from '../components/Pagination/Pagination';
 import ThemeContext, { ETheme } from '../context/themeContext';
 
-vi.mock('next/router', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    pathname: '/1',
-    query: {},
     push: vi.fn(),
+  }),
+  useSearchParams: () => ({
+    get: vi.fn().mockImplementation((key) => {
+      if (key === 'search') return 'Luke';
+      return null;
+    }),
   }),
 }));
 

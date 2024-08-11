@@ -1,3 +1,4 @@
+import React from 'react';
 import MainContent from '../../../components/MainContent/MainContent';
 import { IFetchResponse } from '../../../api/types';
 import fetchData from '../../../api/fetchData';

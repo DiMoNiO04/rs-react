@@ -5,7 +5,6 @@ import ProviderTheme from '../providers/providerTheme';
 import ThemeContext, { ETheme } from '../context/themeContext';
 import { getDataStorage, setDataStorage } from '../utils/localeStorage';
 
-// Мокирование функций локального хранилища
 vi.mock('../utils/localeStorage', () => ({
   __esModule: true,
   getDataStorage: vi.fn(),

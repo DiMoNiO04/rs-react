@@ -4,11 +4,15 @@ import { describe, it, expect, vi } from 'vitest';
 import ThemeContext, { ETheme } from '../context/themeContext';
 import Search from '../components/Search/Search';
 
-vi.mock('next/router', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    query: { search: 'Test' },
-    pathname: '/',
     push: vi.fn(),
+  }),
+  useSearchParams: () => ({
+    get: vi.fn().mockImplementation((key) => {
+      if (key === 'search') return 'Test';
+      return null;
+    }),
   }),
 }));
 

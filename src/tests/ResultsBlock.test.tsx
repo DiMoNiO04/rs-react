@@ -6,9 +6,15 @@ import ThemeContext, { ETheme } from '../context/themeContext';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 
-vi.mock('next/router', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    query: { search: 'Luke' },
+    push: vi.fn(),
+  }),
+  useSearchParams: () => ({
+    get: vi.fn().mockImplementation((key) => {
+      if (key === 'search') return 'Luke';
+      return null;
+    }),
   }),
 }));
 

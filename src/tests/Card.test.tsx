@@ -15,11 +15,15 @@ vi.mock('../store/favorites/slice', () => ({
   toggleFavorite: vi.fn(),
 }));
 
-vi.mock('next/router', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    pathname: '/1',
-    query: {},
     push: vi.fn(),
+  }),
+  useSearchParams: () => ({
+    get: vi.fn().mockImplementation((key) => {
+      if (key === 'search') return 'Luke';
+      return null;
+    }),
   }),
 }));
 
