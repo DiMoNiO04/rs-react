@@ -1,7 +1,12 @@
 import React from 'react';
+import { NavigationPanel } from '..';
 
 const MainPage: React.FC = () => {
-  return <div>MainPage</div>;
+  return (
+    <>
+      <NavigationPanel />
+    </>
+  );
 };
 
 export default MainPage;
