@@ -1,5 +1,8 @@
 import React, { useRef, useState } from 'react';
+import * as yup from 'yup';
+import { schemaYup } from '../../utils';
 import BtnBack from '../BtnBack/BtnBack';
+import { ValidationErrors, FormData } from '../../utils/interfaces';
 
 const FormNoControl: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -12,12 +15,12 @@ const FormNoControl: React.FC = () => {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const agreeInputRef = useRef<HTMLInputElement>(null);
 
-  const [errors] = useState<{ [key: string]: string | undefined }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string | undefined }>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = {
+    const formData: FormData = {
       name: nameInputRef.current?.value,
       age: ageInputRef.current?.value,
       email: emailInputRef.current?.value,
@@ -25,11 +28,24 @@ const FormNoControl: React.FC = () => {
       confirmPassword: confirmPasswordInputRef.current?.value,
       gender: genderInputRef.current?.value,
       country: countryInputRef.current?.value,
-      image: imageInputRef.current?.value,
-      agree: agreeInputRef.current?.value,
+      image: imageInputRef.current?.files,
+      agree: agreeInputRef.current?.checked,
     };
 
-    console.log(formData);
+    try {
+      setErrors({});
+      await schemaYup.validate(formData, { abortEarly: false });
+    } catch (err) {
+      if (err instanceof yup.ValidationError) {
+        const validationErrors: ValidationErrors = {};
+        err.inner.forEach((error) => {
+          if (error.path) {
+            validationErrors[error.path] = error.message;
+          }
+        });
+        setErrors(validationErrors);
+      }
+    }
   };
 
   return (
@@ -66,6 +82,7 @@ const FormNoControl: React.FC = () => {
         <div>
           <label htmlFor="gender">Gender</label>
           <select name="gender" id="gender" ref={genderInputRef}>
+            <option value="">Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
@@ -74,6 +91,7 @@ const FormNoControl: React.FC = () => {
         <div>
           <label htmlFor="country">Country</label>
           <select name="country" id="country" ref={countryInputRef}>
+            <option value="">Select country</option>
             <option value="usa">USA</option>
             <option value="canada">Canada</option>
             <option value="russia">Russia</option>

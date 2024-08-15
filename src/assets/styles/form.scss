@@ -15,6 +15,10 @@ form {
     display: flex;
     flex-direction: row;
     column-gap: 12px;
+
+    p {
+      top: 30px;
+    }
   }
 
   label {
@@ -22,7 +26,8 @@ form {
     color: white;
   }
 
-  input, select {
+  input,
+  select {
     border: 2px solid black;
     border-radius: 4px;
     padding: 10px;
@@ -39,20 +44,25 @@ form {
   }
 
   button {
-      color: black;
-      padding: 12px 16px;
-      background-color: white;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 20px;
-      width: 100%;
-      text-align: center;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    
-      &:hover {
-        opacity: 0.5;
-      }
+    color: black;
+    padding: 12px 16px;
+    background-color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.2;
+      cursor: default;
+    }
+
+    &:not(:disabled):hover {
+      opacity: 0.5;
+    }
   }
 
   p {
