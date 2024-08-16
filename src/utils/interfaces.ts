@@ -2,7 +2,7 @@ interface ValidationErrors {
   [key: string]: string;
 }
 
-interface FormData {
+interface IFormData {
   name: string | undefined;
   age: string | undefined;
   email: string | undefined;
@@ -10,8 +10,8 @@ interface FormData {
   confirmPassword: string | undefined;
   gender: string | undefined;
   country: string | undefined;
-  image: FileList | undefined | null;
+  file: FileList | undefined | null;
   agree: boolean | undefined;
 }
 
-export type { ValidationErrors, FormData };
+export type { ValidationErrors, IFormData };

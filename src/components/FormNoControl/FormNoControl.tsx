@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import * as yup from 'yup';
 import { schemaYup } from '../../utils';
 import BtnBack from '../BtnBack/BtnBack';
-import { ValidationErrors, FormData } from '../../utils/interfaces';
+import { ValidationErrors, IFormData } from '../../utils/interfaces';
 
 const FormNoControl: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -12,7 +12,7 @@ const FormNoControl: React.FC = () => {
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
   const genderInputRef = useRef<HTMLSelectElement>(null);
   const countryInputRef = useRef<HTMLSelectElement>(null);
-  const imageInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const agreeInputRef = useRef<HTMLInputElement>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string | undefined }>({});
@@ -20,7 +20,7 @@ const FormNoControl: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData: FormData = {
+    const formData: IFormData = {
       name: nameInputRef.current?.value,
       age: ageInputRef.current?.value,
       email: emailInputRef.current?.value,
@@ -28,7 +28,7 @@ const FormNoControl: React.FC = () => {
       confirmPassword: confirmPasswordInputRef.current?.value,
       gender: genderInputRef.current?.value,
       country: countryInputRef.current?.value,
-      image: imageInputRef.current?.files,
+      file: fileInputRef.current?.files,
       agree: agreeInputRef.current?.checked,
     };
 
@@ -56,27 +56,32 @@ const FormNoControl: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
-          <input id="name" type="text" name="name" ref={nameInputRef} />
+          <input id="name" type="text" placeholder="Enter name" ref={nameInputRef} />
           {errors.name && <p>{errors.name}</p>}
         </div>
         <div>
           <label htmlFor="age">Age</label>
-          <input id="age" type="number" name="age" ref={ageInputRef} />
+          <input id="age" type="number" placeholder="Enter age" ref={ageInputRef} />
           {errors.age && <p>{errors.age}</p>}
         </div>
         <div>
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" ref={emailInputRef} />
+          <input id="email" type="email" placeholder="Enter email" ref={emailInputRef} />
           {errors.email && <p>{errors.email}</p>}
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" ref={passwordInputRef} />
+          <input id="password" type="password" placeholder="Enter password" ref={passwordInputRef} />
           {errors.password && <p>{errors.password}</p>}
         </div>
         <div>
           <label htmlFor="confirmPassword">Confirm password</label>
-          <input id="confirmPassword" type="password" name="confirmPassword" ref={confirmPasswordInputRef} />
+          <input
+            id="confirmPassword"
+            type="password"
+            placeholder="Enter confirm password"
+            ref={confirmPasswordInputRef}
+          />
           {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         </div>
         <div>
@@ -99,8 +104,8 @@ const FormNoControl: React.FC = () => {
           {errors.country && <p>{errors.country}</p>}
         </div>
         <div>
-          <label htmlFor="image">Image</label>
-          <input name="image" ref={imageInputRef} type="file" id="image" />
+          <label htmlFor="file">Image</label>
+          <input name="file" ref={fileInputRef} type="file" id="file" />
           {errors.file && <p>{errors.file}</p>}
         </div>
         <div className="block-agree">

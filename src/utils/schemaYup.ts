@@ -27,7 +27,7 @@ const schemaYup = yup.object().shape({
     .required(REQUIRED_FIELD),
   gender: yup.string().required(REQUIRED_FIELD),
   country: yup.string().required(REQUIRED_FIELD),
-  image: yup
+  file: yup
     .mixed()
     .test('fileSize', 'File size is too large', (value) => !value || (value as FileList)[0]?.size <= 2000000)
     .test(
