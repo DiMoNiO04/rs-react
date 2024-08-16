@@ -1,4 +1,4 @@
-interface ValidationErrors {
+interface IValidationErrors {
   [key: string]: string;
 }
 
@@ -14,4 +14,4 @@ interface IFormData {
   agree: boolean | undefined;
 }
 
-export type { ValidationErrors, IFormData };
+export type { IValidationErrors, IFormData };

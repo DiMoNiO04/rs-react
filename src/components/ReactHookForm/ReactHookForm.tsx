@@ -1,9 +1,9 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import BtnBack from '../BtnBack/BtnBack';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IFormData } from '../../utils/interfaces';
 import { schemaYup } from '../../utils';
+import { BtnBack, PasswordStrength } from '..';
 
 const ReactHookForm: React.FC = () => {
   const {
@@ -11,10 +11,13 @@ const ReactHookForm: React.FC = () => {
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    watch,
   } = useForm<IFormData>({
     mode: 'onChange',
     resolver: yupResolver(schemaYup),
   });
+
+  const password = watch('password', '');
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     console.log(data);
@@ -46,6 +49,7 @@ const ReactHookForm: React.FC = () => {
           <label htmlFor="password">Password</label>
           <input id="password" type="password" placeholder="Enter password" {...register('password')} />
           {errors.password && <p>{errors.password.message}</p>}
+          {password && <PasswordStrength password={password} />}
         </div>
         <div>
           <label htmlFor="confirmPassword">Confirm password</label>

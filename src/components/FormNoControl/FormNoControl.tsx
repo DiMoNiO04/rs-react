@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import * as yup from 'yup';
 import { schemaYup } from '../../utils';
-import BtnBack from '../BtnBack/BtnBack';
-import { ValidationErrors, IFormData } from '../../utils/interfaces';
+import { IValidationErrors, IFormData } from '../../utils/interfaces';
+import { BtnBack, PasswordStrength } from '..';
 
 const FormNoControl: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -16,6 +16,7 @@ const FormNoControl: React.FC = () => {
   const agreeInputRef = useRef<HTMLInputElement>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string | undefined }>({});
+  const [password, setPassword] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ const FormNoControl: React.FC = () => {
       await schemaYup.validate(formData, { abortEarly: false });
     } catch (err) {
       if (err instanceof yup.ValidationError) {
-        const validationErrors: ValidationErrors = {};
+        const validationErrors: IValidationErrors = {};
         err.inner.forEach((error) => {
           if (error.path) {
             validationErrors[error.path] = error.message;
@@ -46,6 +47,10 @@ const FormNoControl: React.FC = () => {
         setErrors(validationErrors);
       }
     }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   return (
@@ -71,8 +76,15 @@ const FormNoControl: React.FC = () => {
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" placeholder="Enter password" ref={passwordInputRef} />
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter password"
+            ref={passwordInputRef}
+            onChange={handlePasswordChange}
+          />
           {errors.password && <p>{errors.password}</p>}
+          {password && <PasswordStrength password={password} />}
         </div>
         <div>
           <label htmlFor="confirmPassword">Confirm password</label>
