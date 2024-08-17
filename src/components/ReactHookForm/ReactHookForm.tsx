@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { IFormData } from '../../utils/interfaces';
 import { schemaYup } from '../../utils';
 import { BtnBack, PasswordStrength } from '..';
+import useImageUpload from '../../hooks/useImageUpload';
 
 const ReactHookForm: React.FC = () => {
   const {
@@ -18,6 +19,7 @@ const ReactHookForm: React.FC = () => {
   });
 
   const password = watch('password', '');
+  const { handleImageChange } = useImageUpload();
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     console.log(data);
@@ -82,7 +84,7 @@ const ReactHookForm: React.FC = () => {
         </div>
         <div>
           <label htmlFor="file">Image</label>
-          <input type="file" id="file" {...register('file')} />
+          <input type="file" id="file" {...register('file')} onChange={handleImageChange} />
           {errors.file && <p>{errors.file.message}</p>}
         </div>
         <div className="block-agree">

@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import { schemaYup } from '../../utils';
 import { IValidationErrors, IFormData } from '../../utils/interfaces';
 import { BtnBack, PasswordStrength } from '..';
+import useImageUpload from '../../hooks/useImageUpload';
 
 const FormNoControl: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -17,6 +18,8 @@ const FormNoControl: React.FC = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string | undefined }>({});
   const [password, setPassword] = useState<string>('');
+
+  const { handleImageChange } = useImageUpload();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,7 +120,7 @@ const FormNoControl: React.FC = () => {
         </div>
         <div>
           <label htmlFor="file">Image</label>
-          <input name="file" ref={fileInputRef} type="file" id="file" />
+          <input name="file" ref={fileInputRef} type="file" id="file" onChange={handleImageChange} />
           {errors.file && <p>{errors.file}</p>}
         </div>
         <div className="block-agree">
