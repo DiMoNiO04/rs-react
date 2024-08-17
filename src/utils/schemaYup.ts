@@ -34,7 +34,8 @@ const schemaYup = yup.object().shape({
       return value.size <= 2000000;
     })
     .test('fileType', 'Unsupported file format', (value) => {
-      if (!value || !(value instanceof File)) return true;
+      if (!value) return true;
+      if (!(value instanceof File)) return false;
       return ['image/jpeg', 'image/png'].includes(value.type);
     })
     .required('File is required'),
