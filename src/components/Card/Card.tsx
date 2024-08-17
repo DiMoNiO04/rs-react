@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Card.module.scss';
 import { IFormData } from '../../utils/interfaces';
 
 const Card: React.FC<IFormData> = ({ name, age, email, gender, country, file, isNew }) => {
+  const [isNewClass, setIsNewClass] = useState(isNew);
+
+  useEffect(() => {
+    if (isNewClass) {
+      const timer = setTimeout(() => {
+        setIsNewClass(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isNewClass]);
+
   return (
-    <div className={`${styles.card} ${isNew && styles.new}`}>
+    <div className={`${styles.card} ${isNewClass && styles.new}`}>
       <div className={styles.block}>
         <b>Name: </b>
         <p>{name}</p>
