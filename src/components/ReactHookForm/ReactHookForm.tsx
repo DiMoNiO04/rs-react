@@ -5,25 +5,27 @@ import { IFormData } from '../../utils/interfaces';
 import { schemaYup } from '../../utils';
 import { BtnBack, PasswordStrength } from '..';
 import useImageUpload from '../../hooks/useImageUpload';
+import { useAppDispatch } from '../../store/store';
+import { setDataFormHookData } from '../../store/form/slice';
 
 const ReactHookForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    reset,
     watch,
   } = useForm<IFormData>({
     mode: 'onChange',
     resolver: yupResolver(schemaYup),
   });
 
+  const dispatch = useAppDispatch();
   const password = watch('password', '');
-  const { handleImageChange } = useImageUpload();
+  const { fileBase, handleImageChange } = useImageUpload();
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
-    console.log(data);
-    reset();
+    data.file = fileBase;
+    dispatch(setDataFormHookData(data));
   };
 
   return (

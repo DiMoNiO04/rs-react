@@ -10,8 +10,9 @@ interface IFormData {
   confirmPassword: string | undefined;
   gender: string | undefined;
   country: string | undefined;
-  file: FileList | undefined | null;
+  file: string | null;
   agree: boolean | undefined;
+  isNew?: boolean;
 }
 
 export type { IValidationErrors, IFormData };

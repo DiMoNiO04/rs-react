@@ -29,13 +29,15 @@ const schemaYup = yup.object().shape({
   country: yup.string().required(REQUIRED_FIELD),
   file: yup
     .mixed()
-    .test('fileSize', 'File size is too large', (value) => !value || (value as FileList)[0]?.size <= 2000000)
-    .test(
-      'fileType',
-      'Unsupported file format',
-      (value) => !value || ['image/jpeg', 'image/png'].includes((value as FileList)[0]?.type)
-    )
-    .required(REQUIRED_FIELD),
+    .test('fileSize', 'File size is too large', (value) => {
+      if (!value || !(value instanceof File)) return true;
+      return value.size <= 2000000;
+    })
+    .test('fileType', 'Unsupported file format', (value) => {
+      if (!value || !(value instanceof File)) return true;
+      return ['image/jpeg', 'image/png'].includes(value.type);
+    })
+    .required('File is required'),
   agree: yup.boolean().oneOf([true], 'You must agree'),
 });
 

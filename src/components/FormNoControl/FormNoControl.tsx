@@ -4,6 +4,8 @@ import { schemaYup } from '../../utils';
 import { IValidationErrors, IFormData } from '../../utils/interfaces';
 import { BtnBack, PasswordStrength } from '..';
 import useImageUpload from '../../hooks/useImageUpload';
+import { useAppDispatch } from '../../store/store';
+import { setDataFormNoControl } from '../../store/form/slice';
 
 const FormNoControl: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -19,7 +21,8 @@ const FormNoControl: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string | undefined }>({});
   const [password, setPassword] = useState<string>('');
 
-  const { handleImageChange } = useImageUpload();
+  const { fileBase, handleImageChange } = useImageUpload();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,13 +35,14 @@ const FormNoControl: React.FC = () => {
       confirmPassword: confirmPasswordInputRef.current?.value,
       gender: genderInputRef.current?.value,
       country: countryInputRef.current?.value,
-      file: fileInputRef.current?.files,
+      file: fileBase,
       agree: agreeInputRef.current?.checked,
     };
 
     try {
       setErrors({});
       await schemaYup.validate(formData, { abortEarly: false });
+      dispatch(setDataFormNoControl(formData));
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         const validationErrors: IValidationErrors = {};

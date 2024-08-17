@@ -9,7 +9,8 @@ const useImageUpload = () => {
       const reader = new FileReader();
       reader.onloadend = () => setFileBase(reader.result as string);
       reader.readAsDataURL(file);
-      console.log(fileBase);
+    } else {
+      setFileBase(null);
     }
   };
 
