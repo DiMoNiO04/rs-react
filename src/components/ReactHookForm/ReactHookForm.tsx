@@ -2,11 +2,12 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IFormData } from '../../utils/interfaces';
-import { schemaYup } from '../../utils';
+import { EUrls, schemaYup } from '../../utils';
 import { BtnBack, PasswordStrength } from '..';
 import useImageUpload from '../../hooks/useImageUpload';
 import { useAppDispatch } from '../../store/store';
 import { setDataFormHookData } from '../../store/form/slice';
+import { useNavigate } from 'react-router-dom';
 
 const ReactHookForm: React.FC = () => {
   const {
@@ -20,12 +21,14 @@ const ReactHookForm: React.FC = () => {
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const password = watch('password', '');
   const { fileBase, handleImageChange } = useImageUpload();
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     data.file = fileBase;
     dispatch(setDataFormHookData(data));
+    navigate(EUrls.MAIN);
   };
 
   return (

@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import * as yup from 'yup';
-import { schemaYup } from '../../utils';
+import { EUrls, schemaYup } from '../../utils';
 import { IValidationErrors, IFormData } from '../../utils/interfaces';
 import { BtnBack, PasswordStrength } from '..';
 import useImageUpload from '../../hooks/useImageUpload';
 import { useAppDispatch } from '../../store/store';
 import { setDataFormNoControl } from '../../store/form/slice';
+import { useNavigate } from 'react-router-dom';
 
 const FormNoControl: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -23,6 +24,7 @@ const FormNoControl: React.FC = () => {
 
   const { fileBase, handleImageChange } = useImageUpload();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +45,7 @@ const FormNoControl: React.FC = () => {
       setErrors({});
       await schemaYup.validate(formData, { abortEarly: false });
       dispatch(setDataFormNoControl(formData));
+      navigate(EUrls.MAIN);
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         const validationErrors: IValidationErrors = {};

@@ -1,10 +1,11 @@
 import React from 'react';
-import { NavigationPanel } from '..';
+import { Cards, NavigationPanel } from '..';
 
 const MainPage: React.FC = () => {
   return (
     <>
       <NavigationPanel />
+      <Cards />
     </>
   );
 };
