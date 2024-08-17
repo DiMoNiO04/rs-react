@@ -1,22 +1,2 @@
 @import './assets/styles/form.scss';
-
-body {
-  background-color: rgb(46, 46, 46);
-}
-
-.container {
-  margin: 30px auto;
-  max-width: 500px;
-  padding: 40px;
-  border-radius: 12px;
-  border: 2px solid white;
-  position: relative;
-}
-
-h1 {
-  color: white;
-  font-size: 50px;
-  line-height: 130%;
-  margin: 0;
-  text-align: center;
-}
+@import './assets/styles/main.scss';
