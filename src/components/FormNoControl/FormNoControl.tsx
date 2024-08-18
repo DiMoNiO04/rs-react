@@ -4,9 +4,10 @@ import { EUrls, schemaYup } from '../../utils';
 import { IValidationErrors, IFormData } from '../../utils/interfaces';
 import { BtnBack, PasswordStrength } from '..';
 import useImageUpload from '../../hooks/useImageUpload';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setDataFormNoControl } from '../../store/form/slice';
 import { useNavigate } from 'react-router-dom';
+import { getCountries } from '../../store/countries/selectors';
 
 const FormNoControl: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -15,7 +16,7 @@ const FormNoControl: React.FC = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
   const genderInputRef = useRef<HTMLSelectElement>(null);
-  const countryInputRef = useRef<HTMLSelectElement>(null);
+  const countryInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const agreeInputRef = useRef<HTMLInputElement>(null);
 
@@ -25,6 +26,7 @@ const FormNoControl: React.FC = () => {
   const { fileBase, handleImageChange } = useImageUpload();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const countries = useAppSelector(getCountries());
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,12 +119,14 @@ const FormNoControl: React.FC = () => {
         </div>
         <div>
           <label htmlFor="country">Country</label>
-          <select name="country" id="country" ref={countryInputRef}>
-            <option value="">Select country</option>
-            <option value="usa">USA</option>
-            <option value="canada">Canada</option>
-            <option value="russia">Russia</option>
-          </select>
+          <input id="country" list="country-list" placeholder="Select country" ref={countryInputRef} />
+          <datalist id="country-list">
+            {countries.map((country) => (
+              <option key={country.code} value={country.label}>
+                ({country.code})
+              </option>
+            ))}
+          </datalist>
           {errors.country && <p>{errors.country}</p>}
         </div>
         <div>

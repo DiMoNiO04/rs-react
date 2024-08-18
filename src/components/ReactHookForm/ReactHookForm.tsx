@@ -5,9 +5,10 @@ import { IFormData } from '../../utils/interfaces';
 import { EUrls, schemaYup } from '../../utils';
 import { BtnBack, PasswordStrength } from '..';
 import useImageUpload from '../../hooks/useImageUpload';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setDataFormHookData } from '../../store/form/slice';
 import { useNavigate } from 'react-router-dom';
+import { getCountries } from '../../store/countries/selectors';
 
 const ReactHookForm: React.FC = () => {
   const {
@@ -24,6 +25,7 @@ const ReactHookForm: React.FC = () => {
   const navigate = useNavigate();
   const password = watch('password', '');
   const { fileBase, handleImageChange } = useImageUpload();
+  const countries = useAppSelector(getCountries());
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     data.file = fileBase;
@@ -79,12 +81,14 @@ const ReactHookForm: React.FC = () => {
         </div>
         <div>
           <label htmlFor="country">Country</label>
-          <select id="country" {...register('country')}>
-            <option value="">Select country</option>
-            <option value="usa">USA</option>
-            <option value="canada">Canada</option>
-            <option value="russia">Russia</option>
-          </select>
+          <input id="country" list="country-list" placeholder="Select country" {...register('country')} />
+          <datalist id="country-list">
+            {countries.map((country) => (
+              <option key={country.code} value={country.label}>
+                ({country.code})
+              </option>
+            ))}
+          </datalist>
           {errors.country && <p>{errors.country.message}</p>}
         </div>
         <div>

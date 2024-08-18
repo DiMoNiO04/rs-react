@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import countries from '../store/countries/data';
 
 const REQUIRED_FIELD = 'Required field';
 
@@ -26,7 +27,13 @@ const schemaYup = yup.object().shape({
     .oneOf([yup.ref('password')], 'Passwords must match')
     .required(REQUIRED_FIELD),
   gender: yup.string().required(REQUIRED_FIELD),
-  country: yup.string().required(REQUIRED_FIELD),
+  country: yup
+    .string()
+    .oneOf(
+      countries.map((country) => country.label),
+      'Invalid country selected'
+    )
+    .required(REQUIRED_FIELD),
   file: yup
     .mixed()
     .test('fileSize', 'File size is too large', (value) => {
